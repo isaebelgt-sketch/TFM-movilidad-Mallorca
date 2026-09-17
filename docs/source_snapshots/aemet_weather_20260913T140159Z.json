@@ -1,0 +1,33 @@
+{
+  "source_id": "aemet_weather",
+  "provider": "Agencia Estatal de Meteorología",
+  "source_url": "https://opendata.aemet.es/",
+  "license": "AEMET-ATTRIBUTION",
+  "attribution": "AEMET, datos abiertos meteorológicos.",
+  "coverage": "Estaciones y predicciones meteorológicas aplicables a Illes Balears.",
+  "status_at_ingestion": "approved",
+  "run_id": "20260913T140159Z",
+  "ingested_at_utc": "2026-09-13T14:02:00.207182+00:00",
+  "period": {
+    "start": "2024-09-12",
+    "end": "2024-09-12"
+  },
+  "acquisition": {
+    "inventory_request": "valores/climatologicos/inventarioestaciones/todasestaciones/",
+    "daily_request": "valores/climatologicos/diarios/datos/fechaini/2024-09-12T00:00:00UTC/fechafin/2024-09-12T23:59:59UTC/todasestaciones/",
+    "payload_delivery": "URL temporal de AEMET consultada durante la ejecución y no persistida",
+    "authentication": "AEMET_API_KEY local; valor no registrado"
+  },
+  "payloads": [
+    {
+      "file": "stations_inventory.json",
+      "bytes": 186712,
+      "sha256": "03cd28ff7116a209ea3967ebbbd4f809d3ab30984de8ef656e46cd99d07279a7"
+    },
+    {
+      "file": "daily_2024-09-12_2024-09-12.json",
+      "bytes": 450467,
+      "sha256": "592b3138d168bf7d35b671e7c7f420bbcdd465b2ee53120d929b9bee5de8a0fd"
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "generated_at_utc": "2026-09-04T00:57:15.517939+00:00",
+  "sample_size": 20,
+  "method": "Transparent rule-based screening recommendations linked to OTP outcomes and priority index components.",
+  "robust_priority_cases": 5,
+  "recommendation_summary": [
+    {
+      "recommendation_code": "first_last_mile_assessment",
+      "recommendation_scope": "prioridad robusta para revisión",
+      "cases": 3,
+      "robust_cases": 3,
+      "mean_priority_score": 0.718629
+    },
+    {
+      "recommendation_code": "audit_pedestrian_network",
+      "recommendation_scope": "prioridad robusta para revisión",
+      "cases": 1,
+      "robust_cases": 1,
+      "mean_priority_score": 0.825
+    },
+    {
+      "recommendation_code": "walking_quality_preservation",
+      "recommendation_scope": "prioridad robusta para revisión",
+      "cases": 1,
+      "robust_cases": 1,
+      "mean_priority_score": 0.610325
+    },
+    {
+      "recommendation_code": "walking_quality_preservation",
+      "recommendation_scope": "caso exploratorio para seguimiento",
+      "cases": 3,
+      "robust_cases": 0,
+      "mean_priority_score": 0.381177
+    },
+    {
+      "recommendation_code": "reduce_multimodal_walk_burden",
+      "recommendation_scope": "caso exploratorio para seguimiento",
+      "cases": 3,
+      "robust_cases": 0,
+      "mean_priority_score": 0.372373
+    },
+    {
+      "recommendation_code": "first_last_mile_assessment",
+      "recommendation_scope": "caso exploratorio para seguimiento",
+      "cases": 2,
+      "robust_cases": 0,
+      "mean_priority_score": 0.33891
+    },
+    {
+      "recommendation_code": "monitor_and_validate",
+      "recommendation_scope": "caso exploratorio para seguimiento",
+      "cases": 1,
+      "robust_cases": 0,
+      "mean_priority_score": 0.325384
+    },
+    {
+      "recommendation_code": "timetable_service_review",
+      "recommendation_scope": "caso exploratorio para seguimiento",
+      "cases": 1,
+      "robust_cases": 0,
+      "mean_priority_score": 0.206729
+    },
+    {
+      "recommendation_code": "service_feasibility_review",
+      "recommendation_scope": "caso exploratorio para seguimiento",
+      "cases": 2,
+      "robust_cases": 0,
+      "mean_priority_score": 0.191927
+    },
+    {
+      "recommendation_code": "promote_existing_low_emission_route",
+      "recommendation_scope": "caso exploratorio para seguimiento",
+      "cases": 3,
+      "robust_cases": 0,
+      "mean_priority_score": 0.115064
+    }
+  ],
+  "output_file": "C:\\Users\\PC\\Downloads\\Datos NTIC UCM 2025-20260902T223204Z-1-001\\TFM_Movilidad_Mallorca\\data\\curated\\multimodal_intervention_recommendations.parquet"
+}

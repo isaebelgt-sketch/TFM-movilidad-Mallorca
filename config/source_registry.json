@@ -1,0 +1,130 @@
+{
+  "registry_version": "1.0",
+  "policy": {
+    "allowed_licenses": ["CC-BY-4.0", "ODbL-1.0", "AEMET-ATTRIBUTION"],
+    "allowed_statuses": ["approved", "pending_permission", "disabled"],
+    "rules": [
+      "Solo las fuentes con estado approved pueden entrar en data/raw.",
+      "Una fuente debe declarar licencia, atribución, cobertura, frecuencia de actualización y URL de procedencia.",
+      "Los textos de usuarios requieren consentimiento explícito o una licencia CC0/CC-BY verificable antes de cualquier análisis.",
+      "Los datos simulados se almacenan fuera de raw y nunca se mezclan con observaciones reales."
+    ]
+  },
+  "sources": [
+    {
+      "source_id": "mallorca_tourist_accommodations",
+      "layer": "accommodations",
+      "provider": "Consell de Mallorca / Govern de les Illes Balears",
+      "source_url": "https://datos.gob.es/es/catalogo/a04003003-allotjaments-turistics-mallorca",
+      "download_url": "https://intranet.caib.es/opendatacataleg/files/dataset/allotjaments_turistics_mallorca/allotjaments_turistics_mallorca.geojson",
+      "license": "CC-BY-4.0",
+      "attribution": "Consell de Mallorca, Registro de alojamientos turísticos de Mallorca, CC-BY 4.0.",
+      "coverage": "Mallorca; establecimientos turísticos registrados.",
+      "refresh_frequency": "periodic",
+      "data_kind": "observed_official",
+      "status": "approved",
+      "automated_download": true
+    },
+    {
+      "source_id": "tib_gtfs_supply",
+      "layer": "public_transport_schedule",
+      "provider": "Consorci de Transports de Mallorca",
+      "source_url": "https://www.tib.org/es/sobre-ctm/portal-de-transparencia/datos-abiertos",
+      "download_url": "https://nap.transportes.gob.es/Files/Detail/1071",
+      "license": "CC-BY-4.0",
+      "attribution": "Consorci de Transports de Mallorca, datos abiertos GTFS, CC-BY 4.0.",
+      "coverage": "Mallorca; líneas, paradas, horarios y expediciones TIB.",
+      "refresh_frequency": "weekly_or_provider_update",
+      "data_kind": "observed_official",
+      "status": "approved",
+      "automated_download": false
+    },
+    {
+      "source_id": "osm_mallorca_network",
+      "layer": "active_mobility_network_and_pois",
+      "provider": "OpenStreetMap contributors / Geofabrik",
+      "source_url": "https://www.openstreetmap.org/copyright",
+      "download_url": "https://download.geofabrik.de/europe/spain/islas-baleares-latest.osm.pbf",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors, ODbL 1.0.",
+      "coverage": "Mallorca; red vial, peatonal, ciclista y POI según cartografía colaborativa.",
+      "refresh_frequency": "provider_update",
+      "data_kind": "observed_crowdsourced",
+      "status": "approved",
+      "automated_download": true
+    },
+    {
+      "source_id": "ibestat_tourism_offer",
+      "layer": "tourism_seasonality",
+      "provider": "Institut d'Estadística de les Illes Balears",
+      "source_url": "https://datos.gob.es/es/catalogo/a04027063-establecimientos-abiertos-apartamentos-y-plazas-municipios-turisticos-de-las-illes-balears-por-meses",
+      "download_url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000060A_000004/1.15.csv",
+      "license": "CC-BY-4.0",
+      "attribution": "IBESTAT, establecimientos turísticos abiertos y plazas por municipio, CC-BY 4.0.",
+      "coverage": "Municipios turísticos de Illes Balears; oferta mensual reglada.",
+      "refresh_frequency": "monthly",
+      "data_kind": "observed_official",
+      "status": "approved",
+      "automated_download": true
+    },
+    {
+      "source_id": "ign_cnig_mdp05",
+      "layer": "slope",
+      "provider": "Instituto Geográfico Nacional / Centro Nacional de Información Geográfica",
+      "source_url": "https://centrodedescargas.cnig.es/CentroDescargas/modelo-digital-pendientes-mdp05-primera-cobertura",
+      "download_url": "https://centrodedescargas.cnig.es/CentroDescargas/modelo-digital-pendientes-mdp05-primera-cobertura",
+      "license": "CC-BY-4.0",
+      "attribution": "Obra derivada de MDP05, IGN/CNIG, CC-BY 4.0.",
+      "coverage": "Mallorca; modelo digital de pendientes.",
+      "refresh_frequency": "provider_update",
+      "data_kind": "observed_official",
+      "status": "approved",
+      "automated_download": false
+    },
+    {
+      "source_id": "aemet_weather",
+      "layer": "weather_context",
+      "provider": "Agencia Estatal de Meteorología",
+      "source_url": "https://opendata.aemet.es/",
+      "download_url": "https://opendata.aemet.es/",
+      "license": "AEMET-ATTRIBUTION",
+      "attribution": "AEMET, datos abiertos meteorológicos.",
+      "coverage": "Estaciones y predicciones meteorológicas aplicables a Illes Balears.",
+      "refresh_frequency": "daily_or_on_demand",
+      "data_kind": "observed_official",
+      "status": "approved",
+      "automated_download": true,
+      "activation_requirement": "API key personal de AEMET guardada sólo en .env y nunca en el repositorio; el extractor la valida antes de cualquier consulta."
+    },
+    {
+      "source_id": "mallorca_accessible_guide",
+      "layer": "documented_accessibility",
+      "provider": "Fundació Mallorca Turisme / Consell de Mallorca",
+      "source_url": "https://accesiblemallorca.com/",
+      "download_url": "https://accesiblemallorca.com/",
+      "license": "UNVERIFIED",
+      "attribution": "Pendiente de confirmar por el titular de los datos.",
+      "coverage": "Servicios, playas, excursiones y experiencias accesibles en Mallorca.",
+      "refresh_frequency": "unknown",
+      "data_kind": "observed_official",
+      "status": "pending_permission",
+      "automated_download": false,
+      "activation_requirement": "Confirmación escrita de licencia de reutilización o permiso expreso antes de extraer datos estructurados."
+    },
+    {
+      "source_id": "licensed_mobility_survey",
+      "layer": "mobility_sentiment_and_perception",
+      "provider": "Trabajo de campo propio del TFM",
+      "source_url": "local_collection_with_informed_consent",
+      "download_url": "not_applicable",
+      "license": "CC-BY-4.0",
+      "attribution": "Encuesta anónima de movilidad recogida para el TFM con consentimiento informado.",
+      "coverage": "Respuestas voluntarias de visitantes o residentes en Mallorca.",
+      "refresh_frequency": "one_off_study_period",
+      "data_kind": "observed_primary",
+      "status": "disabled",
+      "automated_download": false,
+      "activation_requirement": "Formulario, texto de consentimiento, minimización de datos y exportación sin identificadores personales."
+    }
+  ]
+}

@@ -1,0 +1,88 @@
+{
+  "generated_at_utc": "2026-09-03T22:21:21.591989+00:00",
+  "source_file": "C:\\Users\\PC\\Downloads\\Datos NTIC UCM 2025-20260902T223204Z-1-001\\TFM_Movilidad_Mallorca\\data\\curated\\od_multimodal_routes.parquet",
+  "classified_file": "C:\\Users\\PC\\Downloads\\Datos NTIC UCM 2025-20260902T223204Z-1-001\\TFM_Movilidad_Mallorca\\data\\curated\\od_multimodal_routes_classified.parquet",
+  "sample_size": 20,
+  "outcomes": [
+    {
+      "outcome_code": "transit_available",
+      "outcome": "Transporte público disponible",
+      "routes": 7,
+      "percentage": 35.0
+    },
+    {
+      "outcome_code": "walking_preferable_by_otp",
+      "outcome": "OTP prioriza caminar",
+      "routes": 4,
+      "percentage": 20.0
+    },
+    {
+      "outcome_code": "endpoint_without_stop_in_range",
+      "outcome": "Extremo sin parada en radio de búsqueda",
+      "routes": 5,
+      "percentage": 25.0
+    },
+    {
+      "outcome_code": "no_scheduled_connection_at_time",
+      "outcome": "Sin conexión en fecha/hora consultada",
+      "routes": 1,
+      "percentage": 5.0
+    },
+    {
+      "outcome_code": "walk_only_itineraries",
+      "outcome": "OTP solo devuelve alternativa a pie",
+      "routes": 2,
+      "percentage": 10.0
+    },
+    {
+      "outcome_code": "direct_walk_network_disconnect",
+      "outcome": "Sin conexión peatonal en el grafo",
+      "routes": 1,
+      "percentage": 5.0
+    },
+    {
+      "outcome_code": "other_routing_outcome",
+      "outcome": "Otro desenlace de enrutamiento",
+      "routes": 0,
+      "percentage": 0.0
+    }
+  ],
+  "outcomes_by_origin_access_band_pct": {
+    "alta_0_400m": {
+      "transit_available": 40.0,
+      "walking_preferable_by_otp": 0.0,
+      "endpoint_without_stop_in_range": 40.0,
+      "no_scheduled_connection_at_time": 20.0,
+      "walk_only_itineraries": 0.0,
+      "direct_walk_network_disconnect": 0.0,
+      "other_routing_outcome": 0.0
+    },
+    "media_400_800m": {
+      "transit_available": 60.0,
+      "walking_preferable_by_otp": 0.0,
+      "endpoint_without_stop_in_range": 0.0,
+      "no_scheduled_connection_at_time": 0.0,
+      "walk_only_itineraries": 40.0,
+      "direct_walk_network_disconnect": 0.0,
+      "other_routing_outcome": 0.0
+    },
+    "baja_800_1200m": {
+      "transit_available": 40.0,
+      "walking_preferable_by_otp": 40.0,
+      "endpoint_without_stop_in_range": 20.0,
+      "no_scheduled_connection_at_time": 0.0,
+      "walk_only_itineraries": 0.0,
+      "direct_walk_network_disconnect": 0.0,
+      "other_routing_outcome": 0.0
+    },
+    "brecha_mas_1200m": {
+      "transit_available": 0.0,
+      "walking_preferable_by_otp": 40.0,
+      "endpoint_without_stop_in_range": 40.0,
+      "no_scheduled_connection_at_time": 0.0,
+      "walk_only_itineraries": 0.0,
+      "direct_walk_network_disconnect": 20.0,
+      "other_routing_outcome": 0.0
+    }
+  }
+}

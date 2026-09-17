@@ -1,0 +1,29 @@
+{
+  "status": "passed",
+  "run_id": "20260913T145611Z",
+  "purpose": "Perfiles actuales de pendiente sobre la muestra multimodal OTP real y estratificada.",
+  "routing_date": "2026-09-15",
+  "routing_time": "10:00",
+  "otp_endpoint": "http://localhost:8080/otp/gtfs/v1",
+  "source": "Obra derivada de MDP05, IGN/CNIG, CC-BY 4.0.",
+  "source_sample": "data\\curated\\multimodal_route_sample_20260913T043734Z.parquet",
+  "source_sample_sha256": "a7c5b7811d4624cd6777ebf868c8153d48f72173bbe42060193f53e0f9871529",
+  "sample_pairs": 12,
+  "routes_with_geometry": 12,
+  "routes_with_slope": 12,
+  "wcs_queries": 40,
+  "wcs_status_counts": {
+    "ok": 40
+  },
+  "profile_output": "data\\curated\\current_sample_slope_profiles_ign_mdp05_20260913T145611Z.parquet",
+  "raw_manifest": "data\\raw\\ign_cnig_mdp05\\20260913T145611Z\\manifest.json",
+  "generated_at_utc": "2026-09-13T14:56:11.623583+00:00",
+  "method": "Geometría WALK actual de OTP; muestreo cada 1000 m; WCS MDP05 de IGN/CNIG con celdas 5 m y valores en grados.",
+  "next_action": "Perfil completo disponible.",
+  "limitations": [
+    "La muestra de 12 pares sigue siendo estratificada y no representa demanda ni todos los desplazamientos turísticos.",
+    "No se imputan valores WCS ni rutas ausentes.",
+    "La pendiente no mide anchura, pavimento, cruces, iluminación, continuidad ni accesibilidad universal.",
+    "No se incorpora al TSMAI V9 sin cobertura por alojamiento y validación metodológica específica."
+  ]
+}

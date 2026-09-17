@@ -1,0 +1,63 @@
+{
+  "status": "passed",
+  "index_version": "TSMAI-v6-multimodal-network",
+  "unit_of_analysis": "alojamiento turístico oficial con geometría válida",
+  "records": 1461,
+  "weights": {
+    "public_transport_proximity_score": 0.28,
+    "public_transport_service_score": 0.12,
+    "cycling_evidence_proximity_score": 0.1,
+    "bicycle_network_destination_score": 0.1,
+    "pedestrian_evidence_proximity_score": 0.2,
+    "walk_network_destination_score": 0.2
+  },
+  "bicycle_network_component": {
+    "source": "data\\curated\\accommodations_bicycle_network_access_bicycle_20260912T222855Z_20260915_1000.parquet",
+    "scoring": {
+      "≤10 min": 1.0,
+      ">10–20 min": 0.8,
+      ">20–30 min": 0.6,
+      ">30–45 min": 0.3,
+      ">45 min or no_route": 0.0
+    },
+    "route_status_counts": {
+      "ok": 1460,
+      "no_route": 1
+    },
+    "coverage_10_20_30_45_pct": {
+      "bicycle_10min": 90.76,
+      "bicycle_20min": 98.08,
+      "bicycle_30min": 99.18,
+      "bicycle_45min": 99.86
+    }
+  },
+  "inputs": {
+    "tsmai_v5": "data\\curated\\accommodations_tsmai_v5_network.parquet",
+    "tsmai_v5_sha256": "ef57d13e4199712dc76722172ad81c1518985c7daa3f6eea680ad67aaec07760",
+    "bicycle_network": "data\\curated\\accommodations_bicycle_network_access_bicycle_20260912T222855Z_20260915_1000.parquet",
+    "bicycle_network_sha256": "347bf04e06dc4c70b764c14bf897c70032d19c940b87faea3cbf0199526d7f6f"
+  },
+  "levels": {
+    "favorable": 993,
+    "intermedio": 307,
+    "prioridad de mejora": 161
+  },
+  "score_summary": {
+    "count": 1461.0,
+    "mean": 0.702,
+    "std": 0.202,
+    "min": 0.054,
+    "25%": 0.61,
+    "50%": 0.766,
+    "75%": 0.846,
+    "max": 0.982
+  },
+  "mean_evidence_coverage_pct": 100.0,
+  "output": "data\\curated\\accommodations_tsmai_v6_multimodal_network.parquet",
+  "generated_at_utc": "2026-09-13T05:32:44.918091+00:00",
+  "limitations": [
+    "Los destinos son POI elegibles más próximos por geometría; no representan demanda, preferencia ni itinerario turístico observado.",
+    "Las rutas WALK/BICYCLE dependen de OTP y su red documentada; no certifican seguridad, pendiente, continuidad, iluminación o accesibilidad universal.",
+    "La evidencia de ciclovías OSM se conserva separada de la capacidad de enrutar en bicicleta, porque una no demuestra la otra."
+  ]
+}

@@ -1,0 +1,6 @@
+source_id,fuente,url,licencia,fecha_descarga,periodo,granularidad,uso,limitaciones,estado
+osm_mallorca,OpenStreetMap / Geofabrik,https://download.geofabrik.de/europe/spain.html,ODbL,,,,red vial y etiquetas de movilidad,requiere atribución; cobertura de etiquetas variable,pendiente
+gtfs_tib,TIB Mallorca / NAP,https://nap.transportes.gob.es/Files/Detail/1071,licencia gratuita NAP,,,,paradas rutas horarios y accesibilidad,feed estático; puede requerir cuenta gratuita para descarga,pendiente
+accommodations_mallorca,Registro oficial de alojamientos turísticos de Mallorca,https://datos.gob.es/es/catalogo/a04003003-allotjaments-turistics-mallorca,CC-BY,,,,establecimientos capacidad municipio y dirección,comprobar disponibilidad de coordenadas y fecha de actualización,pendiente
+tourist_centres_mallorca,Centros turísticos Mallorca,https://intranet.caib.es/opendatacataleg/files/dataset/centres_turistics_mallorca/centres_turistics_mallorca.geojson,CC-BY,,,,puntos o zonas turísticas,confirmar geometría y campos,pendiente
+ibestat_monthly,IBESTAT indicadores municipales,https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000060A_000004/1.15.csv,CC-BY,,,,contexto de oferta y plazas turísticas,agregado mensual no representa cada alojamiento,pendiente

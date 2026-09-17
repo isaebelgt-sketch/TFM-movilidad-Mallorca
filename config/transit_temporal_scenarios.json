@@ -1,0 +1,10 @@
+{
+  "scenario_set": "tib_gtfs_202609_temporal_robustness",
+  "selection_rationale": "Dos franjas laborables de actividad, una franja vespertina y una franja de sábado; todas dentro del calendario del GTFS versionado.",
+  "scenarios": [
+    {"scenario_id": "weekday_am_peak", "date": "2026-09-15", "time": "08:00", "label": "Laborable, punta de mañana"},
+    {"scenario_id": "weekday_midday", "date": "2026-09-15", "time": "10:00", "label": "Laborable, media mañana"},
+    {"scenario_id": "weekday_evening", "date": "2026-09-15", "time": "18:00", "label": "Laborable, tarde"},
+    {"scenario_id": "weekend_midday", "date": "2026-09-19", "time": "10:00", "label": "Sábado, media mañana"}
+  ]
+}

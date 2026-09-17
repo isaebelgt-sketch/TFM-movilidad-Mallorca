@@ -1,0 +1,24 @@
+{
+  "generated_at_utc": "2026-09-03T21:18:46.825352+00:00",
+  "source_pbf": "mallorca_bbox.osm.pbf",
+  "source_pbf_sha256": "9e98a5efe1eb4f2e96d0782f13d4d1539a10e5d58e0de989d6c50374d866feb4",
+  "filters": [
+    "nwr/tourism=attraction,museum,viewpoint,zoo,aquarium,theme_park,gallery",
+    "nwr/historic",
+    "nwr/amenity=arts_centre,theatre,cinema,marketplace,exhibition_centre"
+  ],
+  "all_pois": 2507,
+  "named_destinations": 1423,
+  "categories": {
+    "historic": 712,
+    "tourism": 407,
+    "cultural_amenity": 210,
+    "other_tourism": 94
+  },
+  "source_geometry_types": {
+    "Point": 1414,
+    "LineString": 591,
+    "MultiPolygon": 502
+  },
+  "limitation": "POI OSM es una fuente colaborativa y no un inventario turístico oficial exhaustivo; se usa como conjunto de destinos candidatos georreferenciados."
+}

@@ -1,0 +1,58 @@
+{
+  "status": "passed",
+  "run_id": "walk_20260912T222855Z_20260915_1000",
+  "routing_date": "2026-09-15",
+  "routing_time": "10:00",
+  "otp_endpoint": "http://localhost:8080/otp/gtfs/v1",
+  "method": "Un destino elegible real más próximo por alojamiento; duración y distancia obtenidas mediante ruta WALK de OTP.",
+  "eligible_destination_categories": [
+    "historic:archaeological_site",
+    "historic:castle",
+    "historic:city_gate",
+    "historic:fort",
+    "historic:monastery",
+    "historic:monument",
+    "historic:ruins",
+    "leisure:garden",
+    "leisure:nature_reserve",
+    "leisure:park",
+    "man_made:lighthouse",
+    "natural:beach",
+    "tourism:aquarium",
+    "tourism:attraction",
+    "tourism:gallery",
+    "tourism:museum",
+    "tourism:spa_resort",
+    "tourism:theme_park",
+    "tourism:viewpoint",
+    "tourism:zoo"
+  ],
+  "pairs_total": 1461,
+  "pairs_completed": 1461,
+  "status_counts": {
+    "ok": 1454,
+    "no_route": 7
+  },
+  "threshold_coverage_pct": {
+    "walk_5min": 45.45,
+    "walk_10min": 72.76,
+    "walk_15min": 82.96,
+    "walk_30min": 90.01
+  },
+  "inputs": {
+    "accommodations": "data\\unified\\accommodations_official_normalized.geojson",
+    "accommodations_sha256": "5ee25c3fb6b9cccf8b347fa5cc9f2360bc789acc9773aac967198301fb5b0c23",
+    "tourism_destinations": "data\\curated\\tourism_destinations_osm_20260912T222855Z.parquet",
+    "tourism_destinations_sha256": "38598270cacde2849e25b9be90c3ecb64996dab3dfde4baa48c150aea46e2aa2",
+    "tourism_source_run_id": "20260912T222855Z"
+  },
+  "checkpoint": "data\\curated\\accommodations_walk_network_access_walk_20260912T222855Z_20260915_1000_checkpoint.parquet",
+  "output": "data\\curated\\accommodations_walk_network_access_walk_20260912T222855Z_20260915_1000.parquet",
+  "elapsed_seconds": 22.54,
+  "generated_at_utc": "2026-09-13T05:11:35.400299+00:00",
+  "limitations": [
+    "La selección del destino por proximidad geométrica no representa demanda, preferencia ni itinerario turístico observado.",
+    "Los POI OSM son puntos representativos; no garantizan la entrada física ni horario de apertura.",
+    "La ruta WALK se interpreta con la red y configuración OTP de la fecha documentada; no certifica seguridad, pendiente ni accesibilidad universal."
+  ]
+}

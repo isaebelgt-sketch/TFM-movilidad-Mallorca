@@ -1,0 +1,15 @@
+{
+  "generated_at_utc": "2026-09-11T14:52:22.091719+00:00",
+  "source": "DGT, Ficheros de microdatos de accidentes con víctimas 2024 (CC-BY 4.0).",
+  "source_url": "https://www.dgt.es/export/sites/web-DGT/.galleries/downloads/dgt-en-cifras/publicaciones/Ficheros_microdatos_de_accidentalidad_con_victimas/TABLA_ACCIDENTES_24.XLSX",
+  "raw_sha256": "4c39dbdf3c31fcd0c99a0b9e68fdd7fc017c689cda01546d1d34545a3c64b387",
+  "balearic_accident_records": 2888,
+  "municipal_codes": 43,
+  "municipalities_named_from_ibestat": 15,
+  "method": "Agregación municipal de registros DGT con COD_PROVINCIA=7; unión nominal sólo cuando el código aparece en la fuente IBESTAT local.",
+  "limitations": [
+    "No hay coordenadas: no se puede calcular proximidad a una ruta, intersección vial ni riesgo por segmento.",
+    "La siniestralidad observada no es percepción de seguridad ni una tasa ajustada por exposición.",
+    "No se incorpora al TSMAI ni se usa para recomendar automáticamente una ruta."
+  ]
+}

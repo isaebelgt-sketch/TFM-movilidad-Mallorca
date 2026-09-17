@@ -1,0 +1,21 @@
+services:
+  otp-build:
+    image: opentripplanner/opentripplanner:2.10.0_2026-09-01T15-06
+    working_dir: /var/opentripplanner
+    volumes:
+      - ${OTP_DATA_DIR:-../../data/otp}:/var/opentripplanner
+    environment:
+      JAVA_TOOL_OPTIONS: "-Xmx2G"
+    command: ["--build", "--save"]
+
+  otp-server:
+    image: opentripplanner/opentripplanner:2.10.0_2026-09-01T15-06
+    container_name: tfm-mallorca-otp
+    working_dir: /var/opentripplanner
+    volumes:
+      - ${OTP_DATA_DIR:-../../data/otp}:/var/opentripplanner
+    environment:
+      JAVA_TOOL_OPTIONS: "-Xmx2G"
+    command: ["--load", "--serve"]
+    ports:
+      - "8080:8080"

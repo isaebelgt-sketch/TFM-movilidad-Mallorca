@@ -1,0 +1,21 @@
+{
+  "generated_at_utc": "2026-09-03T19:23:25.571013+00:00",
+  "method": "nearest-neighbor euclidean distance",
+  "metric_crs": "EPSG:25831",
+  "input_accommodations": 1463,
+  "input_boarding_stops": 772,
+  "coverage_within_800m_pct": 78.88,
+  "distance_summary_m": {
+    "min": 3.55,
+    "median": 322.13,
+    "mean": 706.28,
+    "max": 7599.49
+  },
+  "band_counts": {
+    "alta_0_400m": 884,
+    "media_400_800m": 270,
+    "brecha_mas_1200m": 267,
+    "baja_800_1200m": 42
+  },
+  "limitation": "No representa distancia ni tiempo por la red peatonal; se sustituirá por rutas OSM en una fase posterior."
+}

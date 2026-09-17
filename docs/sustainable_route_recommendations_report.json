@@ -1,0 +1,20 @@
+{
+  "generated_at_utc": "2026-09-11T14:30:00.723274+00:00",
+  "method": "Reglas deterministas sobre duración de rutas OTP WALK, TRANSIT y BICYCLE, y contexto de infraestructura activa documentada en OSM; no se entrena un modelo predictivo.",
+  "criteria": {
+    "walk": "duración a pie <=20 min",
+    "bicycle": "duración bicicleta <=30 min, no más de 10 min sobre tránsito y puntuación de contexto activo OSM >=25/100",
+    "transit": "se selecciona si bicicleta no cumple el criterio y existe tránsito"
+  },
+  "cases": 20,
+  "mode_distribution": {
+    "Bicicleta": 12,
+    "Bicicleta: revisar confort": 6,
+    "Transporte público": 2
+  },
+  "limitations": [
+    "La bicicleta en OTP modela red OSM; el contexto activo OSM no confirma carril segregado, tráfico, aparcamiento ni bicicleta disponible.",
+    "Las reglas son explícitas y modificables, no preferencias observadas de visitantes.",
+    "No incorpora sentimiento ni seguridad percibida."
+  ]
+}

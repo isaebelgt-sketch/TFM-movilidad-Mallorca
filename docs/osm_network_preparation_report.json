@@ -1,0 +1,17 @@
+{
+  "status": "passed",
+  "source_snapshot": "data\\raw\\osm_mallorca_network\\20260912T222855Z\\payload.pbf",
+  "source_run_id": "20260912T222855Z",
+  "source_sha256_verified": true,
+  "source_license": "ODbL-1.0",
+  "source_attribution": "© OpenStreetMap contributors, ODbL 1.0.",
+  "bbox_wgs84": "2.20,39.15,3.55,40.20",
+  "network_file": "data\\unified\\osm\\mallorca_mobility_network_20260912T222855Z.osm.pbf",
+  "network_bytes": 28679730,
+  "network_sha256": "5ef3cb80aed1119e4b64c681122596f6c54292504b59c520b95ef29875bd94e4",
+  "generated_at_utc": "2026-09-12T23:01:50.278028+00:00",
+  "limitations": [
+    "El recorte por envolvente puede incluir segmentos próximos al litoral; no es un límite administrativo exacto.",
+    "Este paso prepara la red OSM; la clasificación por modo y las restricciones de accesibilidad se calculan en etapas posteriores."
+  ]
+}

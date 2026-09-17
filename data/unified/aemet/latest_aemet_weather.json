@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "source_id": "aemet_weather",
+  "run_id": "20260913T140159Z",
+  "raw_manifest": "data\\raw\\aemet_weather\\20260913T140159Z\\manifest.json",
+  "stations_output": "data\\unified\\aemet\\aemet_weather_stations_20260913T140159Z.parquet",
+  "daily_output": "data\\unified\\aemet\\aemet_weather_daily_baleares_20260913T140159Z.parquet",
+  "period": {
+    "start": "2024-09-12",
+    "end": "2024-09-12"
+  },
+  "attribution": "AEMET, datos abiertos meteorológicos."
+}

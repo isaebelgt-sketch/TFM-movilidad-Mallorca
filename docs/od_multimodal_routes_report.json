@@ -1,0 +1,14 @@
+{
+  "generated_at_utc": "2026-09-03T22:05:55.855977+00:00",
+  "otp_endpoint": "http://localhost:8080/otp/gtfs/v1",
+  "query_type": "OTP GTFS GraphQL plan: WALK-only compared with WALK + TRANSIT",
+  "request_date": "2026-09-03",
+  "request_time": "12:00",
+  "sample_size": 20,
+  "origins_per_access_band": 5,
+  "origin_selection": "Random reproducible sample with seed 2026; five accommodations per euclidean access band.",
+  "destination_selection": "Nearest named tourism or historic destination located between 2,000 and 20,000 metres in EPSG:25831.",
+  "walk_successful_routes": 19,
+  "transit_successful_routes": 7,
+  "output_file": "C:\\Users\\PC\\Downloads\\Datos NTIC UCM 2025-20260902T223204Z-1-001\\TFM_Movilidad_Mallorca\\data\\curated\\od_multimodal_routes.parquet"
+}

@@ -1,0 +1,63 @@
+{
+  "status": "passed",
+  "run_id": "transit_20260912T222855Z_20260915_1000_8to20km",
+  "routing_date": "2026-09-15",
+  "routing_time": "10:00",
+  "otp_endpoint": "http://localhost:8080/otp/gtfs/v1",
+  "method": "Un destino elegible real más próximo entre 8 y 20 km por alojamiento; itinerario TRANSIT de OTP con al menos un tramo no WALK.",
+  "distance_window_m": [
+    8000,
+    20000
+  ],
+  "eligible_destination_categories": [
+    "historic:archaeological_site",
+    "historic:castle",
+    "historic:city_gate",
+    "historic:fort",
+    "historic:monastery",
+    "historic:monument",
+    "historic:ruins",
+    "leisure:garden",
+    "leisure:nature_reserve",
+    "leisure:park",
+    "man_made:lighthouse",
+    "natural:beach",
+    "tourism:aquarium",
+    "tourism:attraction",
+    "tourism:gallery",
+    "tourism:museum",
+    "tourism:spa_resort",
+    "tourism:theme_park",
+    "tourism:viewpoint",
+    "tourism:zoo"
+  ],
+  "pairs_total": 1461,
+  "pairs_completed": 1461,
+  "status_counts": {
+    "ok": 756,
+    "no_transit_leg": 644,
+    "no_route": 61
+  },
+  "threshold_coverage_pct": {
+    "transit_30min": 3.76,
+    "transit_60min": 29.36,
+    "transit_90min": 45.31,
+    "transit_120min": 50.86
+  },
+  "inputs": {
+    "accommodations": "data\\unified\\accommodations_official_normalized.geojson",
+    "accommodations_sha256": "5ee25c3fb6b9cccf8b347fa5cc9f2360bc789acc9773aac967198301fb5b0c23",
+    "tourism_destinations": "data\\curated\\tourism_destinations_osm_20260912T222855Z.parquet",
+    "tourism_destinations_sha256": "38598270cacde2849e25b9be90c3ecb64996dab3dfde4baa48c150aea46e2aa2",
+    "tourism_source_run_id": "20260912T222855Z"
+  },
+  "checkpoint": "data\\curated\\accommodations_transit_network_access_transit_20260912T222855Z_20260915_1000_8to20km_checkpoint.parquet",
+  "output": "data\\curated\\accommodations_transit_network_access_transit_20260912T222855Z_20260915_1000_8to20km.parquet",
+  "elapsed_seconds": 57.37,
+  "generated_at_utc": "2026-09-13T05:51:32.431990+00:00",
+  "limitations": [
+    "La selección del destino por proximidad geométrica dentro de una ventana no representa demanda, preferencia ni itinerario turístico observado.",
+    "El resultado depende del horario GTFS y la fecha/hora documentadas; no mide puntualidad, ocupación, tarifa ni accesibilidad física certificada.",
+    "Un itinerario TRANSIT encontrado no certifica seguridad, continuidad de la primera/última milla ni accesibilidad universal."
+  ]
+}

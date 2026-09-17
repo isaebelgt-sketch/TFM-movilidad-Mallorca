@@ -1,0 +1,76 @@
+{
+  "generated_at_utc": "2026-09-03T23:18:57.503323+00:00",
+  "method": "K-Means unsupervised clustering of municipality accessibility profiles.",
+  "input_records": 1463,
+  "municipalities": 51,
+  "feature_columns": [
+    "log_accommodations",
+    "log_tourist_places",
+    "median_distance_to_stop_m",
+    "coverage_800m_pct",
+    "gap_over_1200m_pct"
+  ],
+  "feature_transformations": {
+    "accommodations": "log1p",
+    "tourist_places": "log1p",
+    "other_features": "StandardScaler standardization before K-Means"
+  },
+  "candidate_k_scores": [
+    {
+      "n_clusters": 2,
+      "silhouette_score": 0.471089,
+      "inertia": 130.111787
+    },
+    {
+      "n_clusters": 3,
+      "silhouette_score": 0.502106,
+      "inertia": 65.134274
+    },
+    {
+      "n_clusters": 4,
+      "silhouette_score": 0.480292,
+      "inertia": 46.269369
+    },
+    {
+      "n_clusters": 5,
+      "silhouette_score": 0.452845,
+      "inertia": 37.37872
+    }
+  ],
+  "selected_k": 3,
+  "random_seed": 2026,
+  "profiles": [
+    {
+      "cluster_code": "C1",
+      "municipalities": 16,
+      "accommodations": 1257,
+      "tourist_places": 236339,
+      "median_distance_to_stop_m": 293.048201,
+      "coverage_800m_pct": 85.796817,
+      "gap_over_1200m_pct": 12.081129
+    },
+    {
+      "cluster_code": "C2",
+      "municipalities": 24,
+      "accommodations": 148,
+      "tourist_places": 3678,
+      "median_distance_to_stop_m": 347.96029,
+      "coverage_800m_pct": 77.896825,
+      "gap_over_1200m_pct": 15.701058
+    },
+    {
+      "cluster_code": "C3",
+      "municipalities": 11,
+      "accommodations": 58,
+      "tourist_places": 1368,
+      "median_distance_to_stop_m": 2127.680234,
+      "coverage_800m_pct": 12.787879,
+      "gap_over_1200m_pct": 85.69697
+    }
+  ],
+  "outputs": {
+    "clusters": "C:\\Users\\PC\\Downloads\\Datos NTIC UCM 2025-20260902T223204Z-1-001\\TFM_Movilidad_Mallorca\\data\\curated\\municipality_accessibility_clusters.parquet",
+    "profiles": "C:\\Users\\PC\\Downloads\\Datos NTIC UCM 2025-20260902T223204Z-1-001\\TFM_Movilidad_Mallorca\\data\\curated\\municipality_accessibility_cluster_profiles.parquet",
+    "model": "C:\\Users\\PC\\Downloads\\Datos NTIC UCM 2025-20260902T223204Z-1-001\\TFM_Movilidad_Mallorca\\data\\curated\\kmeans_municipality_accessibility.joblib"
+  }
+}

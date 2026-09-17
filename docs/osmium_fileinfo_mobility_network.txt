@@ -1,0 +1,39 @@
+File:
+  Name: C:\Users\PC\Downloads\Datos NTIC UCM 2025-20260902T223204Z-1-001\TFM_Movilidad_Mallorca\data\unified\osm\mallorca_mobility_network.osm.pbf
+  Format: PBF
+  Compression: none
+  Size: 8679106
+Header:
+  Bounding boxes:
+  With history: no
+  Options:
+    generator=osmium/1.19.1
+    pbf_dense_nodes=true
+    pbf_optional_feature_0=Sort.Type_then_ID
+    sorting=Type_then_ID
+Data:
+  Bounding box: (2.3044886,39.1290602,3.4772245,39.9615487)
+  Timestamps:
+    First: 2007-01-19T16:50:22Z
+    Last: 2026-09-02T19:49:51Z
+  Objects ordered (by type and id): yes
+  Multiple versions of same object: no
+  CRC32: not calculated (use --crc/-c to enable)
+  Number of changesets: 0
+  Number of nodes: 797816
+  Number of ways: 98990
+  Number of relations: 1482
+  Smallest changeset ID: 0
+  Smallest node ID: 21721240
+  Smallest way ID: 4225841
+  Smallest relation ID: 571581
+  Largest changeset ID: 0
+  Largest node ID: 14143033283
+  Largest way ID: 1554611312
+  Largest relation ID: 21318942
+  Number of buffers: 1264 (avg 710 objects per buffer)
+  Sum of buffer sizes: 80252344 (0.076 GB)
+  Sum of buffer capacities: 82837504 (0.079 GB, 97% full)
+Metadata:
+  All objects have following metadata attributes: version+timestamp
+  Some objects have following metadata attributes: version+timestamp

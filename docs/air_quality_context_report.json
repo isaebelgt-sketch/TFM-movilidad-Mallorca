@@ -1,0 +1,20 @@
+{
+  "generated_at_utc": "2026-09-11T14:32:50.602042+00:00",
+  "source": "Govern de les Illes Balears, Estacions de mesura de la qualitat de l'aire (CC-BY).",
+  "source_url": "https://intranet.caib.es/opendatacataleg/files/dataset/estacions-qualitat-aire/estacions-qualitat-aire.geojson",
+  "raw_sha256": "8038fc95a034a695601f39b61066c1cdb6dd94520921d2da80b26c729970996a",
+  "stations": 22,
+  "pollutant_columns_detected": [
+    "SO2_ACTUAL",
+    "NO2_ACTUAL",
+    "CO_ACTUAL",
+    "O3_ACTUAL",
+    "PM10_ACTUAL"
+  ],
+  "method": "Asignación de la estación CAIB más próxima en CRS métrico a cada alojamiento.",
+  "limitations": [
+    "La proximidad a una estación no estima exposición ni calidad del aire de un alojamiento o ruta.",
+    "Las observaciones son puntuales y pueden cambiar con el tiempo; no se integran en TSMAI.",
+    "Para una evaluación de exposición se requeriría una serie temporal validada y un modelo espacial de interpolación."
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "generated_at_utc": "2026-09-11T14:28:48.066448+00:00",
+  "cases": 20,
+  "profiles": 40,
+  "method": "Muestreo cada 100 m de geometrías OTP y proximidad <=30 m a capas de movilidad activa extraídas de OSM.",
+  "limitations": [
+    "El indicador mide documentación OSM, no siniestralidad, tráfico, continuidad física ni percepción de seguridad.",
+    "Una vía no etiquetada no implica infraestructura ausente.",
+    "No sustituye una auditoría de campo."
+  ]
+}

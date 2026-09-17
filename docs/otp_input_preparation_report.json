@@ -1,0 +1,14 @@
+{
+  "status": "ready_for_otp_build",
+  "build_id": "otp_20260912T222855Z_20260912T231840Z",
+  "build_directory": "data\\otp\\builds\\otp_20260912T222855Z_20260912T231840Z",
+  "osm_source": "data\\unified\\osm\\mallorca_mobility_network_20260912T222855Z.osm.pbf",
+  "osm_source_sha256": "5ef3cb80aed1119e4b64c681122596f6c54292504b59c520b95ef29875bd94e4",
+  "gtfs_source": "data\\raw\\tib_gtfs_supply\\20260912T231840Z\\payload.zip",
+  "gtfs_source_sha256": "eb239bebf5dcb013fbc75bd563b00e45c84764be096e400bc8cb88a9c005afff",
+  "osm_input": "data\\otp\\builds\\otp_20260912T222855Z_20260912T231840Z\\mallorca_network.osm.pbf",
+  "gtfs_input": "data\\otp\\builds\\otp_20260912T222855Z_20260912T231840Z\\tib_gtfs.zip",
+  "timezone": "Europe/Madrid",
+  "generated_at_utc": "2026-09-12T23:28:35.877626+00:00",
+  "next_command": "docker compose -f docker/otp/docker-compose.yml run --rm otp-build"
+}

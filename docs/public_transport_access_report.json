@@ -1,0 +1,23 @@
+{
+  "status": "passed",
+  "source_gtfs_snapshot": "data\\raw\\tib_gtfs_supply\\20260912T231840Z\\payload.zip",
+  "source_run_id": "20260912T231840Z",
+  "source_sha256_verified": true,
+  "source_license": "CC-BY-4.0",
+  "stops_enriched": 789,
+  "stops_with_at_least_one_route": 772,
+  "accommodations_evaluated": 1461,
+  "access_bands": {
+    "alta_0_400m": 885,
+    "brecha_mas_800m": 309,
+    "media_400_800m": 267
+  },
+  "enriched_stops_output": "data\\unified\\gtfs\\tib_gtfs_stops_service_20260912T231840Z.parquet",
+  "accommodation_access_output": "data\\curated\\accommodations_public_transport_access_20260912T231840Z.parquet",
+  "generated_at_utc": "2026-09-12T23:24:33.151527+00:00",
+  "limitations": [
+    "La distancia a la parada es euclídea; no es distancia caminable por red ni tiempo de viaje.",
+    "scheduled_stop_time_records cuenta filas del feed y no representa frecuencia diaria sin fijar fecha y servicio.",
+    "La evidencia de rutas dentro de un radio suma paradas servidas; no es número de líneas únicas del área."
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "generated_at_utc": "2026-09-10T16:13:59.484098+00:00",
+  "scope": "exploratory nearest eligible destination screening",
+  "date": "2026-09-03",
+  "time": "12:00",
+  "concurrency": 4,
+  "batch_size": 25,
+  "pairs": 1463,
+  "ok": 1441,
+  "seconds": 61.05,
+  "requests_per_second": 23.96
+}

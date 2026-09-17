@@ -1,0 +1,58 @@
+{
+  "status": "passed",
+  "run_id": "bicycle_20260912T222855Z_20260915_1000",
+  "routing_date": "2026-09-15",
+  "routing_time": "10:00",
+  "otp_endpoint": "http://localhost:8080/otp/gtfs/v1",
+  "method": "Un destino elegible real más próximo por alojamiento; duración y distancia obtenidas mediante ruta BICYCLE de OTP.",
+  "eligible_destination_categories": [
+    "historic:archaeological_site",
+    "historic:castle",
+    "historic:city_gate",
+    "historic:fort",
+    "historic:monastery",
+    "historic:monument",
+    "historic:ruins",
+    "leisure:garden",
+    "leisure:nature_reserve",
+    "leisure:park",
+    "man_made:lighthouse",
+    "natural:beach",
+    "tourism:aquarium",
+    "tourism:attraction",
+    "tourism:gallery",
+    "tourism:museum",
+    "tourism:spa_resort",
+    "tourism:theme_park",
+    "tourism:viewpoint",
+    "tourism:zoo"
+  ],
+  "pairs_total": 1461,
+  "pairs_completed": 1461,
+  "status_counts": {
+    "ok": 1460,
+    "no_route": 1
+  },
+  "threshold_coverage_pct": {
+    "bicycle_10min": 90.76,
+    "bicycle_20min": 98.08,
+    "bicycle_30min": 99.18,
+    "bicycle_45min": 99.86
+  },
+  "inputs": {
+    "accommodations": "data\\unified\\accommodations_official_normalized.geojson",
+    "accommodations_sha256": "5ee25c3fb6b9cccf8b347fa5cc9f2360bc789acc9773aac967198301fb5b0c23",
+    "tourism_destinations": "data\\curated\\tourism_destinations_osm_20260912T222855Z.parquet",
+    "tourism_destinations_sha256": "38598270cacde2849e25b9be90c3ecb64996dab3dfde4baa48c150aea46e2aa2",
+    "tourism_source_run_id": "20260912T222855Z"
+  },
+  "checkpoint": "data\\curated\\accommodations_bicycle_network_access_bicycle_20260912T222855Z_20260915_1000_checkpoint.parquet",
+  "output": "data\\curated\\accommodations_bicycle_network_access_bicycle_20260912T222855Z_20260915_1000.parquet",
+  "elapsed_seconds": 20.3,
+  "generated_at_utc": "2026-09-13T05:27:55.797003+00:00",
+  "limitations": [
+    "La selección del destino por proximidad geométrica no representa demanda, preferencia ni itinerario turístico observado.",
+    "La ruta BICYCLE no prueba infraestructura segregada, continuidad, iluminación, seguridad vial ni ciclabilidad percibida.",
+    "La ruta se interpreta con la red y configuración OTP documentadas; la evidencia de ciclovías OSM se mantiene como componente separado."
+  ]
+}

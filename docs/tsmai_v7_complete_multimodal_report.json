@@ -1,0 +1,65 @@
+{
+  "status": "passed",
+  "index_version": "TSMAI-v7-complete-multimodal",
+  "unit_of_analysis": "alojamiento turístico oficial con geometría válida",
+  "records": 1461,
+  "weights": {
+    "public_transport_proximity_score": 0.12,
+    "public_transport_service_score": 0.08,
+    "transit_network_destination_score": 0.2,
+    "cycling_evidence_proximity_score": 0.1,
+    "bicycle_network_destination_score": 0.1,
+    "pedestrian_evidence_proximity_score": 0.2,
+    "walk_network_destination_score": 0.2
+  },
+  "transit_network_component": {
+    "source": "data\\curated\\accommodations_transit_network_access_transit_20260912T222855Z_20260915_1000_8to20km.parquet",
+    "scoring": {
+      "≤30 min": 1.0,
+      ">30–60 min": 0.8,
+      ">60–90 min": 0.6,
+      ">90–120 min": 0.3,
+      ">120 min, no_transit_leg or no_route": 0.0
+    },
+    "route_status_counts": {
+      "ok": 756,
+      "no_transit_leg": 644,
+      "no_route": 61
+    },
+    "coverage_30_60_90_120_pct": {
+      "transit_30min": 3.76,
+      "transit_60min": 29.36,
+      "transit_90min": 45.31,
+      "transit_120min": 50.86
+    }
+  },
+  "inputs": {
+    "tsmai_v6": "data\\curated\\accommodations_tsmai_v6_multimodal_network.parquet",
+    "tsmai_v6_sha256": "d6a7802aae0f60c4bcb9b5db36c219cdd5e59681e0dc73167cf8a10c363164c5",
+    "transit_network": "data\\curated\\accommodations_transit_network_access_transit_20260912T222855Z_20260915_1000_8to20km.parquet",
+    "transit_network_sha256": "b4b316c78b7e49f30c696e3216b520eb09a0d8ed9b25a4f6daaa480598619f3b"
+  },
+  "levels": {
+    "favorable": 765,
+    "intermedio": 522,
+    "prioridad de mejora": 174
+  },
+  "score_summary": {
+    "count": 1461.0,
+    "mean": 0.652,
+    "std": 0.198,
+    "min": 0.046,
+    "25%": 0.559,
+    "50%": 0.682,
+    "75%": 0.801,
+    "max": 0.989
+  },
+  "mean_evidence_coverage_pct": 100.0,
+  "output": "data\\curated\\accommodations_tsmai_v7_complete_multimodal.parquet",
+  "generated_at_utc": "2026-09-13T05:57:56.272088+00:00",
+  "limitations": [
+    "Los pares TRANSIT se construyen contra un POI elegible entre 8 y 20 km; no representan demanda, preferencia ni itinerario turístico observado.",
+    "No se imputa un itinerario de transporte público: no_transit_leg y no_route conservan puntuación de componente 0 y sus estados originales.",
+    "La disponibilidad depende del horario GTFS y fecha/hora documentados; no mide puntualidad, ocupación, tarifa, seguridad o accesibilidad física certificada."
+  ]
+}

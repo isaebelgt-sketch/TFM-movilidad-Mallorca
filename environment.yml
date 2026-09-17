@@ -1,0 +1,36 @@
+name: tfm-mallorca
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  - pip
+  - jupyter
+  - notebook
+  - ipykernel
+  - pandas
+  - openpyxl
+  - geopandas
+  - shapely
+  - pyproj
+  - pyarrow
+  - osmnx
+  - osmium-tool
+  - networkx
+  - folium
+  - pydeck
+  - plotly
+  - requests
+  - rasterio
+  - scikit-learn
+  - streamlit
+  - pytest
+  - git
+  - pip:
+      - python-calamine
+      - gtfs-kit
+      - streamlit-folium
+      - aiohttp
+      - reportlab
+      - pypdf
+      - fastapi
+      - uvicorn

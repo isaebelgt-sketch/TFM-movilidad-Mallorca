@@ -1,0 +1,42 @@
+{
+  "generated_at_utc": "2026-09-03T19:11:13.944415+00:00",
+  "source_file": "allotjaments_turistics_mallorca.geojson",
+  "source_sha256": "aadfdeada03723c86ea5f1dd0671e015552c7e60499912dee9494d421b1116d3",
+  "crs": "EPSG:4326",
+  "study_bbox": {
+    "min_lon": 2.2,
+    "min_lat": 39.1,
+    "max_lon": 3.6,
+    "max_lat": 40.2
+  },
+  "total_records": 1877,
+  "spatial_candidates": 1463,
+  "geometry_quality_counts": {
+    "valid_point_in_study_bbox": 1463,
+    "missing_geometry": 398,
+    "outside_study_bbox": 16
+  },
+  "missing_values": {
+    "accommodation_id": 0,
+    "commercial_name": 0,
+    "group_raw": 0,
+    "subgroup_raw": 0,
+    "category_raw": 0,
+    "activity_start_date_raw": 0,
+    "status_raw": 0,
+    "municipality_raw": 0,
+    "locality_raw": 0,
+    "address_raw": 0,
+    "places": 0,
+    "surface_m2": 1444,
+    "city_hotel_raw": 0,
+    "units": 0,
+    "operator_raw": 0,
+    "activity_start_date": 0,
+    "geometry_quality": 0,
+    "is_spatial_candidate": 0,
+    "source_file": 0,
+    "ingested_at_utc": 0
+  },
+  "duplicate_accommodation_ids": 0
+}

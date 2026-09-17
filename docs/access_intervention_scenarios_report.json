@@ -1,0 +1,162 @@
+{
+  "status": "passed",
+  "index_version": "TSMAI-v9-seasonal-transit",
+  "purpose": "Análisis determinista de sensibilidad de pesos del TSMAI V9; no validación causal ni simulación de datos.",
+  "input": {
+    "path": "data\\curated\\accommodations_tsmai_v9_seasonal_transit.parquet",
+    "sha256": "cd57ed244f2ed07d38b68a3159d32015702e1f90749f86917c726bde2264a6de",
+    "records": 1461
+  },
+  "scenarios": {
+    "balanced": {
+      "public_transport_proximity_score": 0.12,
+      "public_transport_service_score": 0.08,
+      "temporal_transit_destination_score": 0.2,
+      "cycling_evidence_proximity_score": 0.1,
+      "bicycle_network_destination_score": 0.1,
+      "pedestrian_evidence_proximity_score": 0.2,
+      "walk_network_destination_score": 0.2
+    },
+    "seasonal_public_transport_focus": {
+      "public_transport_proximity_score": 0.12,
+      "public_transport_service_score": 0.08,
+      "temporal_transit_destination_score": 0.36,
+      "cycling_evidence_proximity_score": 0.08,
+      "bicycle_network_destination_score": 0.08,
+      "pedestrian_evidence_proximity_score": 0.14,
+      "walk_network_destination_score": 0.14
+    },
+    "active_mobility_focus": {
+      "public_transport_proximity_score": 0.06,
+      "public_transport_service_score": 0.04,
+      "temporal_transit_destination_score": 0.08,
+      "cycling_evidence_proximity_score": 0.18,
+      "bicycle_network_destination_score": 0.18,
+      "pedestrian_evidence_proximity_score": 0.23,
+      "walk_network_destination_score": 0.23
+    },
+    "walkability_focus": {
+      "public_transport_proximity_score": 0.1,
+      "public_transport_service_score": 0.05,
+      "temporal_transit_destination_score": 0.1,
+      "cycling_evidence_proximity_score": 0.1,
+      "bicycle_network_destination_score": 0.1,
+      "pedestrian_evidence_proximity_score": 0.25,
+      "walk_network_destination_score": 0.3
+    },
+    "balanced_non_transit_focus": {
+      "public_transport_proximity_score": 0.1,
+      "public_transport_service_score": 0.05,
+      "temporal_transit_destination_score": 0.05,
+      "cycling_evidence_proximity_score": 0.16,
+      "bicycle_network_destination_score": 0.16,
+      "pedestrian_evidence_proximity_score": 0.24,
+      "walk_network_destination_score": 0.24
+    }
+  },
+  "top_decile_definition": "top 147 de 1461 alojamientos; prioridad robusta si aparece en al menos 4 de 5 escenarios.",
+  "accommodation_results": {
+    "records": 1461,
+    "level_stable_all_scenarios": 625,
+    "level_changed_in_any_scenario": 836,
+    "robust_top_decile": 110,
+    "mean_rank_spread": 194.26,
+    "rank_spearman_correlation": {
+      "balanced_rank": {
+        "balanced_rank": 1.0,
+        "seasonal_public_transport_focus_rank": 0.972,
+        "active_mobility_focus_rank": 0.939,
+        "walkability_focus_rank": 0.966,
+        "balanced_non_transit_focus_rank": 0.942
+      },
+      "seasonal_public_transport_focus_rank": {
+        "balanced_rank": 0.972,
+        "seasonal_public_transport_focus_rank": 1.0,
+        "active_mobility_focus_rank": 0.858,
+        "walkability_focus_rank": 0.893,
+        "balanced_non_transit_focus_rank": 0.855
+      },
+      "active_mobility_focus_rank": {
+        "balanced_rank": 0.939,
+        "seasonal_public_transport_focus_rank": 0.858,
+        "active_mobility_focus_rank": 1.0,
+        "walkability_focus_rank": 0.968,
+        "balanced_non_transit_focus_rank": 0.995
+      },
+      "walkability_focus_rank": {
+        "balanced_rank": 0.966,
+        "seasonal_public_transport_focus_rank": 0.893,
+        "active_mobility_focus_rank": 0.968,
+        "walkability_focus_rank": 1.0,
+        "balanced_non_transit_focus_rank": 0.977
+      },
+      "balanced_non_transit_focus_rank": {
+        "balanced_rank": 0.942,
+        "seasonal_public_transport_focus_rank": 0.855,
+        "active_mobility_focus_rank": 0.995,
+        "walkability_focus_rank": 0.977,
+        "balanced_non_transit_focus_rank": 1.0
+      }
+    },
+    "output": "data\\curated\\accommodations_tsmai_v9_sensitivity.parquet"
+  },
+  "municipality_results": {
+    "records": 51,
+    "level_stable_all_scenarios": 19,
+    "robust_top_decile": 5,
+    "mean_rank_spread": 5.02,
+    "rank_spearman_correlation": {
+      "balanced_rank": {
+        "balanced_rank": 1.0,
+        "seasonal_public_transport_focus_rank": 0.974,
+        "active_mobility_focus_rank": 0.975,
+        "walkability_focus_rank": 0.986,
+        "balanced_non_transit_focus_rank": 0.979
+      },
+      "seasonal_public_transport_focus_rank": {
+        "balanced_rank": 0.974,
+        "seasonal_public_transport_focus_rank": 1.0,
+        "active_mobility_focus_rank": 0.916,
+        "walkability_focus_rank": 0.932,
+        "balanced_non_transit_focus_rank": 0.917
+      },
+      "active_mobility_focus_rank": {
+        "balanced_rank": 0.975,
+        "seasonal_public_transport_focus_rank": 0.916,
+        "active_mobility_focus_rank": 1.0,
+        "walkability_focus_rank": 0.984,
+        "balanced_non_transit_focus_rank": 0.996
+      },
+      "walkability_focus_rank": {
+        "balanced_rank": 0.986,
+        "seasonal_public_transport_focus_rank": 0.932,
+        "active_mobility_focus_rank": 0.984,
+        "walkability_focus_rank": 1.0,
+        "balanced_non_transit_focus_rank": 0.992
+      },
+      "balanced_non_transit_focus_rank": {
+        "balanced_rank": 0.979,
+        "seasonal_public_transport_focus_rank": 0.917,
+        "active_mobility_focus_rank": 0.996,
+        "walkability_focus_rank": 0.992,
+        "balanced_non_transit_focus_rank": 1.0
+      }
+    },
+    "robust_top10_municipalities": [
+      "ALCÚDIA",
+      "ARIANY",
+      "CALVIÀ",
+      "MURO",
+      "SANT LLORENÇ DES CARDASSAR",
+      "SANTA MARGALIDA",
+      "SON SERVERA"
+    ],
+    "output": "data\\curated\\municipality_tsmai_v9_sensitivity.parquet"
+  },
+  "generated_at_utc": "2026-09-17T05:10:53.021138+00:00",
+  "limitations": [
+    "Los escenarios modifican pesos, no los componentes ni las fuentes reales de TSMAI V9.",
+    "La estabilidad de ranking no valida causalmente el índice ni demuestra preferencias de visitantes o gestores.",
+    "Los resultados mantienen las limitaciones de OSM, GTFS y OTP, incluida la estacionalidad calculada dentro de un único feed GTFS versionado."
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "generated_at_utc": "2026-09-04T01:10:22.487402+00:00",
+  "environment": {
+    "python": "3.11.16",
+    "platform": "Windows-10-10.0.22621-SP0",
+    "pandas": "3.0.5",
+    "geopandas": "1.1.4"
+  },
+  "validation_status": "passed",
+  "kpis": {
+    "Alojamientos con coordenadas plausibles": 1463.0,
+    "Cobertura de alojamientos a ≤800 m (%)": 78.88,
+    "Destinos turísticos nombrados": 1423.0,
+    "Cobertura de destinos a ≤800 m (%)": 65.5,
+    "Pares OD multimodales analizados": 20.0,
+    "Casos prioritarios robustos": 5.0,
+    "Pares coche-autobús comparables": 6.0,
+    "CO₂eq evitado estimado (kg)": 2.844,
+    "Reducción estimada (%)": 69.81
+  },
+  "robust_cases": [
+    {
+      "od_id": "OD16",
+      "priority_index_score": 0.825,
+      "recommendation_code": "audit_pedestrian_network"
+    },
+    {
+      "od_id": "OD18",
+      "priority_index_score": 0.825,
+      "recommendation_code": "first_last_mile_assessment"
+    },
+    {
+      "od_id": "OD13",
+      "priority_index_score": 0.7387611284784045,
+      "recommendation_code": "first_last_mile_assessment"
+    },
+    {
+      "od_id": "OD15",
+      "priority_index_score": 0.6103250411907656,
+      "recommendation_code": "walking_quality_preservation"
+    },
+    {
+      "od_id": "OD19",
+      "priority_index_score": 0.5921261694162647,
+      "recommendation_code": "first_last_mile_assessment"
+    }
+  ],
+  "known_limitations": [
+    "La accesibilidad inicial usa distancia euclídea a la parada GTFS más cercana.",
+    "La muestra multimodal contiene 20 pares y una única fecha/hora del GTFS.",
+    "Las emisiones son un contrafactual por viajero; no son emisiones observadas ni marginales.",
+    "Las recomendaciones requieren validación de campo y análisis de viabilidad."
+  ]
+}

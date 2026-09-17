@@ -1,0 +1,49 @@
+{
+  "status": "passed",
+  "purpose": "Capas actuales del mapa territorial, sin dependencia de la línea base histórica.",
+  "inputs": {
+    "accommodations_tsmai_v9": "data\\curated\\accommodations_tsmai_v9_seasonal_transit.parquet",
+    "accommodations_tsmai_v9_sha256": "cd57ed244f2ed07d38b68a3159d32015702e1f90749f86917c726bde2264a6de",
+    "gtfs_manifest": "data\\unified\\gtfs\\latest_tib_gtfs.json",
+    "gtfs_source_run_id": "20260912T231840Z",
+    "gtfs_stops": "data\\unified\\gtfs\\tib_gtfs_stops_20260912T231840Z.geojson",
+    "gtfs_stops_sha256": "92c76047938618c85269398b4febb36c0e778b237cc46c88e870d2c2dcdf3096",
+    "osm_manifest": "data\\unified\\osm\\latest_mallorca_network.json",
+    "osm_source_run_id": "20260912T222855Z",
+    "destinations_osm": "data\\unified\\osm\\mallorca_tourism_destinations_20260912T222855Z.geojson",
+    "destinations_osm_sha256": "62367f6a6b93acb1761d0cbb8d8337d6cd6fd8659de9a6c5348c7ea22c02901d",
+    "cycling_osm": "data\\unified\\osm\\mallorca_cycling_evidence_20260912T222855Z.parquet",
+    "cycling_osm_sha256": "66d6d3705caa08a64cfdce53e550554cfe20d90e1676a508b7c5d5dcfe70555a"
+  },
+  "outputs": {
+    "accommodations": "data\\curated\\dashboard_current_accommodations_tsmai_v9.parquet",
+    "stops": "data\\curated\\dashboard_current_tib_gtfs_stops.parquet",
+    "destinations": "data\\curated\\dashboard_current_tourism_destinations_osm.parquet",
+    "cycling": "data\\curated\\dashboard_current_cycling_evidence_osm.parquet"
+  },
+  "counts": {
+    "accommodations": 1461,
+    "stops": 772,
+    "destinations": 4487,
+    "cycling_evidence": 1421,
+    "destination_themes": {
+      "nature": 1611,
+      "cultural": 977,
+      "leisure": 754,
+      "tourism": 702,
+      "coastal": 443
+    },
+    "accommodation_access_bands": {
+      "alta_0_400m": 885,
+      "media_400_800m": 267,
+      "brecha_mas_1200m": 267,
+      "baja_800_1200m": 42
+    }
+  },
+  "generated_at_utc": "2026-09-17T05:06:11.433439+00:00",
+  "limitations": [
+    "La distancia a parada sigue siendo euclídea y no equivale a un itinerario a pie por red.",
+    "Los destinos OSM son POI representativos; no garantizan entrada física, horario o accesibilidad universal.",
+    "Las capas sustituyen la línea base del mapa, pero no convierten los casos OD históricos en resultados TSMAI V9."
+  ]
+}

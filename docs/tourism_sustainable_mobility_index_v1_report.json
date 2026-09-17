@@ -1,0 +1,30 @@
+{
+  "generated_at_utc": "2026-09-10T20:50:43.442211+00:00",
+  "name": "Tourism Sustainable Mobility & Accessibility Index v1",
+  "scope": "Municipal screening index based only on available, validated project artifacts. It is not a causal model or an accessibility certification.",
+  "municipalities": 51,
+  "weights": {
+    "coverage_score": 0.28,
+    "gap_score": 0.17,
+    "proximity_score": 0.17,
+    "routing_score": 0.22,
+    "transit_score": 0.16
+  },
+  "components": {
+    "coverage_score": "Accommodation coverage to GTFS stops within 800m",
+    "gap_score": "Inverse share of accommodation gaps over 1200m",
+    "proximity_score": "Inverse normalized municipal median distance to nearest GTFS stop",
+    "routing_score": "OTP route success in exploratory screening",
+    "transit_score": "Transit availability in exploratory OTP screening"
+  },
+  "universal_access_proxy": {
+    "status": "available",
+    "wheelchair_boarding_stops": 2,
+    "note": "The GTFS wheelchair_boarding tag is retained as a separate proxy and is not included in TSMAI v1 without sufficient documented coverage."
+  },
+  "limitations": [
+    "No cycling infrastructure, slope, perceived safety, reviews, air quality or traffic are included.",
+    "The OTP screening is nearest eligible POI based, not observed demand.",
+    "Weights are transparent analytical choices and should be sensitivity-tested before policy use."
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "generated_at_utc": "2026-09-17T05:03:50.123512+00:00",
+  "source": "IBESTAT 000060A_000004; medida PLAZA_TURISTICA.",
+  "municipalities": 15,
+  "period_start": "2008-01-01",
+  "period_end": "2026-05-01",
+  "limitations": [
+    "Las plazas oficiales son capacidad de oferta, no ocupación, llegadas ni viajes observados.",
+    "No se incorporan al TSMAI como demanda ni se usan para validar emisiones."
+  ]
+}

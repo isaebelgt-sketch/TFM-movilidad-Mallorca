@@ -1,0 +1,27 @@
+{
+  "status": "partial",
+  "run_id": "20260913T160412Z",
+  "sample_pairs": 12,
+  "route_profiles": 24,
+  "route_status_counts": {
+    "ok": 23,
+    "no_route": 1
+  },
+  "provenance": {
+    "sample": "data\\curated\\multimodal_route_sample_20260913T043734Z.parquet",
+    "routing_date": "2026-09-15",
+    "routing_time": "10:00",
+    "cycling_evidence": "data\\unified\\osm\\mallorca_cycling_evidence_20260912T222855Z.parquet",
+    "pedestrian_evidence": "data\\unified\\osm\\mallorca_pedestrian_evidence_20260912T222855Z.parquet",
+    "osm_source_run_id": "20260912T222855Z"
+  },
+  "profile_output": "data\\curated\\current_sample_route_documentary_evidence_20260913T160412Z.parquet",
+  "raw_routes": "data\\raw\\current_route_documentary_evidence\\20260913T160412Z\\otp_route_geometries.parquet",
+  "method": "Puntos cada 100 m de rutas OTP; proximidad ≤30 m a evidencia OSM.",
+  "limitations": [
+    "Mide documentación OSM próxima a la geometría, no seguridad vial, continuidad física, iluminación, tráfico ni siniestralidad.",
+    "La ausencia de etiqueta OSM no demuestra ausencia de infraestructura.",
+    "No es una auditoría de campo ni una certificación de accesibilidad universal."
+  ],
+  "generated_at_utc": "2026-09-13T16:04:12.110062+00:00"
+}

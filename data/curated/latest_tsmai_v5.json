@@ -1,0 +1,62 @@
+{
+  "status": "passed",
+  "index_version": "TSMAI-v5-network-walk",
+  "unit_of_analysis": "alojamiento turístico oficial con geometría válida",
+  "records": 1461,
+  "weights": {
+    "public_transport_proximity_score": 0.28,
+    "public_transport_service_score": 0.12,
+    "cycling_evidence_proximity_score": 0.2,
+    "pedestrian_evidence_proximity_score": 0.2,
+    "walk_network_destination_score": 0.2
+  },
+  "network_component": {
+    "source": "data\\curated\\accommodations_walk_network_access_walk_20260912T222855Z_20260915_1000.parquet",
+    "scoring": {
+      "≤5 min": 1.0,
+      ">5–10 min": 0.8,
+      ">10–15 min": 0.6,
+      ">15–30 min": 0.3,
+      ">30 min or no_route": 0.0
+    },
+    "route_status_counts": {
+      "ok": 1454,
+      "no_route": 7
+    },
+    "coverage_5_10_15_30_pct": {
+      "walk_5min": 45.45,
+      "walk_10min": 72.76,
+      "walk_15min": 82.96,
+      "walk_30min": 90.01
+    }
+  },
+  "inputs": {
+    "tsmai_v4": "data\\curated\\accommodations_tsmai_v4_current.parquet",
+    "tsmai_v4_sha256": "02717f7089706c268425b91051cb2987ec45db938e18553497dded23cb4653e9",
+    "walk_network": "data\\curated\\accommodations_walk_network_access_walk_20260912T222855Z_20260915_1000.parquet",
+    "walk_network_sha256": "668312946be51de8b89a5be9bfc6f1734d1e2e6e77063497c1714edf50f58479"
+  },
+  "levels": {
+    "favorable": 804,
+    "intermedio": 466,
+    "prioridad de mejora": 191
+  },
+  "score_summary": {
+    "count": 1461.0,
+    "mean": 0.641,
+    "std": 0.219,
+    "min": 0.024,
+    "25%": 0.531,
+    "50%": 0.694,
+    "75%": 0.805,
+    "max": 0.98
+  },
+  "mean_evidence_coverage_pct": 100.0,
+  "output": "data\\curated\\accommodations_tsmai_v5_network.parquet",
+  "generated_at_utc": "2026-09-13T05:17:23.928266+00:00",
+  "limitations": [
+    "El destino es el POI elegible más próximo por geometría y no representa demanda, preferencia ni un itinerario turístico observado.",
+    "La disponibilidad WALK depende de la red y de la configuración OTP documentadas; no equivale a una auditoría de continuidad, seguridad o accesibilidad universal.",
+    "Los demás componentes siguen siendo evidencia de proximidad/servicio y no se convierten en tiempos de red por esta versión."
+  ]
+}

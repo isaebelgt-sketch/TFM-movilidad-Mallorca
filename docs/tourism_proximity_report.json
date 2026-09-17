@@ -1,0 +1,16 @@
+{
+  "generated_at_utc": "2026-09-11T10:11:38.485999+00:00",
+  "source": "Destinos turísticos nombrados extraídos de OpenStreetMap.",
+  "method": "Distancia euclídea de cada alojamiento al centroide o punto de destino nombrado más próximo, EPSG:25831.",
+  "accommodations": 1463,
+  "destinations": 1423,
+  "bands": {
+    "alta_menos_1km": 1157,
+    "media_1_3km": 276,
+    "baja_mas_3km": 30
+  },
+  "limitations": [
+    "No es tiempo ni distancia por red.",
+    "La ausencia o clasificación de POI en OSM condiciona la métrica."
+  ]
+}

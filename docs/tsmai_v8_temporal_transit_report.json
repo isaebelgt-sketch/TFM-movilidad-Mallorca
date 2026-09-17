@@ -1,0 +1,60 @@
+{
+  "status": "passed",
+  "index_version": "TSMAI-v8-temporal-transit",
+  "records": 1461,
+  "weights": {
+    "public_transport_proximity_score": 0.12,
+    "public_transport_service_score": 0.08,
+    "temporal_transit_destination_score": 0.2,
+    "cycling_evidence_proximity_score": 0.1,
+    "bicycle_network_destination_score": 0.1,
+    "pedestrian_evidence_proximity_score": 0.2,
+    "walk_network_destination_score": 0.2
+  },
+  "temporal_transit_component": {
+    "source": "data\\curated\\transit_temporal_weekday_am_peak_weekday_midday_weekday_evening_weekend_midday.parquet",
+    "scoring_per_scenario": {
+      "≤60 min": 1.0,
+      ">60–90 min": 0.7,
+      ">90–120 min": 0.4,
+      ">120 min, no_transit_leg or no_route": 0.0
+    },
+    "aggregation": "media de los cuatro escenarios configurados por alojamiento",
+    "temporal_levels": {
+      "servicio_consistente": 747,
+      "sin_servicio_en_escenarios": 638,
+      "servicio_inestable": 76
+    }
+  },
+  "inputs": {
+    "tsmai_v7": "data\\curated\\accommodations_tsmai_v7_complete_multimodal.parquet",
+    "tsmai_v7_sha256": "7f8fd5d90ccbedce3db2e4888c221d8890c2fae83a85797ab37092057eef78fb",
+    "temporal_transit_long": "data\\curated\\transit_temporal_weekday_am_peak_weekday_midday_weekday_evening_weekend_midday.parquet",
+    "temporal_transit_long_sha256": "feb5979fd5ff60b3da377f61e3e7e1c3810d91bbffdea071dbe2ef50924c7fa0",
+    "temporal_transit_summary": "data\\curated\\transit_temporal_weekday_am_peak_weekday_midday_weekday_evening_weekend_midday_summary.parquet",
+    "temporal_transit_summary_sha256": "f8ac1ec6d9657ee46db9c31d7fbb0a5a847f6c1b33bf507a37f44a0cb21ae7e4"
+  },
+  "levels": {
+    "favorable": 784,
+    "intermedio": 507,
+    "prioridad de mejora": 170
+  },
+  "score_summary": {
+    "count": 1461.0,
+    "mean": 0.667,
+    "std": 0.207,
+    "min": 0.046,
+    "25%": 0.564,
+    "50%": 0.693,
+    "75%": 0.83,
+    "max": 0.989
+  },
+  "mean_evidence_coverage_pct": 100.0,
+  "output": "data\\curated\\accommodations_tsmai_v8_temporal_transit.parquet",
+  "generated_at_utc": "2026-09-13T06:18:00.742760+00:00",
+  "limitations": [
+    "La estabilidad se limita a cuatro fecha/horas del GTFS versionado; no representa estacionalidad anual, puntualidad ni ocupación observada.",
+    "Los pares TRANSIT proceden de POI OSM a 8–20 km y no representan demanda turística observada.",
+    "Los estados no_transit_leg y no_route no se imputan y tienen puntuación temporal 0 en los escenarios correspondientes."
+  ]
+}

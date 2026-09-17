@@ -1,0 +1,50 @@
+{
+  "generated_at_utc": "2026-09-03T21:10:42.073989+00:00",
+  "method": "stratified random sample; OTP WALK-only from accommodation to nearest GTFS stop",
+  "sample_per_band": 20,
+  "random_seed": 2026,
+  "request_date": "2026-09-03",
+  "request_time": "12:00",
+  "total_routes": 80,
+  "successful_routes": 80,
+  "failed_routes": 0,
+  "summary_by_band": [
+    {
+      "band_code": "alta_0_400m",
+      "routes": 20,
+      "euclidean_mean_m": 213.01,
+      "network_mean_m": 347.47,
+      "network_median_min": 4.25,
+      "mean_ratio": 1.7,
+      "mean_underestimation_m": 134.46
+    },
+    {
+      "band_code": "media_400_800m",
+      "routes": 20,
+      "euclidean_mean_m": 546.37,
+      "network_mean_m": 760.18,
+      "network_median_min": 9.25,
+      "mean_ratio": 1.39,
+      "mean_underestimation_m": 213.81
+    },
+    {
+      "band_code": "baja_800_1200m",
+      "routes": 20,
+      "euclidean_mean_m": 981.03,
+      "network_mean_m": 1362.1,
+      "network_median_min": 17.55,
+      "mean_ratio": 1.39,
+      "mean_underestimation_m": 381.07
+    },
+    {
+      "band_code": "brecha_mas_1200m",
+      "routes": 20,
+      "euclidean_mean_m": 2908.88,
+      "network_mean_m": 5644.11,
+      "network_median_min": 47.5,
+      "mean_ratio": 1.85,
+      "mean_underestimation_m": 2735.24
+    }
+  ],
+  "limitation": "La muestra estima el efecto de red por bandas; no sustituye todavía un cálculo exhaustivo de los 1.463 alojamientos."
+}

@@ -1,0 +1,30 @@
+{
+  "generated_at_utc": "2026-09-11T14:20:43.826049+00:00",
+  "name": "Tourism Sustainable Mobility & Accessibility Index v2",
+  "weights": {
+    "coverage_score": 0.18,
+    "gap_score": 0.12,
+    "proximity_score": 0.1,
+    "routing_score": 0.15,
+    "transit_score": 0.1,
+    "cycling_score": 0.14,
+    "pedestrian_evidence_score": 0.1,
+    "tourism_proximity_score": 0.11
+  },
+  "municipalities": 51,
+  "new_components": {
+    "cycling_score": "Share of accommodations within 400m of OSM-labelled cycling infrastructure",
+    "pedestrian_evidence_score": "Share within 400m of OSM-labelled pedestrian infrastructure",
+    "tourism_proximity_score": "Share within 3km Euclidean distance to an OSM named tourism destination"
+  },
+  "separate_documentary_proxies": {
+    "osm_accessibility_evidence": "Not included because OSM tagging is incomplete",
+    "gtfs_wheelchair_boarding": "Not included because only two stops have a positive tag",
+    "slope": "Not included because it is a route pilot, not municipality-wide"
+  },
+  "limitations": [
+    "Index is a transparent screening tool, not a causal, safety or accessibility certification.",
+    "Cycling and pedestrian values reflect OSM documentation and geometry, not field audit or network continuity.",
+    "Sentiment, perceived safety, air quality, traffic and observed demand are deliberately not included."
+  ]
+}

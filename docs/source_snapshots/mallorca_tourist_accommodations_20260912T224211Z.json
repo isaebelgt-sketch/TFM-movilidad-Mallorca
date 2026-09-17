@@ -1,0 +1,26 @@
+{
+  "source_id": "mallorca_tourist_accommodations",
+  "provider": "Consell de Mallorca / Govern de les Illes Balears",
+  "source_url": "https://datos.gob.es/es/catalogo/a04003003-allotjaments-turistics-mallorca",
+  "download_url": "https://intranet.caib.es/opendatacataleg/files/dataset/allotjaments_turistics_mallorca/allotjaments_turistics_mallorca.geojson",
+  "license": "CC-BY-4.0",
+  "attribution": "Consell de Mallorca, Registro de alojamientos turísticos de Mallorca, CC-BY 4.0.",
+  "coverage": "Mallorca; establecimientos turísticos registrados.",
+  "data_kind": "observed_official",
+  "status_at_ingestion": "approved",
+  "run_id": "20260912T224211Z",
+  "ingested_at_utc": "2026-09-12T22:42:12.731318+00:00",
+  "payload_file": "payload.geojson",
+  "payload_bytes": 1967105,
+  "payload_sha256": "afea1aadd30c46fc5ca34d18c749b9e28a2ec57aae360408a363f4ef23a6bb78",
+  "acquisition_mode": "remote_download",
+  "http_status": 200,
+  "response_headers": {
+    "content-type": "application/geo+json",
+    "content-length": "1967105",
+    "etag": "\"1e0401-65ae8ef93a9eb\"",
+    "last-modified": "Mon, 07 Sep 2026 18:39:18 GMT"
+  },
+  "downloaded_bytes": 1967105,
+  "streamed_sha256": "afea1aadd30c46fc5ca34d18c749b9e28a2ec57aae360408a363f4ef23a6bb78"
+}

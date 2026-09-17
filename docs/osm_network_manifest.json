@@ -1,0 +1,31 @@
+{
+  "generated_at_utc": "2026-09-03T20:05:30.133984+00:00",
+  "source": {
+    "path": "data\\raw\\islas-baleares-latest.osm.pbf",
+    "size_bytes": 46567638,
+    "sha256": "d4dcf6c7780b4dca959476a2b33e92f0976bf333ea770ce313a163c4c4127a26"
+  },
+  "bbox_wgs84": {
+    "min_lon": 2.2,
+    "min_lat": 39.1,
+    "max_lon": 3.6,
+    "max_lat": 40.2
+  },
+  "outputs": {
+    "mallorca_bbox": {
+      "path": "data\\unified\\osm\\mallorca_bbox.osm.pbf",
+      "size_bytes": 28643005,
+      "sha256": "9e98a5efe1eb4f2e96d0782f13d4d1539a10e5d58e0de989d6c50374d866feb4"
+    },
+    "mobility_network": {
+      "path": "data\\unified\\osm\\mallorca_mobility_network.osm.pbf",
+      "size_bytes": 8679106,
+      "sha256": "e412511adb2c151bf7e593ce1f88d8fda8f1ce967ca0bff941b950ef85e6f74d",
+      "selection": [
+        "w/highway",
+        "r/type=restriction"
+      ]
+    }
+  },
+  "limitation": "La envolvente técnica no sustituye un límite administrativo exacto de Mallorca."
+}

@@ -1,0 +1,32 @@
+{
+  "status": "passed",
+  "schema": "mobility",
+  "tables": {
+    "accommodations_current": {
+      "records": 1461,
+      "source": "data\\curated\\dashboard_current_accommodations_tsmai_v9.parquet",
+      "sha256": "2877912e966e873fe4235db2d7e6136f20319602c82f6ba2d3773d153e7af1be"
+    },
+    "tib_gtfs_stops_current": {
+      "records": 772,
+      "source": "data\\curated\\dashboard_current_tib_gtfs_stops.parquet",
+      "sha256": "c9d6c3a7c773e6e2a4cbf1a3479772789657409f1009898e28f6f2d11e781443"
+    },
+    "tourism_destinations_current": {
+      "records": 4487,
+      "source": "data\\curated\\dashboard_current_tourism_destinations_osm.parquet",
+      "sha256": "765e72a5cf09ebeadc3d3794de8d0a492cb49b6d76c56a46f0187f0460446e97"
+    },
+    "cycling_evidence_current": {
+      "records": 1421,
+      "source": "data\\curated\\dashboard_current_cycling_evidence_osm.parquet",
+      "sha256": "8380d064606cc4d5696cc64a3a39e612090f4fe380d3ba199cc974561603eb26"
+    }
+  },
+  "p7_manifest": "data\\curated\\latest_dashboard_current_layers.json",
+  "generated_at_utc": "2026-09-13T19:10:54.613285+00:00",
+  "limitations": [
+    "PostGIS es una capa de publicación; los Parquet versionados mantienen el contrato canónico del TFM.",
+    "La carga no activa por sí sola una API pública ni sustituye controles de acceso, copias de seguridad o despliegue institucional."
+  ]
+}

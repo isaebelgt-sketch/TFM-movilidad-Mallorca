@@ -1,0 +1,35 @@
+{
+  "generated_at_utc": "2026-09-03T19:18:09.352697+00:00",
+  "source_file": "gtfs_tib_mallorca.zip",
+  "source_sha256": "ad54aaeba0f5b3f48a882a54e04b1cf6f28508996ea4900a6db073076965fc72",
+  "crs_for_stops": "EPSG:4326",
+  "table_rows": {
+    "agency": 9,
+    "stops": 789,
+    "routes": 79,
+    "trips": 4229,
+    "stop_times": 62749,
+    "calendar": 429,
+    "calendar_dates": 270
+  },
+  "integrity_checks": {
+    "missing_stop_ids": 0,
+    "duplicate_stop_ids": 0,
+    "missing_route_ids": 0,
+    "duplicate_route_ids": 0,
+    "missing_trip_ids": 0,
+    "duplicate_trip_ids": 0,
+    "trips_with_unknown_route": 0,
+    "stop_times_with_unknown_trip": 0,
+    "stop_times_with_unknown_stop": 0,
+    "stops_outside_study_bbox": 0,
+    "stops_missing_coordinates": 0
+  },
+  "stop_spatial_quality": {
+    "valid_point_in_study_bbox": 789
+  },
+  "notes": [
+    "Las horas de arrival_time y departure_time se preservan como texto GTFS.",
+    "No se eliminan paradas por la envolvente provisional de Mallorca."
+  ]
+}

@@ -1,0 +1,99 @@
+{
+  "status": "passed",
+  "scenario_set": "tib_gtfs_202609_temporal_robustness",
+  "scenarios": [
+    {
+      "scenario_id": "weekday_am_peak",
+      "date": "2026-09-15",
+      "time": "08:00",
+      "label": "Laborable, punta de mañana"
+    },
+    {
+      "scenario_id": "weekday_midday",
+      "date": "2026-09-15",
+      "time": "10:00",
+      "label": "Laborable, media mañana"
+    },
+    {
+      "scenario_id": "weekday_evening",
+      "date": "2026-09-15",
+      "time": "18:00",
+      "label": "Laborable, tarde"
+    },
+    {
+      "scenario_id": "weekend_midday",
+      "date": "2026-09-19",
+      "time": "10:00",
+      "label": "Sábado, media mañana"
+    }
+  ],
+  "queries_total": 5844,
+  "queries_completed": 5844,
+  "status_by_scenario": {
+    "weekday_am_peak": {
+      "ok": 723,
+      "no_transit_leg": 641,
+      "no_route": 97
+    },
+    "weekday_evening": {
+      "ok": 776,
+      "no_transit_leg": 639,
+      "no_route": 46
+    },
+    "weekday_midday": {
+      "ok": 756,
+      "no_transit_leg": 644,
+      "no_route": 61
+    },
+    "weekend_midday": {
+      "ok": 742,
+      "no_transit_leg": 652,
+      "no_route": 67
+    }
+  },
+  "inputs": {
+    "base_transit_output": "data\\curated\\accommodations_transit_network_access_transit_20260912T222855Z_20260915_1000_8to20km.parquet",
+    "scenario_set": "tib_gtfs_202609_temporal_robustness"
+  },
+  "checkpoint": "data\\curated\\transit_temporal_weekday_am_peak_weekday_midday_weekday_evening_weekend_midday_checkpoint.parquet",
+  "long_output": "data\\curated\\transit_temporal_weekday_am_peak_weekday_midday_weekday_evening_weekend_midday.parquet",
+  "summary_output": "data\\curated\\transit_temporal_weekday_am_peak_weekday_midday_weekday_evening_weekend_midday_summary.parquet",
+  "elapsed_seconds": 156.95,
+  "generated_at_utc": "2026-09-13T06:15:26.258963+00:00",
+  "limitations": [
+    "La robustez se refiere sólo a las cuatro fecha/horas del GTFS versionado; no representa todo el año ni puntualidad observada.",
+    "Los pares TRANSIT se heredan del barrido de destinos OSM a 8–20 km y no representan demanda turística observada.",
+    "No se imputan rutas: no_transit_leg, no_route y errores se mantienen como estados diferenciados."
+  ],
+  "summary_levels": {
+    "servicio_consistente": 747,
+    "sin_servicio_en_escenarios": 638,
+    "servicio_inestable": 76
+  },
+  "network_coverage_by_scenario_pct": {
+    "weekday_am_peak": {
+      "transit_ok": 49.49,
+      "transit_60min": 30.46,
+      "transit_90min": 45.93,
+      "transit_120min": 49.14
+    },
+    "weekday_evening": {
+      "transit_ok": 53.11,
+      "transit_60min": 30.6,
+      "transit_90min": 47.36,
+      "transit_120min": 52.57
+    },
+    "weekday_midday": {
+      "transit_ok": 51.75,
+      "transit_60min": 29.36,
+      "transit_90min": 45.31,
+      "transit_120min": 50.86
+    },
+    "weekend_midday": {
+      "transit_ok": 50.79,
+      "transit_60min": 28.47,
+      "transit_90min": 44.49,
+      "transit_120min": 50.03
+    }
+  }
+}

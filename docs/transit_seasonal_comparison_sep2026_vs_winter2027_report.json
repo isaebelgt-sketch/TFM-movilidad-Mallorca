@@ -1,0 +1,40 @@
+{
+  "status": "passed",
+  "comparison_id": "sep2026_vs_winter2027",
+  "comparison_mode": "intra_feed_seasonal",
+  "baseline_summary": "data\\curated\\transit_temporal_weekday_am_peak_weekday_midday_weekday_evening_weekend_midday_summary.parquet",
+  "seasonal_summary": "data\\curated\\transit_temporal_winter_2027_winter_weekday_am_peak_winter_weekday_midday_winter_weekday_evening_winter_weekend_midday_summary.parquet",
+  "baseline_gtfs": {
+    "run_id": "20260912T231840Z",
+    "sha256": "eb239bebf5dcb013fbc75bd563b00e45c84764be096e400bc8cb88a9c005afff"
+  },
+  "seasonal_gtfs": {
+    "run_id": "20260912T231840Z",
+    "sha256": "eb239bebf5dcb013fbc75bd563b00e45c84764be096e400bc8cb88a9c005afff"
+  },
+  "output": "data\\curated\\transit_seasonal_comparison_sep2026_vs_winter2027.parquet",
+  "generated_at_utc": "2026-09-13T07:03:05.649082+00:00",
+  "limitations": [
+    "La comparación mide diferencias entre campañas GTFS y las cuatro franjas declaradas, no puntualidad observada.",
+    "En modo intra_feed_seasonal el resultado representa variación de calendario dentro de un único GTFS, no cambios entre publicaciones del proveedor.",
+    "No se imputan itinerarios ausentes ni se interpretan como ausencia de infraestructura.",
+    "Los pares origen-destino son los mismos del barrido P0 y no representan demanda turística observada."
+  ],
+  "accommodations_compared": 1461,
+  "seasonal_change_counts": {
+    "worsens": 793,
+    "unchanged": 668
+  },
+  "baseline_level_counts": {
+    "servicio_consistente": 747,
+    "sin_servicio_en_escenarios": 638,
+    "servicio_inestable": 76
+  },
+  "seasonal_level_counts": {
+    "sin_servicio_en_escenarios": 1424,
+    "servicio_inestable": 20,
+    "servicio_consistente": 17
+  },
+  "mean_transit_ok_share_delta_pp": -49.81,
+  "median_transit_ok_share_delta_pp": -50.0
+}

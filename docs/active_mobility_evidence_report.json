@@ -1,0 +1,29 @@
+{
+  "status": "passed",
+  "source_network": "data\\unified\\osm\\mallorca_mobility_network_20260912T222855Z.osm.pbf",
+  "source_network_sha256": "5ef3cb80aed1119e4b64c681122596f6c54292504b59c520b95ef29875bd94e4",
+  "source_run_id": "20260912T222855Z",
+  "accommodations_source": "data\\unified\\accommodations_official_normalized.geojson",
+  "cycling_evidence": "data\\unified\\osm\\mallorca_cycling_evidence_20260912T222855Z.parquet",
+  "pedestrian_evidence": "data\\unified\\osm\\mallorca_pedestrian_evidence_20260912T222855Z.parquet",
+  "accommodation_access": "data\\curated\\accommodations_active_mobility_access_20260912T222855Z.parquet",
+  "accommodations_evaluated": 1461,
+  "cycling_features": 1421,
+  "pedestrian_features": 31694,
+  "cycle_access_bands": {
+    "alta_0_400m": 573,
+    "brecha_mas_800m": 537,
+    "media_400_800m": 351
+  },
+  "pedestrian_access_bands": {
+    "alta_0_400m": 1327,
+    "media_400_800m": 78,
+    "brecha_mas_800m": 56
+  },
+  "generated_at_utc": "2026-09-12T23:08:40.972692+00:00",
+  "limitations": [
+    "La ausencia de etiqueta OSM no prueba ausencia de infraestructura.",
+    "La proximidad geométrica no acredita continuidad, seguridad, pendiente, iluminación ni ciclabilidad de una ruta.",
+    "Las etiquetas wheelchair y sidewalk son evidencia cartográfica, no una auditoría de accesibilidad universal."
+  ]
+}

@@ -1,0 +1,176 @@
+{
+  "generated_at_utc": "2026-09-13T07:33:28.614639+00:00",
+  "source": "IGN/CNIG MDP05, WCS abierto, CC-BY 4.0 scne.es; valor en grados sexagesimales.",
+  "method": "Geometría WALK de OTP; se ordenan los casos por prioridad y se toman hasta 20. Muestreo cada 1.000 m y consulta WCS de una celda de pendiente de 5 m.",
+  "date": "2026-09-03",
+  "time": "12:00",
+  "sample_spacing_m": 1000,
+  "cases": 20,
+  "routes_with_slope": 19,
+  "profiles": [
+    {
+      "od_id": "OD18",
+      "samples_valid": 7,
+      "mean_slope_degrees": 3.2142857143,
+      "p95_slope_degrees": 9.3,
+      "max_slope_degrees": 10.5,
+      "slope_difficulty": "exigente_mas_6_grados"
+    },
+    {
+      "od_id": "OD16",
+      "samples_valid": 0,
+      "mean_slope_degrees": null,
+      "p95_slope_degrees": null,
+      "max_slope_degrees": null,
+      "slope_difficulty": "sin_dato"
+    },
+    {
+      "od_id": "OD13",
+      "samples_valid": 5,
+      "mean_slope_degrees": 27.2,
+      "p95_slope_degrees": 60.1,
+      "max_slope_degrees": 63.0,
+      "slope_difficulty": "exigente_mas_6_grados"
+    },
+    {
+      "od_id": "OD15",
+      "samples_valid": 4,
+      "mean_slope_degrees": 17.125,
+      "p95_slope_degrees": 20.925,
+      "max_slope_degrees": 21.0,
+      "slope_difficulty": "exigente_mas_6_grados"
+    },
+    {
+      "od_id": "OD19",
+      "samples_valid": 4,
+      "mean_slope_degrees": 6.625,
+      "p95_slope_degrees": 16.675,
+      "max_slope_degrees": 19.0,
+      "slope_difficulty": "exigente_mas_6_grados"
+    },
+    {
+      "od_id": "OD10",
+      "samples_valid": 6,
+      "mean_slope_degrees": 5.6666666667,
+      "p95_slope_degrees": 8.0,
+      "max_slope_degrees": 8.0,
+      "slope_difficulty": "exigente_mas_6_grados"
+    },
+    {
+      "od_id": "OD14",
+      "samples_valid": 4,
+      "mean_slope_degrees": 3.625,
+      "p95_slope_degrees": 7.25,
+      "max_slope_degrees": 8.0,
+      "slope_difficulty": "exigente_mas_6_grados"
+    },
+    {
+      "od_id": "OD09",
+      "samples_valid": 6,
+      "mean_slope_degrees": 13.5,
+      "p95_slope_degrees": 29.0,
+      "max_slope_degrees": 32.0,
+      "slope_difficulty": "exigente_mas_6_grados"
+    },
+    {
+      "od_id": "OD05",
+      "samples_valid": 5,
+      "mean_slope_degrees": 4.8,
+      "p95_slope_degrees": 10.2,
+      "max_slope_degrees": 11.0,
+      "slope_difficulty": "exigente_mas_6_grados"
+    },
+    {
+      "od_id": "OD02",
+      "samples_valid": 5,
+      "mean_slope_degrees": 3.8,
+      "p95_slope_degrees": 10.1,
+      "max_slope_degrees": 12.0,
+      "slope_difficulty": "exigente_mas_6_grados"
+    },
+    {
+      "od_id": "OD12",
+      "samples_valid": 3,
+      "mean_slope_degrees": 4.5,
+      "p95_slope_degrees": 7.25,
+      "max_slope_degrees": 7.5,
+      "slope_difficulty": "exigente_mas_6_grados"
+    },
+    {
+      "od_id": "OD20",
+      "samples_valid": 3,
+      "mean_slope_degrees": 4.5,
+      "p95_slope_degrees": 9.65,
+      "max_slope_degrees": 10.5,
+      "slope_difficulty": "exigente_mas_6_grados"
+    },
+    {
+      "od_id": "OD17",
+      "samples_valid": 4,
+      "mean_slope_degrees": 6.875,
+      "p95_slope_degrees": 13.5,
+      "max_slope_degrees": 15.0,
+      "slope_difficulty": "exigente_mas_6_grados"
+    },
+    {
+      "od_id": "OD01",
+      "samples_valid": 4,
+      "mean_slope_degrees": 9.625,
+      "p95_slope_degrees": 26.875,
+      "max_slope_degrees": 31.0,
+      "slope_difficulty": "exigente_mas_6_grados"
+    },
+    {
+      "od_id": "OD11",
+      "samples_valid": 5,
+      "mean_slope_degrees": 3.6,
+      "p95_slope_degrees": 5.9,
+      "max_slope_degrees": 6.5,
+      "slope_difficulty": "moderada_3_6_grados"
+    },
+    {
+      "od_id": "OD07",
+      "samples_valid": 3,
+      "mean_slope_degrees": 4.5,
+      "p95_slope_degrees": 7.55,
+      "max_slope_degrees": 8.0,
+      "slope_difficulty": "exigente_mas_6_grados"
+    },
+    {
+      "od_id": "OD08",
+      "samples_valid": 6,
+      "mean_slope_degrees": 3.25,
+      "p95_slope_degrees": 7.875,
+      "max_slope_degrees": 9.5,
+      "slope_difficulty": "exigente_mas_6_grados"
+    },
+    {
+      "od_id": "OD06",
+      "samples_valid": 6,
+      "mean_slope_degrees": 11.75,
+      "p95_slope_degrees": 25.5,
+      "max_slope_degrees": 27.0,
+      "slope_difficulty": "exigente_mas_6_grados"
+    },
+    {
+      "od_id": "OD04",
+      "samples_valid": 3,
+      "mean_slope_degrees": 1.5,
+      "p95_slope_degrees": 3.65,
+      "max_slope_degrees": 4.0,
+      "slope_difficulty": "moderada_3_6_grados"
+    },
+    {
+      "od_id": "OD03",
+      "samples_valid": 4,
+      "mean_slope_degrees": 22.125,
+      "p95_slope_degrees": 38.475,
+      "max_slope_degrees": 40.5,
+      "slope_difficulty": "exigente_mas_6_grados"
+    }
+  ],
+  "limitations": [
+    "La pendiente no mide anchura de acera, pavimento, cruces, iluminación ni accesibilidad universal.",
+    "El muestreo discreto no sustituye una auditoría de cada tramo ni observación en campo."
+  ]
+}

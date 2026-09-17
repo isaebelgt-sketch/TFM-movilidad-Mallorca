@@ -1,0 +1,22 @@
+{
+  "generated_at_utc": "2026-09-17T09:03:29.480115+00:00",
+  "status": "experimental_optional",
+  "purpose": "Índice extendido opcional; no sustituye el TSMAI V9 oficial ni sus pesos publicados.",
+  "core_weight": 0.75,
+  "universal_access_weight": 0.25,
+  "evidence_weights": {
+    "osm_evidence_within_400m": 0.5,
+    "osm_pedestrian_context_within_400m": 0.2,
+    "gtfs_wheelchair_stop_within_800m": 0.3
+  },
+  "records": 1461,
+  "accommodations_without_universal_access_match": 0,
+  "level_changed_vs_v9": 360,
+  "mean_delta_vs_v9": -0.0442,
+  "limitations": [
+    "No es el TSMAI V9 oficial: es una combinación exploratoria adicional que se publica aparte.",
+    "Los pesos (0.75 índice oficial / 0.25 evidencia de accesibilidad universal) son una elección analítica declarada, no calibrada ni validada empíricamente, igual que el resto de escenarios de sensibilidad del proyecto.",
+    "La evidencia de accesibilidad universal es proximidad geométrica a etiquetas OSM/GTFS, no una auditoría de campo ni una certificación de accesibilidad física.",
+    "No incorpora seguridad vial: los microdatos DGT sólo identifican con confianza 15 de 43 municipios de la fuente local y no son atribuibles a un alojamiento o ruta concreta."
+  ]
+}

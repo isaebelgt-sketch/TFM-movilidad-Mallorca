@@ -1,0 +1,91 @@
+{
+  "generated_at_utc": "2026-09-03T21:38:21.843969+00:00",
+  "method": "nearest-neighbor euclidean distance to GTFS boarding stop",
+  "metric_crs": "EPSG:25831",
+  "destinations": 1423,
+  "boarding_stops": 772,
+  "coverage_within_800m_pct": 65.5,
+  "summary_by_category_and_band": [
+    {
+      "destination_category": "cultural_amenity",
+      "destination_access_band_euclidean": "alta_0_400m",
+      "destinations": 113
+    },
+    {
+      "destination_category": "cultural_amenity",
+      "destination_access_band_euclidean": "media_400_800m",
+      "destinations": 69
+    },
+    {
+      "destination_category": "cultural_amenity",
+      "destination_access_band_euclidean": "baja_800_1200m",
+      "destinations": 7
+    },
+    {
+      "destination_category": "cultural_amenity",
+      "destination_access_band_euclidean": "brecha_mas_1200m",
+      "destinations": 21
+    },
+    {
+      "destination_category": "historic",
+      "destination_access_band_euclidean": "alta_0_400m",
+      "destinations": 214
+    },
+    {
+      "destination_category": "historic",
+      "destination_access_band_euclidean": "media_400_800m",
+      "destinations": 223
+    },
+    {
+      "destination_category": "historic",
+      "destination_access_band_euclidean": "baja_800_1200m",
+      "destinations": 41
+    },
+    {
+      "destination_category": "historic",
+      "destination_access_band_euclidean": "brecha_mas_1200m",
+      "destinations": 234
+    },
+    {
+      "destination_category": "other_tourism",
+      "destination_access_band_euclidean": "alta_0_400m",
+      "destinations": 38
+    },
+    {
+      "destination_category": "other_tourism",
+      "destination_access_band_euclidean": "media_400_800m",
+      "destinations": 31
+    },
+    {
+      "destination_category": "other_tourism",
+      "destination_access_band_euclidean": "baja_800_1200m",
+      "destinations": 13
+    },
+    {
+      "destination_category": "other_tourism",
+      "destination_access_band_euclidean": "brecha_mas_1200m",
+      "destinations": 12
+    },
+    {
+      "destination_category": "tourism",
+      "destination_access_band_euclidean": "alta_0_400m",
+      "destinations": 147
+    },
+    {
+      "destination_category": "tourism",
+      "destination_access_band_euclidean": "media_400_800m",
+      "destinations": 97
+    },
+    {
+      "destination_category": "tourism",
+      "destination_access_band_euclidean": "baja_800_1200m",
+      "destinations": 42
+    },
+    {
+      "destination_category": "tourism",
+      "destination_access_band_euclidean": "brecha_mas_1200m",
+      "destinations": 121
+    }
+  ],
+  "limitation": "La distancia es euclídea y no incorpora todavía caminata real ni horarios."
+}

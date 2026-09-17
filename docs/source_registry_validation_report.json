@@ -1,0 +1,24 @@
+{
+  "validation_status": "passed",
+  "approved_sources": [
+    "mallorca_tourist_accommodations",
+    "tib_gtfs_supply",
+    "osm_mallorca_network",
+    "ibestat_tourism_offer",
+    "ign_cnig_mdp05",
+    "aemet_weather"
+  ],
+  "blocked_sources": [
+    "mallorca_accessible_guide",
+    "licensed_mobility_survey"
+  ],
+  "errors": [],
+  "warnings": [
+    "mallorca_accessible_guide: bloqueada para ingesta (pending_permission).",
+    "licensed_mobility_survey: bloqueada para ingesta (disabled)."
+  ],
+  "generated_at_utc": "2026-09-13T15:50:11.024577+00:00",
+  "registry": "config\\source_registry.json",
+  "registry_sha256": "053c9818f85eabc0ea8054a2eade58cd143808d97267ada0c1152ca49576de02",
+  "source_count": 8
+}

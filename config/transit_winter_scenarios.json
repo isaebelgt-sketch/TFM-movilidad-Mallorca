@@ -1,0 +1,10 @@
+{
+  "scenario_set": "tib_gtfs_202609_winter_calendar",
+  "selection_rationale": "Fechas de invierno cubiertas por el calendario del snapshot GTFS 20260912T231840Z; se replican las tres franjas laborables y la franja de sábado de P1.",
+  "scenarios": [
+    {"scenario_id": "winter_weekday_am_peak", "date": "2027-01-15", "time": "08:00", "label": "Invierno, laborable, punta de mañana"},
+    {"scenario_id": "winter_weekday_midday", "date": "2027-01-15", "time": "10:00", "label": "Invierno, laborable, media mañana"},
+    {"scenario_id": "winter_weekday_evening", "date": "2027-01-15", "time": "18:00", "label": "Invierno, laborable, tarde"},
+    {"scenario_id": "winter_weekend_midday", "date": "2027-01-16", "time": "10:00", "label": "Invierno, sábado, media mañana"}
+  ]
+}

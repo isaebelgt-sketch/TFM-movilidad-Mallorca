@@ -1,0 +1,106 @@
+{
+  "generated_at_utc": "2026-09-17T14:16:29.107289+00:00",
+  "sample_size": 20,
+  "index_type": "Índice multicriterio auditable para priorizar revisiones; no es predictivo ni causal.",
+  "balanced_weights": {
+    "origin_access_gap_score": 0.3,
+    "destination_access_gap_score": 0.3,
+    "route_outcome_constraint_score": 0.25,
+    "transit_walk_burden_score": 0.15
+  },
+  "distance_normalization": {
+    "origin_and_destination_gap": "0 a <=400 m; 1 a >=1.200 m.",
+    "transit_walk_burden": "0 a <=1.600 m; 1 a >=2.400 m."
+  },
+  "outcome_constraint_scores": {
+    "transit_available": 0.0,
+    "walking_preferable_by_otp": 0.1,
+    "no_scheduled_connection_at_time": 0.5,
+    "walk_only_itineraries": 0.5,
+    "endpoint_without_stop_in_range": 0.9,
+    "direct_walk_network_disconnect": 0.9,
+    "other_routing_outcome": 0.6
+  },
+  "sensitivity_scenarios": {
+    "balanced": {
+      "origin_access_gap_score": 0.3,
+      "destination_access_gap_score": 0.3,
+      "route_outcome_constraint_score": 0.25,
+      "transit_walk_burden_score": 0.15
+    },
+    "origin_focus": {
+      "origin_access_gap_score": 0.5,
+      "destination_access_gap_score": 0.15,
+      "route_outcome_constraint_score": 0.25,
+      "transit_walk_burden_score": 0.1
+    },
+    "destination_focus": {
+      "origin_access_gap_score": 0.15,
+      "destination_access_gap_score": 0.5,
+      "route_outcome_constraint_score": 0.25,
+      "transit_walk_burden_score": 0.1
+    },
+    "route_focus": {
+      "origin_access_gap_score": 0.2,
+      "destination_access_gap_score": 0.2,
+      "route_outcome_constraint_score": 0.45,
+      "transit_walk_burden_score": 0.15
+    }
+  },
+  "rank_spearman_correlation": {
+    "balanced_rank": {
+      "balanced_rank": 1.0,
+      "origin_focus_rank": 0.863,
+      "destination_focus_rank": 0.958,
+      "route_focus_rank": 0.898
+    },
+    "origin_focus_rank": {
+      "balanced_rank": 0.863,
+      "origin_focus_rank": 1.0,
+      "destination_focus_rank": 0.73,
+      "route_focus_rank": 0.671
+    },
+    "destination_focus_rank": {
+      "balanced_rank": 0.958,
+      "origin_focus_rank": 0.73,
+      "destination_focus_rank": 1.0,
+      "route_focus_rank": 0.907
+    },
+    "route_focus_rank": {
+      "balanced_rank": 0.898,
+      "origin_focus_rank": 0.671,
+      "destination_focus_rank": 0.907,
+      "route_focus_rank": 1.0
+    }
+  },
+  "robust_priorities_top5_in_at_least_3_scenarios": [
+    {
+      "od_id": "OD13",
+      "top5_scenarios": 4
+    },
+    {
+      "od_id": "OD15",
+      "top5_scenarios": 3
+    },
+    {
+      "od_id": "OD16",
+      "top5_scenarios": 4
+    },
+    {
+      "od_id": "OD18",
+      "top5_scenarios": 4
+    },
+    {
+      "od_id": "OD19",
+      "top5_scenarios": 3
+    }
+  ],
+  "output_files": {
+    "index": "data\\curated\\od_multimodal_priority_index.parquet",
+    "sensitivity": "data\\curated\\od_multimodal_priority_sensitivity.parquet"
+  },
+  "limitations": [
+    "Los pesos y la codificación de resultados son decisiones explícitas del estudio, no preferencias observadas.",
+    "El índice se limita a la muestra de validación y a las condiciones temporales del experimento OTP."
+  ]
+}

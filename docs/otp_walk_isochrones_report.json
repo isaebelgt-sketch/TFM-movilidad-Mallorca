@@ -1,0 +1,43 @@
+{
+  "generated_at_utc": "2026-09-10T21:39:48.176196+00:00",
+  "method": "Malla de puntos consultada contra itinerarios WALK reales de OpenTripPlanner; polígonos formados por unión de celdas alcanzables.",
+  "otp_endpoint": "http://localhost:8080/otp/gtfs/v1",
+  "date": "2026-09-03",
+  "time": "12:00",
+  "origins": [
+    {
+      "isochrone_origin_id": "ISO01",
+      "commercial_name": "Bordoy Alcudia Bay",
+      "walk_access_band_euclidean": "alta_0_400m"
+    },
+    {
+      "isochrone_origin_id": "ISO02",
+      "commercial_name": "EDEN NORD",
+      "walk_access_band_euclidean": "media_400_800m"
+    },
+    {
+      "isochrone_origin_id": "ISO03",
+      "commercial_name": "L´HERMITAGE",
+      "walk_access_band_euclidean": "baja_800_1200m"
+    },
+    {
+      "isochrone_origin_id": "ISO04",
+      "commercial_name": "SON PENYAFLOR",
+      "walk_access_band_euclidean": "brecha_mas_1200m"
+    }
+  ],
+  "grid_spacing_m": 750,
+  "radius_m": 3000,
+  "thresholds_min": [
+    5,
+    10,
+    15,
+    30
+  ],
+  "grid_points": 196,
+  "successful_routes": 184,
+  "limitations": [
+    "El contorno está aproximado a una cuadrícula de 750 m; no debe interpretarse como límite submétrico.",
+    "Representa la red, datos GTFS y fecha/hora documentados, no condiciones de tráfico ni accesibilidad certificada."
+  ]
+}

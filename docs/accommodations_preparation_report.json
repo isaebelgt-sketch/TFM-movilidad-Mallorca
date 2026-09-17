@@ -1,0 +1,21 @@
+{
+  "status": "passed",
+  "source_snapshot": "data\\raw\\mallorca_tourist_accommodations\\20260912T224211Z\\payload.geojson",
+  "source_run_id": "20260912T224211Z",
+  "source_sha256_verified": true,
+  "input_features": 1876,
+  "published_features": 1461,
+  "rejected_features": 415,
+  "rejected_by_reason": {
+    "missing_geometry": 399,
+    "out_of_scope_coordinates": 16
+  },
+  "duplicated_ids_discarded": 0,
+  "active_status_count": 1442,
+  "output": "data\\unified\\accommodations_official_normalized.geojson",
+  "limitations": [
+    "Los valores vacíos se conservan como nulos; no se imputan datos turísticos.",
+    "La validación espacial comprueba pertenencia a la envolvente de Mallorca, no la parcela exacta.",
+    "La capa representa registros administrativos, no una auditoría de accesibilidad del establecimiento."
+  ]
+}

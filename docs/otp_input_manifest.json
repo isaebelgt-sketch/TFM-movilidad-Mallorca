@@ -1,0 +1,28 @@
+{
+  "generated_at_utc": "2026-09-03T20:17:36.779861+00:00",
+  "otp_image": "opentripplanner/opentripplanner:2.10.0_2026-09-01T15-06",
+  "inputs": {
+    "osm": {
+      "file": "mallorca_mobility_network.osm.pbf",
+      "size_bytes": 8679106,
+      "sha256": "e412511adb2c151bf7e593ce1f88d8fda8f1ce967ca0bff941b950ef85e6f74d"
+    },
+    "gtfs": {
+      "file": "gtfs_tib_mallorca.zip",
+      "size_bytes": 6388877,
+      "sha256": "ad54aaeba0f5b3f48a882a54e04b1cf6f28508996ea4900a6db073076965fc72"
+    }
+  },
+  "service_period_diagnostics": {
+    "calendar_start_min": "2023-11-01",
+    "calendar_end_max": "2036-12-31",
+    "calendar_dates_min": "2026-10-12",
+    "calendar_dates_max": "2026-12-25"
+  },
+  "build_config": {
+    "osmDefaults": {
+      "timeZone": "Europe/Madrid",
+      "osmTagMapping": "default"
+    }
+  }
+}

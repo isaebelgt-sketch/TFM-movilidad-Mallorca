@@ -1,0 +1,16 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+.ipynb_checkpoints/
+.venv/
+venv/
+env/
+*.egg-info/
+.DS_Store
+Thumbs.db
+*.log
+
+# Secrets - nunca subir claves reales
+.env
+.streamlit/secrets.toml
+data/private/

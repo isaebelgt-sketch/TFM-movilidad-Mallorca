@@ -1,0 +1,18 @@
+{
+  "generated_at_utc": "2026-09-17T17:31:58.213816+00:00",
+  "input_records": 1530,
+  "accepted_records": 1530,
+  "rejected_records": 0,
+  "provenance": {
+    "source": "legacy_local_file",
+    "warning": "Migra el corpus a un snapshot con atestación P12 antes de publicar."
+  },
+  "accepted_licenses": [
+    "CC-BY-4.0"
+  ],
+  "removed_personal_data_columns": [],
+  "limitations": [
+    "La validación técnica de licencia no sustituye la comprobación jurídica del origen.",
+    "El texto se pseudonimiza y no se redistribuyen identificadores personales."
+  ]
+}

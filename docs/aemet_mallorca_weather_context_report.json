@@ -1,0 +1,47 @@
+{
+  "status": "passed",
+  "source_id": "aemet_weather",
+  "source_run_id": "20260913T140159Z",
+  "period": {
+    "start": "2024-09-12",
+    "end": "2024-09-12"
+  },
+  "attribution": "AEMET, datos abiertos meteorológicos.",
+  "inputs": {
+    "stations": "data\\unified\\aemet\\aemet_weather_stations_20260913T140159Z.parquet",
+    "stations_sha256": "61fcf773762f9c5bc1924f1c3e7f95fb7a913e9ef26c053d14be98277fab9f1f",
+    "daily": "data\\unified\\aemet\\aemet_weather_daily_baleares_20260913T140159Z.parquet",
+    "daily_sha256": "d6a0641ce1cc77e1213cab75571826d333c24feeeaf7ca9d054c17dff8abe83d"
+  },
+  "output": "data\\curated\\aemet_weather_context_mallorca_20260913T140159Z.parquet",
+  "records": 25,
+  "mallorca_stations": 25,
+  "observation_dates": [
+    "2024-09-12"
+  ],
+  "numeric_coverage": {
+    "tmed_c": 25,
+    "tmin_c": 25,
+    "tmax_c": 25,
+    "prec_mm": 25,
+    "wind_mean_ms": 21,
+    "wind_gust_ms": 21,
+    "relative_humidity_mean_pct": 24,
+    "relative_humidity_max_pct": 24,
+    "relative_humidity_min_pct": 24,
+    "sunshine_hours": 3
+  },
+  "bbox_wgs84": {
+    "west": 2.2,
+    "south": 39.15,
+    "east": 3.55,
+    "north": 40.2
+  },
+  "generated_at_utc": "2026-09-13T14:07:39.286600+00:00",
+  "limitations": [
+    "El filtrado por envolvente selecciona estaciones localizadas en Mallorca; no interpola microclima.",
+    "Las observaciones diarias históricas no describen condiciones de rutas de otra fecha.",
+    "Los valores cualitativos AEMET no se convierten en números ni se imputan.",
+    "El contexto no forma parte de TSMAI ni del ranking o recomendación de rutas."
+  ]
+}

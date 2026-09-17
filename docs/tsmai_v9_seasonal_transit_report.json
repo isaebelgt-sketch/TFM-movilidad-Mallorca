@@ -1,0 +1,66 @@
+{
+  "status": "passed",
+  "index_version": "TSMAI-v9-seasonal-transit",
+  "records": 1461,
+  "weights": {
+    "public_transport_proximity_score": 0.12,
+    "public_transport_service_score": 0.08,
+    "temporal_transit_destination_score": 0.2,
+    "cycling_evidence_proximity_score": 0.1,
+    "bicycle_network_destination_score": 0.1,
+    "pedestrian_evidence_proximity_score": 0.2,
+    "walk_network_destination_score": 0.2
+  },
+  "seasonal_transit_component": {
+    "aggregation": "media simple, por alojamiento, de dos campañas reales de cuatro escenarios cada una",
+    "summer_score_mean": 0.4291,
+    "winter_score_mean": 0.0137,
+    "seasonal_score_mean": 0.2214,
+    "seasonal_change_counts": {
+      "worsens": 793,
+      "unchanged": 668
+    }
+  },
+  "inputs": {
+    "tsmai_v8": "data\\curated\\accommodations_tsmai_v8_temporal_transit.parquet",
+    "tsmai_v8_sha256": "1f64e7c19beef5684a18190c19fef734358067a3d51fdcc3cba40ccb7d85ee20",
+    "summer_transit_long": "data\\curated\\transit_temporal_weekday_am_peak_weekday_midday_weekday_evening_weekend_midday.parquet",
+    "summer_transit_long_sha256": "feb5979fd5ff60b3da377f61e3e7e1c3810d91bbffdea071dbe2ef50924c7fa0",
+    "winter_transit_long": "data\\curated\\transit_temporal_winter_2027_winter_weekday_am_peak_winter_weekday_midday_winter_weekday_evening_winter_weekend_midday.parquet",
+    "winter_transit_long_sha256": "5c63c6dd818995094aa8ec95abc7d9b92e7c00b8146f503a22a8c5e37c9a3bb6",
+    "seasonal_comparison": "data\\curated\\transit_seasonal_comparison_sep2026_vs_winter2027.parquet",
+    "seasonal_comparison_sha256": "43c26d38b77577b895ff2595079df20fb66d593c4e662b873ad22ff731d3269b"
+  },
+  "levels": {
+    "favorable": 719,
+    "intermedio": 570,
+    "prioridad de mejora": 172
+  },
+  "score_summary": {
+    "count": 1461.0,
+    "mean": 0.625,
+    "std": 0.179,
+    "min": 0.046,
+    "25%": 0.551,
+    "50%": 0.663,
+    "75%": 0.752,
+    "max": 0.937
+  },
+  "v8_to_v9_delta_summary": {
+    "count": 1461.0,
+    "mean": -0.042,
+    "std": 0.042,
+    "min": -0.1,
+    "25%": -0.085,
+    "50%": -0.03,
+    "75%": 0.0,
+    "max": 0.0
+  },
+  "output": "data\\curated\\accommodations_tsmai_v9_seasonal_transit.parquet",
+  "generated_at_utc": "2026-09-17T05:03:35.643435+00:00",
+  "limitations": [
+    "La media de verano e invierno no representa un promedio anual ni pondera demanda, ocupación o frecuencias observadas.",
+    "La variación estacional procede del calendario del mismo GTFS versionado; no mide cambios entre publicaciones del proveedor.",
+    "Los estados no_transit_leg y no_route reciben 0 en el escenario correspondiente, sin imputación."
+  ]
+}

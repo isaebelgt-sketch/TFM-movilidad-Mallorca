@@ -1,0 +1,41 @@
+{
+  "status": "passed",
+  "index_version": "TSMAI-v4-current-snapshots",
+  "unit_of_analysis": "alojamiento turístico oficial con geometría válida",
+  "records": 1461,
+  "weights": {
+    "public_transport_proximity_score": 0.28,
+    "public_transport_service_score": 0.12,
+    "cycling_evidence_proximity_score": 0.2,
+    "pedestrian_evidence_proximity_score": 0.2,
+    "tourism_destination_proximity_score": 0.2
+  },
+  "inputs": {
+    "public_transport_access": "data\\curated\\accommodations_public_transport_access_20260912T231840Z.parquet",
+    "active_mobility_access": "data\\curated\\accommodations_active_mobility_access_20260912T222855Z.parquet",
+    "tourism_destinations": "data\\curated\\tourism_destinations_osm_20260912T222855Z.parquet"
+  },
+  "levels": {
+    "favorable": 821,
+    "intermedio": 481,
+    "prioridad de mejora": 159
+  },
+  "score_summary": {
+    "count": 1461.0,
+    "mean": 0.666,
+    "std": 0.196,
+    "min": 0.024,
+    "25%": 0.576,
+    "50%": 0.704,
+    "75%": 0.816,
+    "max": 0.974
+  },
+  "mean_evidence_coverage_pct": 100.0,
+  "output": "data\\curated\\accommodations_tsmai_v4_current.parquet",
+  "generated_at_utc": "2026-09-13T04:42:36.154991+00:00",
+  "limitations": [
+    "Las distancias a paradas, ciclovías, evidencia peatonal y destinos son geométricas, no rutas ni tiempos de red.",
+    "La oferta GTFS se resume mediante evidencia de rutas servidas y no por frecuencia diaria o puntualidad.",
+    "No incorpora sentimiento, tráfico, pendiente de cada trayecto, seguridad percibida ni accesibilidad universal certificada."
+  ]
+}

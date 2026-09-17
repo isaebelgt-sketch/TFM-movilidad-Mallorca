@@ -1,0 +1,25 @@
+{
+  "status": "passed",
+  "source_network": "data\\unified\\osm\\mallorca_mobility_network_20260912T222855Z.osm.pbf",
+  "source_network_sha256": "5ef3cb80aed1119e4b64c681122596f6c54292504b59c520b95ef29875bd94e4",
+  "osm_source_run_id": "20260912T222855Z",
+  "gtfs_stops_source": "data\\unified\\gtfs\\tib_gtfs_stops_20260912T231840Z.geojson",
+  "gtfs_source_run_id": "20260912T231840Z",
+  "gtfs_source_sha256": "eb239bebf5dcb013fbc75bd563b00e45c84764be096e400bc8cb88a9c005afff",
+  "accommodations_source": "data\\unified\\accommodations_official_normalized.geojson",
+  "evidence_output": "data\\unified\\osm\\mallorca_universal_access_evidence_20260912T222855Z.parquet",
+  "accommodation_evidence_output": "data\\curated\\accommodations_documented_accessibility_evidence_20260912T222855Z_20260912T231840Z.parquet",
+  "osm_features": 3838,
+  "osm_strong_features": 3586,
+  "osm_contextual_crossings": 252,
+  "gtfs_wheelchair_boarding_stops": 2,
+  "accommodations_evaluated": 1461,
+  "accommodations_osm_evidence_within_400m": 1121,
+  "accommodations_gtfs_wheelchair_stop_within_800m": 20,
+  "generated_at_utc": "2026-09-13T07:57:21.374872+00:00",
+  "limitations": [
+    "La ausencia de una etiqueta OSM o GTFS no demuestra una barrera ni ausencia física de accesibilidad.",
+    "Los cruces OSM se conservan como contexto, no como evidencia positiva fuerte.",
+    "La proximidad geométrica no certifica una ruta accesible, cumplimiento normativo ni ausencia de barreras."
+  ]
+}

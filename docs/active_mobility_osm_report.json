@@ -1,0 +1,18 @@
+{
+  "scope": "Mallorca; red OSM contenida en mallorca_mobility_network.osm.pbf",
+  "method": "Extracción OSM con Osmium y proximidad geométrica en EPSG:25831.",
+  "cycling_features": 1444,
+  "pedestrian_features": 31223,
+  "accommodations_evaluated": 1463,
+  "destinations_evaluated": 1423,
+  "accommodation_cycle_access": {
+    "alta_0_400m": 603,
+    "brecha_mas_800m": 526,
+    "media_400_800m": 334
+  },
+  "limitations": [
+    "La ausencia de etiqueta OSM no prueba ausencia de infraestructura.",
+    "La proximidad a infraestructura ciclista no certifica continuidad, seguridad ni ciclabilidad.",
+    "La evidencia peatonal es documental y no una auditoría de accesibilidad universal ni de seguridad vial."
+  ]
+}

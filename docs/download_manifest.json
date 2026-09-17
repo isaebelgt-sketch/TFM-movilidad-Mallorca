@@ -1,0 +1,34 @@
+[
+  {
+    "source_id": "accommodations_mallorca",
+    "filename": "allotjaments_turistics_mallorca.geojson",
+    "url": "https://intranet.caib.es/opendatacataleg/files/dataset/allotjaments_turistics_mallorca/allotjaments_turistics_mallorca.geojson",
+    "downloaded_at_utc": "2026-09-03T18:43:17.782494+00:00",
+    "bytes": 1968250,
+    "sha256": "aadfdeada03723c86ea5f1dd0671e015552c7e60499912dee9494d421b1116d3"
+  },
+  {
+    "source_id": "tourist_centres_mallorca",
+    "filename": "centres_turistics_mallorca.geojson",
+    "url": "https://intranet.caib.es/opendatacataleg/files/dataset/centres_turistics_mallorca/centres_turistics_mallorca.geojson",
+    "downloaded_at_utc": "2026-09-03T18:43:18.194469+00:00",
+    "bytes": 42139,
+    "sha256": "01de73def7c28e89907dbb2e82b1e377b8d033ebef67ea562d6ffa6b7cb19515"
+  },
+  {
+    "source_id": "ibestat_monthly",
+    "filename": "ibestat_000060A_000004.csv",
+    "url": "https://ibestat.es/edatos/apis/statistical-resources/v1.0/datasets/IBESTAT/000060A_000004/1.15.csv",
+    "downloaded_at_utc": "2026-09-03T18:43:23.284323+00:00",
+    "bytes": 4165990,
+    "sha256": "57b363799d09876f47154eed80adba3f2af4483c248ae38e2e484ca052a6996e"
+  },
+  {
+    "source_id": "osm_balearic_islands",
+    "filename": "islas-baleares-latest.osm.pbf",
+    "url": "https://download.geofabrik.de/europe/spain/islas-baleares-latest.osm.pbf",
+    "downloaded_at_utc": "2026-09-03T18:45:25.296412+00:00",
+    "bytes": 46567638,
+    "sha256": "d4dcf6c7780b4dca959476a2b33e92f0976bf333ea770ce313a163c4c4127a26"
+  }
+]

@@ -1,0 +1,12 @@
+{
+  "generated_at_utc": "2026-09-03T20:55:16.061545+00:00",
+  "endpoint": "http://localhost:8080/otp/gtfs/v1",
+  "query_type": "OTP GTFS GraphQL plan; WALK-only to nearest GTFS stop",
+  "request_date": "2026-09-03",
+  "request_time": "12:00",
+  "selection_rule": "lowest accommodation_id within each euclidean accessibility band",
+  "successful_routes": 4,
+  "total_routes": 4,
+  "mean_network_to_euclidean_ratio": 1.694,
+  "limitation": "Cuatro rutas de prueba validan la integración técnica; no constituyen aún una evaluación exhaustiva de todos los alojamientos."
+}

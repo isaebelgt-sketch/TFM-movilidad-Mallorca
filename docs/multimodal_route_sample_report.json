@@ -1,0 +1,47 @@
+{
+  "status": "passed",
+  "sample_pairs": 12,
+  "route_queries": 48,
+  "routing_date": "2026-09-15",
+  "routing_time": "10:00",
+  "otp_endpoint": "http://localhost:8080/otp/gtfs/v1",
+  "sampling_rule": "3 bandas de acceso TIB × 4 temas de destino; sin muestreo sintético ni selección aleatoria.",
+  "route_status_by_mode": {
+    "BICYCLE": {
+      "ok": 12
+    },
+    "CAR": {
+      "ok": 11,
+      "no_route": 1
+    },
+    "TRANSIT": {
+      "no_route": 10,
+      "no_transit_leg": 2
+    },
+    "WALK": {
+      "ok": 12
+    }
+  },
+  "recommendations": {
+    "WALK": 7,
+    "BICYCLE": 5
+  },
+  "recommendation_codes": {
+    "walk_under_20min": 7,
+    "bicycle_under_30min": 4,
+    "bicycle_review_comfort": 1
+  },
+  "sample_output": "data\\curated\\multimodal_route_sample_20260913T043734Z.parquet",
+  "routes_output": "data\\curated\\multimodal_route_results_20260913T043734Z.parquet",
+  "provenance": {
+    "public_transport_access": "data\\curated\\accommodations_public_transport_access_20260912T231840Z.parquet",
+    "active_mobility_access": "data\\curated\\accommodations_active_mobility_access_20260912T222855Z.parquet",
+    "tourism_destinations": "data\\curated\\tourism_destinations_osm_20260912T222855Z.parquet"
+  },
+  "generated_at_utc": "2026-09-13T04:37:34.789147+00:00",
+  "limitations": [
+    "La muestra no representa la demanda turística ni el reparto modal observado.",
+    "Los destinos se seleccionan por proximidad geométrica temática; el resultado de ruta procede de OTP.",
+    "Las recomendaciones aplican umbrales explícitos de caminata, bicicleta y transporte; no certifican seguridad o accesibilidad universal."
+  ]
+}

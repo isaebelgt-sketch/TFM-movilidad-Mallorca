@@ -1,0 +1,44 @@
+File:
+  Name: C:\Users\PC\Downloads\Datos NTIC UCM 2025-20260902T223204Z-1-001\TFM_Movilidad_Mallorca\data\raw\islas-baleares-latest.osm.pbf
+  Format: PBF
+  Compression: none
+  Size: 46567638
+Header:
+  Bounding boxes:
+    (0.615229,38.056747,4.938349,40.709796)
+  With history: no
+  Options:
+    generator=osmium/1.16.0
+    osmosis_replication_base_url=https://download.geofabrik.de/europe/spain/islas-baleares-updates
+    osmosis_replication_sequence_number=1797
+    osmosis_replication_timestamp=2026-09-02T20:20:51Z
+    pbf_dense_nodes=true
+    pbf_optional_feature_0=Sort.Type_then_ID
+    sorting=Type_then_ID
+    timestamp=2026-09-02T20:20:51Z
+Data:
+  Bounding box: (-5.37297,35.62,5.9650081,43.4005997)
+  Timestamps:
+    First: 2007-01-19T16:50:22Z
+    Last: 2026-09-02T20:14:26Z
+  Objects ordered (by type and id): yes
+  Multiple versions of same object: no
+  CRC32: not calculated (use --crc/-c to enable)
+  Number of changesets: 0
+  Number of nodes: 5319366
+  Number of ways: 744939
+  Number of relations: 8668
+  Smallest changeset ID: 0
+  Smallest node ID: 16348842
+  Smallest way ID: 3318645
+  Smallest relation ID: 119987
+  Largest changeset ID: 0
+  Largest node ID: 14143156303
+  Largest way ID: 1554615118
+  Largest relation ID: 21319427
+  Number of buffers: 8861 (avg 685 objects per buffer)
+  Sum of buffer sizes: 559171672 (0.533 GB)
+  Sum of buffer capacities: 581959680 (0.555 GB, 96% full)
+Metadata:
+  All objects have following metadata attributes: version+timestamp
+  Some objects have following metadata attributes: version+timestamp

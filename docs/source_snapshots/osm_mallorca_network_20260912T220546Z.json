@@ -1,0 +1,26 @@
+{
+  "source_id": "osm_mallorca_network",
+  "provider": "OpenStreetMap contributors / Geofabrik",
+  "source_url": "https://www.openstreetmap.org/copyright",
+  "download_url": "https://download.geofabrik.de/europe/spain/islas-baleares-latest.osm.pbf",
+  "license": "ODbL-1.0",
+  "attribution": "© OpenStreetMap contributors, ODbL 1.0.",
+  "coverage": "Mallorca; red vial, peatonal, ciclista y POI según cartografía colaborativa.",
+  "data_kind": "observed_crowdsourced",
+  "status_at_ingestion": "approved",
+  "run_id": "20260912T220546Z",
+  "ingested_at_utc": "2026-09-12T22:05:57.930486+00:00",
+  "payload_file": "payload.pbf",
+  "payload_bytes": 46682398,
+  "payload_sha256": "d513fd024a7d026ad0cf686648151af081f157612d9b81396c24d3e409738b5b",
+  "acquisition_mode": "remote_download",
+  "http_status": 200,
+  "response_headers": {
+    "content-type": "application/octet-stream",
+    "content-length": "46682398",
+    "etag": "\"2c8511e-65b3dfcb98691\"",
+    "last-modified": "Sat, 12 Sep 2026 00:07:31 GMT"
+  },
+  "downloaded_bytes": 46682398,
+  "streamed_sha256": "d513fd024a7d026ad0cf686648151af081f157612d9b81396c24d3e409738b5b"
+}

@@ -1,0 +1,19 @@
+{
+  "source_id": "tib_gtfs_supply",
+  "provider": "Consorci de Transports de Mallorca",
+  "source_url": "https://www.tib.org/es/sobre-ctm/portal-de-transparencia/datos-abiertos",
+  "download_url": "https://nap.transportes.gob.es/Files/Detail/1071",
+  "license": "CC-BY-4.0",
+  "attribution": "Consorci de Transports de Mallorca, datos abiertos GTFS, CC-BY 4.0.",
+  "coverage": "Mallorca; líneas, paradas, horarios y expediciones TIB.",
+  "data_kind": "observed_official",
+  "status_at_ingestion": "approved",
+  "run_id": "20260912T231840Z",
+  "ingested_at_utc": "2026-09-12T23:18:40.835984+00:00",
+  "payload_file": "payload.zip",
+  "payload_bytes": 6401759,
+  "payload_sha256": "eb239bebf5dcb013fbc75bd563b00e45c84764be096e400bc8cb88a9c005afff",
+  "acquisition_mode": "manual_file",
+  "http_status": null,
+  "response_headers": {}
+}

@@ -1,0 +1,2 @@
+case_id,accommodation_id,municipality,tsmai_v9_level,visit_date,visit_time,observer_id,route_type,origin_description,destination_description,continuity_score_0_2,crossing_score_0_2,slope_effort_score_0_2,lighting_orientation_score_0_2,physical_accessibility_score_0_2,cycling_connection_score_0_2,gtfs_service_observed,critical_barrier,barrier_description,weather_notes,photo_reference,review_status
+example_001,,,,,,,,,,,,,,,,,,,,,,pending

@@ -1,0 +1,29 @@
+{
+  "generated_at_utc": "2026-09-10T18:42:00.923453+00:00",
+  "validation_status": "passed",
+  "scope": "Exploratory nearest eligible tourism/historic destination screening; it is not an observed demand model.",
+  "source_artifact": "od_multimodal_routes_massive_exploratory.parquet",
+  "summary_artifact": "od_multimodal_routes_massive_summary.parquet",
+  "pairs_screened": 1463,
+  "routing": {
+    "ok": 1441,
+    "ok_rate_pct": 98.5,
+    "no_itinerary": 22,
+    "with_transit_among_ok_pct": 1.53,
+    "median_duration_min_among_ok": 41.35,
+    "p90_duration_min_among_ok": 67.7,
+    "median_walk_distance_m_among_ok": 3253.9
+  },
+  "quality_checks": {
+    "duplicate_od_id": 0,
+    "missing_od_id": 0,
+    "negative_duration_for_ok": 0,
+    "negative_walk_distance_for_ok": 0,
+    "missing_duration_for_ok": 0
+  },
+  "interpretation": [
+    "Every valid accommodation was paired with its nearest eligible named tourism/historic destination between 2 and 20 km.",
+    "The result is a reproducible screening at the documented GTFS date/time, not a representative visitor-demand sample.",
+    "No-itinerary outcomes are retained as analytical outcomes and are not imputed."
+  ]
+}

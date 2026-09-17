@@ -1,0 +1,35 @@
+{
+  "status": "passed",
+  "source_snapshot": "data\\raw\\tib_gtfs_supply\\20260912T231840Z\\payload.zip",
+  "source_run_id": "20260912T231840Z",
+  "source_sha256_verified": true,
+  "source_license": "CC-BY-4.0",
+  "tables_detected": [
+    "agency.txt",
+    "calendar.txt",
+    "calendar_dates.txt",
+    "feed_info.txt",
+    "levels.txt",
+    "pathways.txt",
+    "routes.txt",
+    "shapes.txt",
+    "stop_times.txt",
+    "stops.txt",
+    "trips.txt"
+  ],
+  "stops_published": 789,
+  "stops_rejected_by_reason": {},
+  "routes_declared": 79,
+  "trips_declared": 4149,
+  "routes_referenced_by_trips": 79,
+  "unknown_route_ids_in_trips": 0,
+  "stop_time_rows": 61852,
+  "calendar_table_present": true,
+  "calendar_dates_table_present": true,
+  "stops_output": "data\\unified\\gtfs\\tib_gtfs_stops_20260912T231840Z.geojson",
+  "generated_at_utc": "2026-09-12T23:18:58.118732+00:00",
+  "limitations": [
+    "La posición de una parada no demuestra frecuencia, puntualidad ni accesibilidad física de la misma.",
+    "La validación comprueba la estructura del feed; el cálculo de itinerarios y tiempo de espera se realizará sobre horario GTFS en una etapa posterior."
+  ]
+}

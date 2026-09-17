@@ -1,0 +1,22 @@
+{
+  "status": "passed",
+  "source_id": "aemet_weather",
+  "run_id": "20260913T140159Z",
+  "raw_manifest": "data\\raw\\aemet_weather\\20260913T140159Z\\manifest.json",
+  "stations_output": "data\\unified\\aemet\\aemet_weather_stations_20260913T140159Z.parquet",
+  "daily_output": "data\\unified\\aemet\\aemet_weather_daily_baleares_20260913T140159Z.parquet",
+  "period": {
+    "start": "2024-09-12",
+    "end": "2024-09-12"
+  },
+  "attribution": "AEMET, datos abiertos meteorológicos.",
+  "station_inventory_records": 926,
+  "balearic_stations": 31,
+  "daily_records_baleares": 31,
+  "generated_at_utc": "2026-09-13T14:02:00.438785+00:00",
+  "limitations": [
+    "Es contexto meteorológico de estaciones; no interpola microclima a cada ruta.",
+    "Las condiciones deben corresponder a la fecha y hora de la ruta antes de interpretarlas.",
+    "No se incorpora al TSMAI sin una validación metodológica específica."
+  ]
+}

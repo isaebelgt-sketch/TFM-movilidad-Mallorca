@@ -1,0 +1,103 @@
+{
+  "status": "passed",
+  "scenario_set": "tib_gtfs_202609_winter_calendar",
+  "scenarios": [
+    {
+      "scenario_id": "winter_weekday_am_peak",
+      "date": "2027-01-15",
+      "time": "08:00",
+      "label": "Invierno, laborable, punta de mañana"
+    },
+    {
+      "scenario_id": "winter_weekday_midday",
+      "date": "2027-01-15",
+      "time": "10:00",
+      "label": "Invierno, laborable, media mañana"
+    },
+    {
+      "scenario_id": "winter_weekday_evening",
+      "date": "2027-01-15",
+      "time": "18:00",
+      "label": "Invierno, laborable, tarde"
+    },
+    {
+      "scenario_id": "winter_weekend_midday",
+      "date": "2027-01-16",
+      "time": "10:00",
+      "label": "Invierno, sábado, media mañana"
+    }
+  ],
+  "queries_total": 5844,
+  "queries_completed": 5844,
+  "status_by_scenario": {
+    "winter_weekday_am_peak": {
+      "no_transit_leg": 1405,
+      "ok": 29,
+      "no_route": 27
+    },
+    "winter_weekday_evening": {
+      "no_transit_leg": 1411,
+      "no_route": 28,
+      "ok": 22
+    },
+    "winter_weekday_midday": {
+      "no_transit_leg": 1405,
+      "no_route": 36,
+      "ok": 20
+    },
+    "winter_weekend_midday": {
+      "no_transit_leg": 1415,
+      "no_route": 31,
+      "ok": 15
+    }
+  },
+  "inputs": {
+    "base_transit_output": "data\\curated\\accommodations_transit_network_access_transit_20260912T222855Z_20260915_1000_8to20km.parquet",
+    "scenario_set": "tib_gtfs_202609_winter_calendar",
+    "scenario_config": "config\\transit_winter_scenarios.json",
+    "gtfs_source_run_id": "20260912T231840Z",
+    "gtfs_source_snapshot": "data\\raw\\tib_gtfs_supply\\20260912T231840Z",
+    "gtfs_source_sha256": "eb239bebf5dcb013fbc75bd563b00e45c84764be096e400bc8cb88a9c005afff"
+  },
+  "checkpoint": "data\\curated\\transit_temporal_winter_2027_winter_weekday_am_peak_winter_weekday_midday_winter_weekday_evening_winter_weekend_midday_checkpoint.parquet",
+  "long_output": "data\\curated\\transit_temporal_winter_2027_winter_weekday_am_peak_winter_weekday_midday_winter_weekday_evening_winter_weekend_midday.parquet",
+  "summary_output": "data\\curated\\transit_temporal_winter_2027_winter_weekday_am_peak_winter_weekday_midday_winter_weekday_evening_winter_weekend_midday_summary.parquet",
+  "elapsed_seconds": 98.31,
+  "generated_at_utc": "2026-09-13T06:58:58.807114+00:00",
+  "limitations": [
+    "La robustez se refiere sólo a las cuatro fecha/horas del GTFS versionado; no representa todo el año ni puntualidad observada.",
+    "Los pares TRANSIT se heredan del barrido de destinos OSM a 8–20 km y no representan demanda turística observada.",
+    "No se imputan rutas: no_transit_leg, no_route y errores se mantienen como estados diferenciados."
+  ],
+  "summary_levels": {
+    "sin_servicio_en_escenarios": 1424,
+    "servicio_inestable": 20,
+    "servicio_consistente": 17
+  },
+  "network_coverage_by_scenario_pct": {
+    "winter_weekday_am_peak": {
+      "transit_ok": 1.98,
+      "transit_60min": 1.71,
+      "transit_90min": 1.92,
+      "transit_120min": 1.98
+    },
+    "winter_weekday_evening": {
+      "transit_ok": 1.51,
+      "transit_60min": 1.16,
+      "transit_90min": 1.44,
+      "transit_120min": 1.51
+    },
+    "winter_weekday_midday": {
+      "transit_ok": 1.37,
+      "transit_60min": 1.1,
+      "transit_90min": 1.3,
+      "transit_120min": 1.37
+    },
+    "winter_weekend_midday": {
+      "transit_ok": 1.03,
+      "transit_60min": 0.82,
+      "transit_90min": 0.96,
+      "transit_120min": 1.03
+    }
+  }
+}

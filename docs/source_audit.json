@@ -1,0 +1,227 @@
+{
+  "audited_at_utc": "2026-09-03T19:03:45.954576+00:00",
+  "files": {
+    "allotjaments_turistics_mallorca.geojson": {
+      "file": "allotjaments_turistics_mallorca.geojson",
+      "rows": 1877,
+      "columns": [
+        "Signatura",
+        "Denominació comercial",
+        "Grup",
+        "Subgrup",
+        "Categoria",
+        "Inici d'activitat",
+        "Estat",
+        "Municipi",
+        "Localitat",
+        "Direcció",
+        "Memoria descriptiva",
+        "Places",
+        "Excepcions ratio turístic",
+        "Superfície",
+        "Hotel de ciutat",
+        "Unitats",
+        "Explotador/s",
+        "geometry"
+      ],
+      "crs": "EPSG:4326",
+      "geometry_types": {
+        "Point": 1479,
+        "NaN": 398
+      },
+      "missing_geometries": 398,
+      "invalid_geometries": 0,
+      "bounds": [
+        -177.486531919325,
+        -51.80294941572892,
+        3.4626961097374567,
+        52.65720819454256
+      ],
+      "sha256": "aadfdeada03723c86ea5f1dd0671e015552c7e60499912dee9494d421b1116d3"
+    },
+    "centres_turistics_mallorca.geojson": {
+      "file": "centres_turistics_mallorca.geojson",
+      "rows": 51,
+      "columns": [
+        "Signatura",
+        "Denominació comercial",
+        "Grup",
+        "Subgrup",
+        "Categoria",
+        "Inici d'activitat",
+        "Estat",
+        "Municipi",
+        "Localitat",
+        "Direcció",
+        "Memoria descriptiva",
+        "Places",
+        "Domini Web",
+        "Explotador/s",
+        "geometry"
+      ],
+      "crs": "EPSG:4326",
+      "geometry_types": {
+        "NaN": 49,
+        "Point": 2
+      },
+      "missing_geometries": 49,
+      "invalid_geometries": 0,
+      "bounds": [
+        2.657338496676069,
+        39.513505458983644,
+        2.7472256267032056,
+        39.57483750848284
+      ],
+      "sha256": "01de73def7c28e89907dbb2e82b1e377b8d033ebef67ea562d6ffa6b7cb19515"
+    },
+    "ibestat_000060A_000004.csv": {
+      "file": "ibestat_000060A_000004.csv",
+      "rows": 21510,
+      "columns": [
+        "TIME_PERIOD#ca",
+        "TIME_PERIOD#es",
+        "TIME_PERIOD_CODE",
+        "MEDIDAS#ca",
+        "MEDIDAS#es",
+        "MEDIDAS_CODE",
+        "TERRITORIO#ca",
+        "TERRITORIO#es",
+        "TERRITORIO_CODE",
+        "OBS_VALUE",
+        "ESTADO_OBSERVACION#ca",
+        "ESTADO_OBSERVACION#es",
+        "ESTADO_OBSERVACION_CODE",
+        "CONFIDENCIALIDAD_OBSERVACION#ca",
+        "CONFIDENCIALIDAD_OBSERVACION#es",
+        "NOTAS_OBSERVACION#ca",
+        "NOTAS_OBSERVACION#es"
+      ],
+      "missing_values": {
+        "TIME_PERIOD#ca": 0,
+        "TIME_PERIOD#es": 0,
+        "TIME_PERIOD_CODE": 0,
+        "MEDIDAS#ca": 0,
+        "MEDIDAS#es": 0,
+        "MEDIDAS_CODE": 0,
+        "TERRITORIO#ca": 0,
+        "TERRITORIO#es": 0,
+        "TERRITORIO_CODE": 0,
+        "OBS_VALUE": 11052,
+        "ESTADO_OBSERVACION#ca": 0,
+        "ESTADO_OBSERVACION#es": 0,
+        "ESTADO_OBSERVACION_CODE": 0,
+        "CONFIDENCIALIDAD_OBSERVACION#ca": 21510,
+        "CONFIDENCIALIDAD_OBSERVACION#es": 21510,
+        "NOTAS_OBSERVACION#ca": 21510,
+        "NOTAS_OBSERVACION#es": 21510
+      },
+      "sha256": "57b363799d09876f47154eed80adba3f2af4483c248ae38e2e484ca052a6996e"
+    },
+    "gtfs_tib_mallorca.zip": {
+      "file": "gtfs_tib_mallorca.zip",
+      "size_bytes": 6388877,
+      "sha256": "ad54aaeba0f5b3f48a882a54e04b1cf6f28508996ea4900a6db073076965fc72",
+      "missing_required_files": [],
+      "has_calendar": true,
+      "tables": {
+        "agency.txt": {
+          "rows": 9,
+          "columns": [
+            "agency_id",
+            "agency_name",
+            "agency_url",
+            "agency_timezone",
+            "agency_lang",
+            "agency_phone"
+          ]
+        },
+        "stops.txt": {
+          "rows": 789,
+          "columns": [
+            "stop_id",
+            "stop_code",
+            "stop_name",
+            "stop_desc",
+            "stop_lat",
+            "stop_lon",
+            "zone_id",
+            "stop_url",
+            "parent_station",
+            "location_type",
+            "level_id",
+            "wheelchair_boarding"
+          ]
+        },
+        "routes.txt": {
+          "rows": 79,
+          "columns": [
+            "route_id",
+            "agency_id",
+            "route_short_name",
+            "route_long_name",
+            "route_desc",
+            "route_type",
+            "route_url",
+            "route_color",
+            "route_text_color"
+          ]
+        },
+        "trips.txt": {
+          "rows": 4229,
+          "columns": [
+            "route_id",
+            "service_id",
+            "trip_id",
+            "trip_headsign",
+            "direction_id",
+            "shape_id"
+          ]
+        },
+        "stop_times.txt": {
+          "rows": 62749,
+          "columns": [
+            "trip_id",
+            "arrival_time",
+            "departure_time",
+            "stop_id",
+            "stop_sequence",
+            "stop_headsign",
+            "timepoint",
+            "pickup_type",
+            "drop_off_type",
+            "shape_dist_traveled"
+          ]
+        },
+        "calendar.txt": {
+          "rows": 429,
+          "columns": [
+            "service_id",
+            "monday",
+            "tuesday",
+            "wednesday",
+            "thursday",
+            "friday",
+            "saturday",
+            "sunday",
+            "start_date",
+            "end_date"
+          ]
+        },
+        "calendar_dates.txt": {
+          "rows": 270,
+          "columns": [
+            "service_id",
+            "date",
+            "exception_type"
+          ]
+        }
+      }
+    },
+    "islas-baleares-latest.osm.pbf": {
+      "file": "islas-baleares-latest.osm.pbf",
+      "size_bytes": 46567638,
+      "sha256": "d4dcf6c7780b4dca959476a2b33e92f0976bf333ea770ce313a163c4c4127a26",
+      "note": "Archivo binario original preservado; se analizará en la fase de red de movilidad."
+    }
+  }
+}

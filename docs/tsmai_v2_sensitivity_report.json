@@ -1,0 +1,86 @@
+{
+  "generated_at_utc": "2026-09-11T14:21:35.516837+00:00",
+  "purpose": "Análisis de sensibilidad de pesos del TSMAI v2; no validación causal.",
+  "scenarios": {
+    "balanced": {
+      "coverage_score": 0.18,
+      "gap_score": 0.12,
+      "proximity_score": 0.1,
+      "routing_score": 0.15,
+      "transit_score": 0.1,
+      "cycling_score": 0.14,
+      "pedestrian_evidence_score": 0.1,
+      "tourism_proximity_score": 0.11
+    },
+    "public_transport_focus": {
+      "coverage_score": 0.25,
+      "gap_score": 0.2,
+      "proximity_score": 0.1,
+      "routing_score": 0.15,
+      "transit_score": 0.15,
+      "cycling_score": 0.05,
+      "pedestrian_evidence_score": 0.05,
+      "tourism_proximity_score": 0.05
+    },
+    "active_mobility_focus": {
+      "coverage_score": 0.1,
+      "gap_score": 0.1,
+      "proximity_score": 0.05,
+      "routing_score": 0.1,
+      "transit_score": 0.1,
+      "cycling_score": 0.25,
+      "pedestrian_evidence_score": 0.15,
+      "tourism_proximity_score": 0.15
+    },
+    "tourism_proximity_focus": {
+      "coverage_score": 0.12,
+      "gap_score": 0.1,
+      "proximity_score": 0.08,
+      "routing_score": 0.12,
+      "transit_score": 0.1,
+      "cycling_score": 0.12,
+      "pedestrian_evidence_score": 0.11,
+      "tourism_proximity_score": 0.25
+    }
+  },
+  "rank_spearman_correlation": {
+    "balanced_rank": {
+      "balanced_rank": 1.0,
+      "public_transport_focus_rank": 0.936,
+      "active_mobility_focus_rank": 0.95,
+      "tourism_proximity_focus_rank": 0.997
+    },
+    "public_transport_focus_rank": {
+      "balanced_rank": 0.936,
+      "public_transport_focus_rank": 1.0,
+      "active_mobility_focus_rank": 0.831,
+      "tourism_proximity_focus_rank": 0.926
+    },
+    "active_mobility_focus_rank": {
+      "balanced_rank": 0.95,
+      "public_transport_focus_rank": 0.831,
+      "active_mobility_focus_rank": 1.0,
+      "tourism_proximity_focus_rank": 0.959
+    },
+    "tourism_proximity_focus_rank": {
+      "balanced_rank": 0.997,
+      "public_transport_focus_rank": 0.926,
+      "active_mobility_focus_rank": 0.959,
+      "tourism_proximity_focus_rank": 1.0
+    }
+  },
+  "robust_top10_municipalities": [
+    "ALCÚDIA",
+    "CALVIÀ",
+    "POLLENÇA",
+    "SANT LLORENÇ DES CARDASSAR",
+    "SANTA EUGÈNIA",
+    "SANTA MARGALIDA",
+    "SES SALINES",
+    "SON SERVERA"
+  ],
+  "limitations": [
+    "Los escenarios expresan prioridades analíticas plausibles, no preferencias observadas.",
+    "Una correlación alta no valida el índice frente a resultados de movilidad reales."
+  ]
+}
