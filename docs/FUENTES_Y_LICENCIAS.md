@@ -38,9 +38,9 @@
 
 ## Sentimiento de reseñas
 
-- No se descargan ni raspan reseñas de plataformas de terceros sin licencia o consentimiento explícito.
+- No se descargan ni raspan reseñas de plataformas de terceros.
 - Sólo se aceptan corpus CC0, CC-BY o con consentimiento explícito y evidencia de reutilización.
-- Modelo opcional documentado en el proyecto de desarrollo: `nlptown/bert-base-multilingual-uncased-sentiment` (licencia MIT). **Esta copia de presentación no incluye el script que lo invoca** (`analyze_multilingual_sentiment`), retirado junto con el resto de componentes de IA generativa/preentrenada.
+- Modelo opcional: `nlptown/bert-base-multilingual-uncased-sentiment`, con licencia MIT según su model card. El modelo no otorga derechos sobre los textos de entrada.
 
 Las condiciones de reutilización dependen de cada fuente. Cuando una fuente
 declara una licencia CC-BY, se mantiene su atribución; en todos los casos se

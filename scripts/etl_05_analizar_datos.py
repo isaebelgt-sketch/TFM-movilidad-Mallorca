@@ -15,6 +15,131 @@ from pathlib import Path
 import pandas as pd
 
 
+ROOT = Path(__file__).resolve().parents[1]
+CURATED = ROOT / "data" / "curated"
+AGGREGATE_SENTIMENT_INPUT = CURATED / "reviews_multilingual_sentiment.parquet"
+accs = CURATED / "accommodations_transport_access_baseline.parquet"
+AGGREGATE_SENTIMENT_OUT = CURATED / "municipality_mobility_sentiment.parquet"
+AGGREGATE_SENTIMENT_REPORT = ROOT / "docs" / "mobility_sentiment_report.json"
+MINIMUM_REVIEWS_PER_MUNICIPALITY = 10
+
+
+def main_aggregate_mobility_sentiment():
+    if not AGGREGATE_SENTIMENT_INPUT.exists():
+        raise FileNotFoundError(
+            "No existe sentimiento autorizado. Ejecuta validate_licensed_reviews.py y analyze_multilingual_sentiment.py con un corpus lícito."
+        )
+    reviews = pd.read_parquet(AGGREGATE_SENTIMENT_INPUT)
+    required = {"sentiment_group", "mobility_relevant"}
+    missing = required.difference(reviews.columns)
+    if missing:
+        raise ValueError(f"El resultado NLP no contiene el contrato de movilidad: {sorted(missing)}")
+    relevant = reviews.loc[reviews["mobility_relevant"].fillna(False)].copy()
+    if "municipality" in relevant.columns and relevant["municipality"].notna().any():
+        data = relevant.rename(columns={"municipality": "municipality_raw"})
+    elif "accommodation_id" in relevant.columns:
+        lodgings = pd.read_parquet(accs)[["accommodation_id", "municipality_raw"]]
+        data = relevant.merge(lodgings, on="accommodation_id", how="inner", validate="many_to_one")
+    else:
+        raise ValueError("La agregación municipal requiere accommodation_id o municipality en el corpus autorizado.")
+    if data.empty:
+        raise ValueError("No hay menciones de movilidad vinculadas a alojamientos; no se publica un indicador vacío.")
+    score = data["sentiment_group"].map({"negative": -1, "neutral": 0, "positive": 1})
+    data = data.assign(sentiment_score=score)
+    grouped = data.groupby("municipality_raw", dropna=False).agg(
+        mobility_review_count=("sentiment_score", "size"),
+        mobility_sentiment_mean=("sentiment_score", "mean"),
+        positive_share_pct=("sentiment_group", lambda values: 100 * values.eq("positive").mean()),
+        negative_share_pct=("sentiment_group", lambda values: 100 * values.eq("negative").mean()),
+    ).reset_index().rename(columns={"municipality_raw": "municipality"})
+    grouped["publication_status"] = grouped["mobility_review_count"].ge(MINIMUM_REVIEWS_PER_MUNICIPALITY).map({True: "published", False: "insufficient_sample"})
+    grouped.loc[grouped["publication_status"].eq("insufficient_sample"), ["mobility_sentiment_mean", "positive_share_pct", "negative_share_pct"]] = pd.NA
+    grouped.to_parquet(AGGREGATE_SENTIMENT_OUT, index=False)
+    AGGREGATE_SENTIMENT_REPORT.write_text(json.dumps({
+        "generated_at_utc": datetime.now(timezone.utc).isoformat(),
+        "source": "Corpus de reseñas previamente validado por licencia y clasificado; sólo menciones explícitas de movilidad.",
+        "minimum_reviews_per_municipality": MINIMUM_REVIEWS_PER_MUNICIPALITY,
+        "review_count": int(len(data)),
+        "municipalities": int(len(grouped)),
+        "limitations": [
+            "Sentimiento general sobre movilidad no equivale a seguridad percibida ni a una auditoría técnica.",
+            "Las zonas con menos de diez reseñas no publican una media para evitar conclusiones inestables.",
+            "No se usan textos sin licencia reutilizable o consentimiento explícito.",
+        ],
+    }, ensure_ascii=False, indent=2), encoding="utf-8")
+    print(f"OK sentimiento de movilidad agregado: {len(data):,} menciones")
+
+
+
+
+
+
+import json
+import hashlib
+from datetime import datetime, timezone
+from pathlib import Path
+
+import pandas as pd
+
+
+ROOT = Path(__file__).resolve().parents[1]
+MULTILINGUAL_SENTIMENT_INPUT = ROOT / "data" / "unified" / "reviews_licensed_validated.parquet"
+MULTILINGUAL_SENTIMENT_OUT = ROOT / "data" / "curated" / "reviews_multilingual_sentiment.parquet"
+MULTILINGUAL_SENTIMENT_REPORT = ROOT / "docs" / "multilingual_sentiment_report.json"
+MODEL = "nlptown/bert-base-multilingual-uncased-sentiment"
+
+
+MOBILITY_TERMS = {
+    "public_transport": ("bus", "autobús", "autobus", "tren", "train", "metro", "parada", "stop", "station", "estació", "transport"),
+    "walking": ("caminar", "caminata", "peatón", "peaton", "acera", "walking", "walk", "footpath", "zu fuß", "spazier"),
+    "cycling": ("bicicleta", "bici", "ciclovía", "ciclovia", "cycling", "bike", "radweg", "fahrrad"),
+    "accessibility": ("accesible", "accessibility", "wheelchair", "silla de ruedas", "rampa", "ascensor", "barrier-free"),
+    "traffic": ("tráfico", "trafico", "traffic", "congestión", "congestion", "aparcamiento", "parking"),
+}
+
+
+def sentiment_group(label):
+    stars = int(str(label).split()[0])
+    return "negative" if stars <= 2 else "neutral" if stars == 3 else "positive"
+
+def mobility_aspects(text):
+    normalized = str(text).casefold()
+    return [aspect for aspect, terms in MOBILITY_TERMS.items() if any(term in normalized for term in terms)]
+
+
+def main_analyze_multilingual_sentiment():
+    # Ejecuta el analisis de sentimiento
+    if not MULTILINGUAL_SENTIMENT_INPUT.exists():
+        raise FileNotFoundError("Ejecuta primero validate_licensed_reviews.py con un corpus de reseñas autorizado.")
+    try:
+        from transformers import pipeline
+    except ImportError as exc:
+        raise RuntimeError("Instala las dependencias opcionales: pip install -r requirements-nlp.txt") from exc
+    reviews = pd.read_parquet(MULTILINGUAL_SENTIMENT_INPUT)
+    if reviews.empty:
+        raise ValueError("No hay reseñas autorizadas para analizar.")
+    classifier = pipeline("text-classification", model=MODEL, tokenizer=MODEL)
+    predictions = classifier(reviews["text"].tolist(), truncation=True, max_length=512, batch_size=8)
+
+    result = reviews.drop(columns=["text"]).copy()
+    result["text_sha256"] = reviews["text"].map(lambda value: hashlib.sha256(str(value).encode("utf-8")).hexdigest())
+    result["sentiment_model"] = MODEL
+    result["sentiment_label_raw"] = [item["label"] for item in predictions]
+    result["sentiment_confidence"] = [round(float(item["score"]), 4) for item in predictions]
+    result["sentiment_group"] = result["sentiment_label_raw"].map(sentiment_group)
+    result["mobility_aspects"] = reviews["text"].map(mobility_aspects)
+    result["mobility_relevant"] = result["mobility_aspects"].map(bool)
+    result.to_parquet(MULTILINGUAL_SENTIMENT_OUT, index=False)
+    report = {
+        "generated_at_utc": datetime.now(timezone.utc).isoformat(), "model": MODEL, "model_license": "MIT (consultar model card antes de redistribución)",
+        "records": int(len(result)), "distribution": result["sentiment_group"].value_counts().to_dict(),
+        "mobility_relevant_records": int(result["mobility_relevant"].sum()),
+        "limitations": ["Modelo entrenado para sentimiento general y no específicamente para movilidad turística de Mallorca.", "La detección de aspectos usa un diccionario conservador y debe validarse manualmente antes de una inferencia territorial.", "Sentimiento no equivale a seguridad percibida; se requiere validación manual temática.", "Sólo se procesan reseñas previamente validadas por licencia y vínculo geográfico."],
+    }
+    MULTILINGUAL_SENTIMENT_REPORT.write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
+    print(f"OK Sentimiento multilingüe: {len(result)} reseñas")
+
+
 
 
 
@@ -668,12 +793,107 @@ def main_compare_transit_seasonal_runs():
 
 
 import json
+import os
+from datetime import datetime, timezone
 from pathlib import Path
 import pandas as pd
 
 
 ROOT = Path(__file__).resolve().parents[1]
 CURATED = ROOT / "data" / "curated"
+RECOMMENDATIONS_IN = CURATED / "od_sustainable_route_recommendations.parquet"
+AI_NARRATIVES_OUT = CURATED / "od_ai_route_narratives.parquet"
+AI_NARRATIVES_REPORT = ROOT / "docs" / "ai_route_narratives_report.json"
+
+def generate_narrative_mock(row):
+    # Genera narrativa heuristica sin IA
+    modo = row.get("recommendation_label", "Desconocido")
+    regla = row.get("recommendation_rule", "")
+
+    if "Caminar" in modo:
+        return f"🌟 Ruta escénica a pie: Disfruta de un paseo accesible. {regla}"
+    elif "Bicicleta" in modo:
+        return f"🚴‍♀️ Ruta ciclista recomendada: Ideal para moverte de forma activa y rápida, con buena conectividad. {regla}"
+    elif "Transporte" in modo:
+        return f"🚌 Conexión sostenible: Relájate y disfruta del paisaje utilizando la red pública. {regla}"
+    else:
+        return f"🔍 Evaluación requerida: Sugerimos revisar las alternativas locales de movilidad. {regla}"
+
+def generate_narrative_llm(row, model):
+    prompt = f"""
+    Eres un asistente experto en movilidad turística sostenible.
+    Genera una breve narrativa atractiva (máximo 2 frases) para un turista,
+    explicando por qué se recomienda esta ruta:
+    Modo recomendado: {row.get('recommendation_label')}
+    Contexto técnico: {row.get('recommendation_rule')}
+    """
+    try:
+        response = model.generate_content(prompt)
+        text = (response.text or "").strip()
+        if not text:
+            raise ValueError("Respuesta vacía del LLM")
+        return text, True
+    except Exception:
+        return generate_narrative_mock(row), False
+
+
+def resolve_llm_model():
+    """Intenta inicializar un cliente Gemini real si hay clave y paquete disponibles.
+
+    Devuelve None si falta la clave o el paquete `google-generativeai`
+    (ver requirements-llm.txt); en ese caso el llamador debe usar el mock.
+    """
+    api_key = os.getenv("GEMINI_API_KEY")
+    if not api_key:
+        print("No se detectó GEMINI_API_KEY. Usando generador heurístico (mock) de narrativas...")
+        return None
+    try:
+        import google.generativeai as genai
+    except ImportError:
+        print("GEMINI_API_KEY detectada pero falta el paquete google-generativeai (ver requirements-llm.txt). Usando generador heurístico (mock)...")
+        return None
+    genai.configure(api_key=api_key)
+    print("API Key detectada. Usando LLM para generar narrativas...")
+    return genai.GenerativeModel("gemini-1.5-flash")
+
+
+def main_generate_ai_route_narratives():
+    if not RECOMMENDATIONS_IN.exists():
+        raise FileNotFoundError(f"No se encuentra {RECOMMENDATIONS_IN}. Ejecuta primero build_sustainable_route_recommendations.py")
+
+    df = pd.read_parquet(RECOMMENDATIONS_IN)
+
+    model = resolve_llm_model()
+
+    narratives = []
+    llm_successes = 0
+    llm_failures = 0
+
+    for _, row in df.iterrows():
+        if model:
+            narrative, used_llm = generate_narrative_llm(row, model)
+            llm_successes += int(used_llm)
+            llm_failures += int(not used_llm)
+        else:
+            narrative = generate_narrative_mock(row)
+        narratives.append(narrative)
+
+    df["ai_narrative"] = narratives
+
+    df.to_parquet(AI_NARRATIVES_OUT, index=False)
+
+    method = "LLM API" if llm_successes > 0 else "Mock Heurístico (AI simulada)"
+    report = {
+        "generated_at_utc": datetime.now(timezone.utc).isoformat(),
+        "method": method,
+        "cases_processed": len(df),
+        "llm_successes": llm_successes,
+        "llm_failures_fallback_to_mock": llm_failures,
+        "columns_added": ["ai_narrative"],
+        "compliance": "Genera narrativas de ruta; el método reportado refleja lo realmente usado por caso, no solo la presencia de una API key."
+    }
+    AI_NARRATIVES_REPORT.write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
+    print(f"OK Narrativas generadas: {len(df)} casos en {AI_NARRATIVES_OUT.name} (método: {method})")
 
 
 def main_generate_destination_clusters():
@@ -1010,6 +1230,12 @@ if __name__ == "__main__":
     args = parser.parse_args()
     task_name = args.task if args.task.startswith("run_") else "run_" + args.task
 
+    if task_name == "run_aggregate_mobility_sentiment":
+        main_aggregate_mobility_sentiment()
+        sys.exit(0)
+    if task_name == "run_analyze_multilingual_sentiment":
+        main_analyze_multilingual_sentiment()
+        sys.exit(0)
     if task_name == "run_analyze_tsmai_v2_sensitivity":
         main_analyze_tsmai_v2_sensitivity()
         sys.exit(0)
@@ -1018,6 +1244,9 @@ if __name__ == "__main__":
         sys.exit(0)
     if task_name == "run_compare_transit_seasonal_runs":
         main_compare_transit_seasonal_runs()
+        sys.exit(0)
+    if task_name == "run_generate_ai_route_narratives":
+        main_generate_ai_route_narratives()
         sys.exit(0)
     if task_name == "run_generate_destination_clusters":
         main_generate_destination_clusters()

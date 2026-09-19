@@ -224,13 +224,9 @@ municipal. Para activar sentimiento se requieren, en este orden:
 python scripts/extract/ingest_source.py --source-id licensed_mobility_survey --input "C:\ruta\encuesta_real.csv"
 python scripts/extract/ingest_source.py --source-id licensed_mobility_survey --input "C:\ruta\encuesta_real.csv" --execute
 python scripts/run_task.py validate_licensed_reviews
+python scripts/run_task.py analyze_multilingual_sentiment
+python scripts/run_task.py aggregate_mobility_sentiment
 ```
-
-Nota sobre esta copia de presentación: las tareas `analyze_multilingual_sentiment`
-(modelo BERT preentrenado) y `aggregate_mobility_sentiment` se han retirado
-deliberadamente de este paquete, junto con `generate_ai_route_narratives`
-(LLM Gemini) y `prepare_inside_airbnb_reviews`, para dejar solo componentes de
-código propio. Siguen documentadas en el proyecto de desarrollo completo.
 
 No se deben añadir reseñas de plataformas de terceros sin licencia o
 consentimiento. El detalle de contratos y publicación está en
@@ -264,8 +260,8 @@ consentimiento. El detalle de contratos y publicación está en
   procedencia, pero no certifica el alojamiento, la parada ni la continuidad
   de un itinerario accesible.
 - El sentimiento no se ejecuta sin un corpus autorizado. Consulta
-  `docs/RESEÑAS_LICENCIADAS.md` antes de usar `validate_licensed_reviews`
-  (el análisis con BERT que consumía su salida no está en esta copia).
+  `docs/RESEÑAS_LICENCIADAS.md` antes de usar las tareas
+  `validate_licensed_reviews` y `analyze_multilingual_sentiment`.
 
 ## P16 — publicación local PostGIS
 

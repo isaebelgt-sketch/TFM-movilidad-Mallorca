@@ -1,0 +1,9 @@
+{
+  "generated_at_utc": "2026-09-14T19:33:32.218164+00:00",
+  "method": "Mock Heurístico (AI simulada)",
+  "cases_processed": 20,
+  "columns_added": [
+    "ai_narrative"
+  ],
+  "compliance": "Genera narrativas de ruta como mock heurístico; no debe presentarse como LLM real sin API key y trazabilidad de la llamada."
+}

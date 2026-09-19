@@ -69,6 +69,7 @@ ROAD_SAFETY_FILE = PROJECT_ROOT / "data" / "curated" / "municipality_road_safety
 ROAD_SAFETY_REPORT_FILE = PROJECT_ROOT / "docs" / "road_safety_context_dgt_2024_report.json"
 AEMET_WEATHER_LATEST_FILE = PROJECT_ROOT / "data" / "curated" / "latest_aemet_weather_context.json"
 ACCOMMODATION_TSMAI_V3_FILE = PROJECT_ROOT / "data" / "curated" / "accommodations_tourism_sustainable_mobility_index_v3.parquet"
+MOBILITY_SENTIMENT_FILE = PROJECT_ROOT / "data" / "curated" / "municipality_mobility_sentiment.parquet"
 TSMAI_V4_FILE = PROJECT_ROOT / "data" / "curated" / "accommodations_tsmai_v4_current.parquet"
 TSMAI_V5_FILE = PROJECT_ROOT / "data" / "curated" / "accommodations_tsmai_v5_network.parquet"
 TSMAI_V6_FILE = PROJECT_ROOT / "data" / "curated" / "accommodations_tsmai_v6_multimodal_network.parquet"
@@ -282,9 +283,11 @@ def load_aemet_weather_context() -> tuple[gpd.GeoDataFrame, dict]:
 
 
 @st.cache_data(show_spinner=False)
-def load_new_decision_artifacts() -> pd.DataFrame:
+def load_new_decision_artifacts() -> tuple[pd.DataFrame, pd.DataFrame]:
     """Carga sólo resultados realmente generados; no crea proxies en la interfaz."""
-    return pd.read_parquet(ACCOMMODATION_TSMAI_V3_FILE) if ACCOMMODATION_TSMAI_V3_FILE.exists() else pd.DataFrame()
+    index = pd.read_parquet(ACCOMMODATION_TSMAI_V3_FILE) if ACCOMMODATION_TSMAI_V3_FILE.exists() else pd.DataFrame()
+    sentiment = pd.read_parquet(MOBILITY_SENTIMENT_FILE) if MOBILITY_SENTIMENT_FILE.exists() else pd.DataFrame()
+    return index, sentiment
 
 
 @st.cache_data(show_spinner=False)
@@ -360,11 +363,23 @@ def load_data() -> tuple[gpd.GeoDataFrame, gpd.GeoDataFrame, gpd.GeoDataFrame, p
     sensitivity = pd.read_parquet(SENSITIVITY_FILE)
     emissions = pd.read_parquet(EMISSIONS_FILE)
     recommendations = pd.read_parquet(RECOMMENDATIONS_FILE)
+    
+    # --- INTEGRA AI NARRATIVES ---
+    import os
+    ai_narratives_file = PROJECT_ROOT / "data" / "curated" / "od_ai_route_narratives.parquet"
+    if ai_narratives_file.exists():
+        ai_df = pd.read_parquet(ai_narratives_file)
+        if "ai_narrative" in ai_df.columns and "od_id" in ai_df.columns:
+            recommendations = recommendations.merge(ai_df[["od_id", "ai_narrative"]], on="od_id", how="left")
+    # -----------------------------
 
     priorities = priorities.merge(sensitivity[["od_id", "top5_scenarios", "robust_priority"]], on="od_id", how="left", validate="one_to_one")
-
+    
+    # Agregar ai_narrative si existe
     cols_to_merge = ["od_id", "recommendation_code", "recommendation", "evidence", "recommendation_scope", "evidence_summary"]
-
+    if "ai_narrative" in recommendations.columns:
+        cols_to_merge.append("ai_narrative")
+        
     priorities = priorities.merge(
         recommendations[cols_to_merge],
         on="od_id", how="left", validate="one_to_one",
@@ -672,6 +687,8 @@ def build_territorial_map(accommodations: gpd.GeoDataFrame, stops: gpd.GeoDataFr
         for _, row in priority_cases.iterrows():
             action = RECOMMENDATION_LABELS.get(row["recommendation_code"], row["recommendation_code"])
             details = f"<b>Prioridad de revisión: {row['priority_level']}</b><br>{row['origin_name']} → {row['destination_name']}<br>Acción: {action}"
+            if "ai_narrative" in row and pd.notna(row["ai_narrative"]):
+                details += f"<hr><b>Narrativa de la ruta (reglas heurísticas):</b><br><i>{row['ai_narrative']}</i>"
             folium.CircleMarker(location=[row["origin_lat"], row["origin_lon"]], radius=7, color="#7f0000", weight=2, fill=True, fill_color="#d73027", fill_opacity=0.9, popup=details).add_to(group)
             folium.CircleMarker(location=[row["destination_lat"], row["destination_lon"]], radius=6, color="#7f0000", weight=2, fill=True, fill_color="#ff8c00", fill_opacity=0.9, popup=details).add_to(group)
         group.add_to(access_map)
@@ -876,7 +893,7 @@ try:
 except (FileNotFoundError, ValueError, OSError, KeyError) as exc:
     aemet_weather_stations, aemet_weather_report = gpd.GeoDataFrame(), {}
     st.info(f"Contexto meteorológico AEMET aún no disponible: {exc}")
-accommodation_tsmai_v3 = load_new_decision_artifacts()
+accommodation_tsmai_v3, mobility_sentiment = load_new_decision_artifacts()
 accommodation_tsmai_v4 = load_current_tsmai_v4()
 accommodation_tsmai_v5 = load_current_tsmai_v5()
 accommodation_tsmai_v6 = load_current_tsmai_v6()
@@ -929,7 +946,7 @@ if not technical_mode:
     accommodation_tsmai_v6 = accommodation_tsmai_v7 = accommodation_tsmai_v8 = pd.DataFrame()
     active_accommodations = active_destinations = gpd.GeoDataFrame()
     cycleways = isochrones = air_quality_stations = aemet_weather_stations = gpd.GeoDataFrame()
-    universal_access = road_safety_context = pd.DataFrame()
+    universal_access = road_safety_context = mobility_sentiment = pd.DataFrame()
     tsmai = tsmai_v2 = tsmai_sensitivity = route_infrastructure_profiles = pd.DataFrame()
     sustainable_mode_recommendations = intervention_scenarios = tourist_offer_seasonality = pd.DataFrame()
     slope_profiles = current_sample_slope_profiles = massive_summary = pd.DataFrame()
@@ -1659,6 +1676,23 @@ with territorial_tab:
             index_table = filtered[["commercial_name", "municipality_raw", "tsmai_v3_accommodation_score", "tsmai_v3_accommodation_level", "evidence_coverage_pct"]].rename(columns={"commercial_name": "Alojamiento", "municipality_raw": "Municipio", "tsmai_v3_accommodation_score": "TSMAI v3", "tsmai_v3_accommodation_level": "Nivel", "evidence_coverage_pct": "Cobertura de evidencia (%)"}).sort_values("TSMAI v3", ascending=False)
             with st.expander("📊 Ver datos detallados", expanded=False):
                 st.dataframe(index_table, width="stretch", hide_index=True, column_config={"TSMAI v3": st.column_config.NumberColumn(format="%.3f"), "Cobertura de evidencia (%)": st.column_config.NumberColumn(format="%.1f %%")})
+
+    if not mobility_sentiment.empty:
+        with st.container(border=True):
+            st.subheader("Sentimiento de movilidad autorizado")
+            st.caption("Sólo se muestran municipios con el tamaño muestral mínimo y reseñas con licencia o consentimiento. Este indicador describe tono de comentarios sobre movilidad, no seguridad percibida certificada.")
+            publishable_sentiment = mobility_sentiment["mobility_sentiment_mean"].notna()
+            sentiment_metrics = st.columns(3)
+            sentiment_metrics[0].metric("Menciones de movilidad", f"{int(mobility_sentiment['mobility_review_count'].sum()):,}")
+            sentiment_metrics[1].metric("Municipios con menciones", f"{int(mobility_sentiment['mobility_review_count'].gt(0).sum())}")
+            sentiment_metrics[2].metric("Municipios publicables (≥10 menciones)", f"{int(publishable_sentiment.sum())}")
+            if not publishable_sentiment.any():
+                st.info("Ningún municipio alcanza el mínimo de 10 menciones de movilidad, por lo que no se publica ninguna media. Es una limitación del volumen de reseñas disponible, no un resultado neutro.", icon=":material/info:")
+            sentiment_display = mobility_sentiment.assign(publication_status=mobility_sentiment["publication_status"].map({"insufficient_sample": "Muestra insuficiente"}).fillna(mobility_sentiment["publication_status"])).rename(columns={"municipality": "Municipio", "mobility_review_count": "Menciones de movilidad", "mobility_sentiment_mean": "Sentimiento medio", "positive_share_pct": "Positivo (%)", "negative_share_pct": "Negativo (%)", "publication_status": "Estado de publicación"}).sort_values("Menciones de movilidad", ascending=False)
+            if not publishable_sentiment.any():
+                sentiment_display = sentiment_display[["Municipio", "Menciones de movilidad", "Estado de publicación"]]
+            with st.expander("📊 Ver datos detallados", expanded=False):
+                st.dataframe(sentiment_display, width="stretch", hide_index=True, column_config={"Sentimiento medio": st.column_config.NumberColumn(format="%.3f"), "Positivo (%)": st.column_config.NumberColumn(format="%.1f %%"), "Negativo (%)": st.column_config.NumberColumn(format="%.1f %%")})
 
     if not air_quality_stations.empty:
         with st.container(border=True):

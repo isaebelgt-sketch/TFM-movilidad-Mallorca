@@ -859,6 +859,116 @@ def main_ingest_licensed_mobility_survey():
     print(json.dumps({"status": "ingested", "source_id": SOURCE_ID, "payload": str(payload.relative_to(ROOT)), "manifest": str((snapshot / "manifest.json").relative_to(ROOT))}, ensure_ascii=False, indent=2))
 
 
+INSIDE_AIRBNB_ROOT = ROOT / "data" / "raw" / "inside_airnb"
+INSIDE_AIRBNB_LISTINGS = INSIDE_AIRBNB_ROOT / "listings.csv"
+INSIDE_AIRBNB_REVIEWS = INSIDE_AIRBNB_ROOT / "reviews.csv.gz"
+REVIEWS_LICENSED_OUT = ROOT / "data" / "raw" / "reviews_licensed.csv"
+INSIDE_AIRBNB_REPORT = ROOT / "docs" / "inside_airbnb_reviews_preparation_report.json"
+INSIDE_AIRBNB_LICENSE = "CC-BY-4.0"
+INSIDE_AIRBNB_SOURCE_URL = "https://insideairbnb.com/get-the-data/"
+
+# Diferencias de grafía entre el "neighbourhood" de Inside Airbnb y el municipality_raw
+# del proyecto (mayúsculas resuelven el resto); comprobado contra el registro de
+# alojamientos vigente. Los municipios de Inside Airbnb sin alojamientos en el
+# proyecto (p. ej. "Mancor de la Vall", "Sant Joan") se descartan, no se inventan.
+INSIDE_AIRBNB_NEIGHBOURHOOD_OVERRIDES = {
+    "Palma de Mallorca": "PALMA",
+    "Deyá": "DEIÀ",
+    "Vilafranc de Bonany": "VILAFRANCA DE BONANY",
+    "Santa María del Camí": "SANTA MARIA DEL CAMÍ",
+}
+
+
+def clean_inside_airbnb_text(value):
+    # Quita marcado HTML y saltos de línea crudos del scrape, sin tocar el contenido
+    if not isinstance(value, str):
+        return ""
+    text = value.replace("<br/>", " ").replace("<br />", " ").replace("\r", " ").replace("\n", " ")
+    return re.sub(r"\s+", " ", text).strip()
+
+
+def main_prepare_inside_airbnb_reviews():
+    """Transforma el export de Inside Airbnb (Mallorca) al contrato de validate_licensed_reviews.
+
+    Inside Airbnb publica sus datos bajo Creative Commons Attribution 4.0
+    (ver https://insideairbnb.com/get-the-data/); "reviews.csv.gz" es la única
+    de las dos exportaciones de reseñas que trae el texto ("reviews.csv" es
+    sólo un resumen de fechas, sin comentarios, y no sirve para sentimiento).
+    Sólo se publica un agregado por municipio aguas abajo: nunca el texto en
+    bruto, en línea con la política de la fuente de no republicar el dataset.
+    """
+    parser = argparse.ArgumentParser(description="Prepara las reseñas de Inside Airbnb (Mallorca) para el pipeline de sentimiento de movilidad.")
+    parser.add_argument("--max-per-municipality", type=int, default=200, help="Límite de reseñas por municipio para acotar el tiempo de inferencia BERT posterior; 0 = sin límite.")
+    args = parser.parse_args()
+
+    if not INSIDE_AIRBNB_LISTINGS.is_file() or not INSIDE_AIRBNB_REVIEWS.is_file():
+        raise FileNotFoundError("Faltan listings.csv o reviews.csv.gz en data/raw/inside_airnb/.")
+    if not OUTPUT.is_file():
+        raise FileNotFoundError("Falta el registro de alojamientos del proyecto; ejecuta prepare_official_accommodations primero.")
+    project_municipalities = set(gpd.read_file(OUTPUT)["municipality"].dropna().unique())
+
+    listings = pd.read_csv(INSIDE_AIRBNB_LISTINGS, usecols=["id", "neighbourhood"], low_memory=False)
+    listings["municipality"] = listings["neighbourhood"].map(
+        lambda value: INSIDE_AIRBNB_NEIGHBOURHOOD_OVERRIDES.get(value, str(value).upper()) if pd.notna(value) else None
+    )
+    unmatched_neighbourhoods = sorted(set(
+        listings.loc[listings["municipality"].notna() & ~listings["municipality"].isin(project_municipalities), "neighbourhood"].dropna()
+    ))
+    listings.loc[~listings["municipality"].isin(project_municipalities), "municipality"] = None
+
+    reviews = pd.read_csv(INSIDE_AIRBNB_REVIEWS, compression="gzip", usecols=["listing_id", "id", "comments"])
+    reviews_total = int(len(reviews))
+    reviews = reviews.merge(listings[["id", "municipality"]], left_on="listing_id", right_on="id", how="left", suffixes=("", "_listing"))
+
+    reviews["text"] = reviews["comments"].map(clean_inside_airbnb_text)
+    with_text = reviews.loc[reviews["text"].str.len().ge(15)].copy()
+    with_municipality = with_text.loc[with_text["municipality"].notna()].copy()
+
+    sampled = with_municipality
+    if args.max_per_municipality > 0:
+        sampled_parts = [
+            group.sample(n=min(len(group), args.max_per_municipality), random_state=42)
+            for _, group in with_municipality.groupby("municipality")
+        ]
+        sampled = pd.concat(sampled_parts, ignore_index=True) if sampled_parts else with_municipality.iloc[0:0].copy()
+
+    output = pd.DataFrame({
+        "review_id": "airbnb_" + sampled["id"].astype(str),
+        "text": sampled["text"],
+        "license": INSIDE_AIRBNB_LICENSE,
+        "source_url": INSIDE_AIRBNB_SOURCE_URL,
+        "municipality": sampled["municipality"],
+    }).drop_duplicates(subset="review_id")
+    REVIEWS_LICENSED_OUT.parent.mkdir(parents=True, exist_ok=True)
+    output.to_csv(REVIEWS_LICENSED_OUT, index=False)
+
+    report = {
+        "generated_at_utc": datetime.now(timezone.utc).isoformat(),
+        "source": "Inside Airbnb (Mallorca): listings.csv + reviews.csv.gz",
+        "source_license": INSIDE_AIRBNB_LICENSE,
+        "source_policy_note": "Inside Airbnb pide no republicar el dataset en bruto y citar la fuente; este pipeline sólo agrega por municipio, nunca publica el texto de las reseñas.",
+        "reviews_in_source": reviews_total,
+        "reviews_with_usable_text": int(len(with_text)),
+        "reviews_matched_to_project_municipality": int(len(with_municipality)),
+        "reviews_written": int(len(output)),
+        "max_per_municipality": args.max_per_municipality or None,
+        "municipalities_covered": sorted(output["municipality"].unique().tolist()),
+        "neighbourhoods_without_project_municipality": unmatched_neighbourhoods,
+        "output": str(REVIEWS_LICENSED_OUT.relative_to(ROOT)),
+        "next_steps": [
+            "python scripts/run_task.py validate_licensed_reviews",
+            "python scripts/run_task.py analyze_multilingual_sentiment  (requiere pip install -r requirements-nlp.txt)",
+            "python scripts/run_task.py aggregate_mobility_sentiment",
+        ],
+        "limitations": [
+            "El municipio se asigna por el 'neighbourhood' del alojamiento en Inside Airbnb, no por el alojamiento real del proyecto: es contexto territorial, no un vínculo a un accommodation_id.",
+            "El muestreo por municipio (si --max-per-municipality > 0) no es aleatorio simple sobre toda Mallorca, sino estratificado por municipio con semilla fija (42) para reproducibilidad.",
+        ],
+    }
+    write_json(INSIDE_AIRBNB_REPORT, report)
+    print(json.dumps(report, ensure_ascii=False, indent=2))
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("task", help="Task to run")

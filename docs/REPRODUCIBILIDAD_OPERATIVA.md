@@ -1,4 +1,4 @@
-# Reproducibilidad operativa y universos de análisis
+﻿# Reproducibilidad operativa y universos de análisis
 
 Este documento es la referencia de ejecución vigente. Los nombres históricos como `prepare_tib_gtfs.py`, `validate_streamlit_app.py` o `etl_*.py` no son archivos ejecutables de esta versión. Usa siempre el lanzador único:
 
@@ -29,7 +29,7 @@ No se debe atribuir la diferencia 1.463 → 1.461 a una unión analítica: proce
 ## Preparación y validación mínima
 
 ```powershell
-conda env create -f environment.yml
+conda env create -f environment-dev.yml
 conda activate tfm-mallorca
 python scripts/run_task.py validate_source_registry
 python -m pytest -q

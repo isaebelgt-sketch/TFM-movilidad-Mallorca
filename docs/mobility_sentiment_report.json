@@ -1,0 +1,12 @@
+{
+  "generated_at_utc": "2026-09-17T17:45:37.578306+00:00",
+  "source": "Corpus de reseñas previamente validado por licencia y clasificado; sólo menciones explícitas de movilidad.",
+  "minimum_reviews_per_municipality": 10,
+  "review_count": 194,
+  "municipalities": 49,
+  "limitations": [
+    "Sentimiento general sobre movilidad no equivale a seguridad percibida ni a una auditoría técnica.",
+    "Las zonas con menos de diez reseñas no publican una media para evitar conclusiones inestables.",
+    "No se usan textos sin licencia reutilizable o consentimiento explícito."
+  ]
+}

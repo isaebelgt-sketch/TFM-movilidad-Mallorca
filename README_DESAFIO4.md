@@ -2,9 +2,7 @@
 
 Este proyecto responde al **Desafío 4** mediante un prototipo reproducible de análisis territorial y enrutamiento multimodal para destinos turísticos, utilizando Mallorca como laboratorio de pruebas.
 
-La entrega actual integra datos geoespaciales, alojamiento turístico, puntos de interés, transporte público, movilidad activa, rutas OTP y un índice TSMAI por alojamiento.
-
-> **Nota sobre esta copia de presentación:** los componentes de IA generativa o preentrenada del proyecto de desarrollo completo (análisis de sentimiento con BERT y generación de narrativas con un LLM) se han retirado deliberadamente de este paquete para dejar solo código propio. Las secciones 3 y 4 de más abajo describen el diseño original con esos componentes; en esta copia no están presentes.
+La entrega actual integra datos geoespaciales, alojamiento turístico, puntos de interés, transporte público, movilidad activa, rutas OTP y un índice TSMAI por alojamiento. Las partes de sentimiento de usuarios y generación LLM quedan preparadas técnicamente, pero no se presentan como resultados finales si no existe corpus licenciado o API configurada.
 
 ## Propuesta de Valor
 La solución permite diagnosticar la conectividad sostenible entre alojamientos y puntos de interés turísticos. El valor principal está en combinar datos abiertos, rutas reales de red y un índice explicable para localizar brechas de transporte, primera/última milla y movilidad activa.
@@ -21,14 +19,14 @@ El sistema no certifica seguridad vial, accesibilidad universal ni cambio modal 
 - El sistema no usa simples líneas rectas (distancia euclídea). Integra **OpenTripPlanner (OTP)** como motor enrutador de fondo.
 - El **Planificador Multimodal** compara WALK, BICYCLE, TRANSIT y CAR para pares seleccionados, calculando duración, caminata, transbordos y emisiones estimadas bajo factores declarados.
 
-### 3. Sentimiento de Usuarios (no incluido en esta copia)
-- **Diseño original:** pipeline BERT multilingüe para reseñas con licencia o consentimiento explícito, documentado en `docs/RESEÑAS_LICENCIADAS.md` y `docs/FUENTES_Y_LICENCIAS.md`.
-- **Esta copia:** el script que invoca el modelo (`analyze_multilingual_sentiment`) se ha retirado; no se publican resultados de sentimiento.
-- **Límite (si se reincorpora):** el sentimiento general no debe llamarse "seguridad percibida" sin anotación manual, protocolo de evaluación y validación temática.
+### 3. Sentimiento de Usuarios (Preparado, No Ejecutado)
+- **Preparado:** Pipeline BERT multilingüe para reseñas con licencia o consentimiento explícito.
+- **Estado actual:** No se publican resultados de sentimiento porque no hay corpus lícito incorporado.
+- **Límite:** El sentimiento general no debe llamarse "seguridad percibida" sin anotación manual, protocolo de evaluación y validación temática.
 
-### 4. Narrativas Explicativas (no incluidas en esta copia)
-- **Diseño original:** generación de textos explicativos a partir de reglas y evidencias de ruta, con una alternativa opcional vía LLM (Gemini) si había API key configurada.
-- **Esta copia:** el generador (`generate_ai_route_narratives`) se ha retirado; las recomendaciones se explican solo con las reglas deterministas ya integradas en el índice de prioridad.
+### 4. Narrativas Explicativas
+- **Implementado:** Generación de textos explicativos a partir de reglas y evidencias de ruta.
+- **Estado actual:** Si no hay API key configurada, el sistema lo etiqueta como **mock heurístico**, no como LLM real.
 
 ### 5. Tourism Sustainable Mobility & Accessibility Index (TSMAI)
 - **Implementado:** TSMAI V9 por alojamiento, con rutas OTP, evidencia OSM, GTFS TIB y comparación estacional dentro del feed disponible.
@@ -38,7 +36,7 @@ El sistema no certifica seguridad vial, accesibilidad universal ni cambio modal 
 - **Backend & Data:** Python, Pandas, GeoPandas, PyArrow (GeoParquet).
 - **Routing & Maps:** OpenTripPlanner (OTP), OpenStreetMap, GTFS.
 - **Frontend:** Streamlit, Folium, Plotly.
-- **IA / Analítica:** Clustering (DBSCAN, K-Means) y scoring explicable. El pipeline BERT y las narrativas LLM del diseño original no están en esta copia (ver nota al inicio).
+- **IA / Analítica:** Clustering, scoring explicable, pipeline BERT opcional y narrativas heurísticas/LLM condicionadas a configuración.
 
 ## Impacto Esperado
 1. **Gestores de Destino (Ayuntamientos):** Identificar "islas" de alojamientos desconectados del transporte público para trazar nuevas líneas de bus o crear corredores verdes peatonales.

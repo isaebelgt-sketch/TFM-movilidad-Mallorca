@@ -1,12 +1,9 @@
 # Ingesta responsable de reseñas para sentimiento
 
-> Nota sobre esta copia de presentación: `analyze_multilingual_sentiment`
-> (modelo BERT preentrenado) y `aggregate_mobility_sentiment` se han retirado
-> de este paquete para dejar solo componentes de código propio. Los comandos
-> vigentes aquí son `ingest_licensed_mobility_survey` y
-> `validate_licensed_reviews`; el resto de este documento se conserva como
-> contexto de gobernanza de datos, no como instrucciones ejecutables en esta
-> copia.
+> Los comandos vigentes son `python scripts/run_task.py
+> ingest_licensed_mobility_survey`, `validate_licensed_reviews` y
+> `aggregate_mobility_sentiment`. Los nombres históricos de scripts individuales
+> que aparecen más abajo se conservan como contexto y no deben ejecutarse.
 
 El proyecto no debe copiar reseñas de Google, Booking, TripAdvisor u otras
 plataformas sin autorización expresa de reutilización. La disponibilidad en una
@@ -51,15 +48,14 @@ python scripts/run_task.py ingest_licensed_mobility_survey --input "C:\ruta\encu
 python scripts/run_task.py ingest_licensed_mobility_survey --input "C:\ruta\encuesta_real.csv" --execute
 ```
 
-Validación (disponible en esta copia):
+Validación y análisis, una vez instaladas las dependencias opcionales:
 
 ```powershell
 python scripts/run_task.py validate_licensed_reviews
+pip install -r requirements-nlp.txt
+python scripts/run_task.py aggregate_mobility_sentiment
 ```
 
-El paso siguiente del diseño original (clasificación con BERT vía
-`analyze_multilingual_sentiment` y `requirements-nlp.txt`) no está en esta
-copia de presentación. El modelo original clasifica sentimiento general en
-positivo, neutral o negativo. No
+El modelo clasifica sentimiento general en positivo, neutral o negativo. No
 debe llamarse "seguridad percibida" sin una anotación manual temática, acuerdo
 entre anotadores y evaluación específica para movilidad turística.

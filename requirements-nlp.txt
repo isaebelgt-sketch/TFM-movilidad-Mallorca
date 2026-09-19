@@ -1,0 +1,3 @@
+# Dependencias opcionales: instalar sólo cuando se disponga de un corpus autorizado.
+transformers
+torch

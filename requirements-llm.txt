@@ -1,0 +1,2 @@
+# Dependencias opcionales: instalar sólo si se dispone de GEMINI_API_KEY.
+google-generativeai

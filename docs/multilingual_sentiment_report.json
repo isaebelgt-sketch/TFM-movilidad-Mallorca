@@ -1,0 +1,18 @@
+{
+  "generated_at_utc": "2026-09-17T17:44:39.025088+00:00",
+  "model": "nlptown/bert-base-multilingual-uncased-sentiment",
+  "model_license": "MIT (consultar model card antes de redistribución)",
+  "records": 1530,
+  "distribution": {
+    "positive": 1480,
+    "neutral": 26,
+    "negative": 24
+  },
+  "mobility_relevant_records": 194,
+  "limitations": [
+    "Modelo entrenado para sentimiento general y no específicamente para movilidad turística de Mallorca.",
+    "La detección de aspectos usa un diccionario conservador y debe validarse manualmente antes de una inferencia territorial.",
+    "Sentimiento no equivale a seguridad percibida; se requiere validación manual temática.",
+    "Sólo se procesan reseñas previamente validadas por licencia y vínculo geográfico."
+  ]
+}

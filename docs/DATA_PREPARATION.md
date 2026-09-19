@@ -1,4 +1,4 @@
-# Preparación de datos reales
+﻿# Preparación de datos reales
 
 > Los comandos vigentes usan `python scripts/run_task.py <tarea>`. Las formas
 > históricas `python scripts/<nombre>.py` y `python scripts/etl_*.py` de este
@@ -27,7 +27,7 @@ GeoJSON original. Los rechazos se registran por motivo en el informe.
 ## Red de movilidad
 
 La red OSM requiere `osmium` (incluido en el entorno conda definido por
-`environment.yml`). Genera primero el recorte reproducible desde el snapshot:
+`environment-dev.yml`). Genera primero el recorte reproducible desde el snapshot:
 
 ```powershell
 python scripts/run_task.py prepare_osm_mobility_network

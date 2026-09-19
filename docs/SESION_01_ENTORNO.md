@@ -1,4 +1,4 @@
-# Sesión 1 - Preparar el entorno en Windows
+﻿# Sesión 1 - Preparar el entorno en Windows
 
 ## Lo que ya está hecho
 
@@ -20,7 +20,7 @@ No hay un gestor de paquetes disponible en este ordenador, por lo que estas dos 
 
 ```powershell
 cd "C:\Users\PC\Downloads\Datos NTIC UCM 2025-20260902T223204Z-1-001\TFM_Movilidad_Mallorca"
-conda env create -f environment.yml
+conda env create -f environment-dev.yml
 conda activate tfm-mallorca
 python --version
 jupyter notebook --version
