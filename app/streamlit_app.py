@@ -33,6 +33,11 @@ from project_tools import build_case_html, build_case_pdf, calculate_emissions_s
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
+
+
+def project_path(reference: str) -> Path:
+    """Resuelve rutas de los JSON, guardadas con «\\» en Windows, también en Linux."""
+    return PROJECT_ROOT / str(reference).replace("\\", "/")
 METRIC_CRS = "EPSG:25831"
 OTP_ENDPOINT = os.getenv("OTP_URL", "http://localhost:8080/otp/gtfs/v1")
 CURRENT_DASHBOARD_LATEST_FILE = PROJECT_ROOT / "data" / "curated" / "latest_dashboard_current_layers.json"
@@ -201,7 +206,7 @@ def load_current_sample_slope_profiles() -> tuple[pd.DataFrame, dict]:
     profile_reference = report.get("profile_output")
     if report.get("status") != "passed" or not profile_reference:
         return pd.DataFrame(), report
-    profile_path = PROJECT_ROOT / profile_reference
+    profile_path = project_path(profile_reference)
     if not profile_path.exists():
         return pd.DataFrame(), report
     profiles = pd.read_parquet(profile_path)
@@ -221,7 +226,7 @@ def load_pending_challenge_artifacts() -> tuple[pd.DataFrame, pd.DataFrame, pd.D
     tsmai_v2 = pd.read_parquet(TSMAI_V2_FILE)
     if UNIVERSAL_ACCESS_LATEST_FILE.exists():
         latest_universal = json.loads(UNIVERSAL_ACCESS_LATEST_FILE.read_text(encoding="utf-8"))
-        universal_path = PROJECT_ROOT / latest_universal["accommodation_evidence_output"]
+        universal_path = project_path(latest_universal["accommodation_evidence_output"])
     else:
         universal_path = UNIVERSAL_ACCESS_FILE
     universal = pd.read_parquet(universal_path)
@@ -278,7 +283,7 @@ def load_aemet_weather_context() -> tuple[gpd.GeoDataFrame, dict]:
     metadata = json.loads(AEMET_WEATHER_LATEST_FILE.read_text(encoding="utf-8"))
     if metadata.get("status") != "passed":
         return gpd.GeoDataFrame(), {}
-    output = PROJECT_ROOT / metadata["output"]
+    output = project_path(metadata["output"])
     return gpd.read_parquet(output), metadata
 
 
@@ -350,9 +355,9 @@ def load_data() -> tuple[gpd.GeoDataFrame, gpd.GeoDataFrame, gpd.GeoDataFrame, p
     if current_layers.get("status") != "passed":
         raise ValueError("El manifiesto P7 no declara una publicación correcta.")
     try:
-        accommodations_path = PROJECT_ROOT / current_layers["outputs"]["accommodations"]
-        stops_path = PROJECT_ROOT / current_layers["outputs"]["stops"]
-        destinations_path = PROJECT_ROOT / current_layers["outputs"]["destinations"]
+        accommodations_path = project_path(current_layers["outputs"]["accommodations"])
+        stops_path = project_path(current_layers["outputs"]["stops"])
+        destinations_path = project_path(current_layers["outputs"]["destinations"])
     except KeyError as exc:
         raise ValueError("El manifiesto P7 no declara las tres capas del mapa.") from exc
     accommodations = gpd.read_parquet(accommodations_path)

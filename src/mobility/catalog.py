@@ -58,7 +58,7 @@ class TourismCatalog:
         if latest.exists():
             import json
 
-            path = self.root / json.loads(latest.read_text(encoding="utf-8"))["parquet_output"]
+            path = self.root / json.loads(latest.read_text(encoding="utf-8"))["parquet_output"].replace("\\", "/")
             if path.exists():
                 return path
         return self.curated / "tourism_destinations_transport_access_baseline.parquet"
