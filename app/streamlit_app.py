@@ -65,6 +65,8 @@ UNIVERSAL_ACCESS_LATEST_FILE = PROJECT_ROOT / "data" / "curated" / "latest_unive
 UNIVERSAL_ACCESS_REPORT_FILE = PROJECT_ROOT / "docs" / "universal_access_evidence_report.json"
 SUSTAINABLE_ROUTE_RECOMMENDATIONS_FILE = PROJECT_ROOT / "data" / "curated" / "od_sustainable_route_recommendations.parquet"
 INTERVENTION_SCENARIOS_FILE = PROJECT_ROOT / "data" / "curated" / "municipality_access_intervention_scenarios.parquet"
+INTERVENTION_PRIORITY_FILE = PROJECT_ROOT / "data" / "curated" / "municipality_access_intervention_priority.parquet"
+INTERVENTION_PRIORITY_REPORT_FILE = PROJECT_ROOT / "docs" / "access_intervention_priority_report.json"
 TSMAI_SENSITIVITY_FILE = PROJECT_ROOT / "data" / "curated" / "municipality_tsmai_v2_sensitivity.parquet"
 ROUTE_INFRASTRUCTURE_FILE = PROJECT_ROOT / "data" / "curated" / "route_osm_infrastructure_profiles.parquet"
 AIR_QUALITY_STATIONS_FILE = PROJECT_ROOT / "data" / "unified" / "caib_air_quality_stations.parquet"
@@ -234,6 +236,15 @@ def load_pending_challenge_artifacts() -> tuple[pd.DataFrame, pd.DataFrame, pd.D
     scenarios = pd.read_parquet(INTERVENTION_SCENARIOS_FILE)
     report = json.loads(UNIVERSAL_ACCESS_REPORT_FILE.read_text(encoding="utf-8"))
     return tsmai_v2, universal, recommendations, scenarios, report
+
+
+@st.cache_data(show_spinner=False)
+def load_access_intervention_priority() -> tuple[pd.DataFrame, dict]:
+    """Orden de prioridad de inversión (heurística voraz coste-beneficio, ver INTERVENTION_PRIORITY_REPORT_FILE)."""
+    if not INTERVENTION_PRIORITY_FILE.exists():
+        return pd.DataFrame(), {}
+    report = json.loads(INTERVENTION_PRIORITY_REPORT_FILE.read_text(encoding="utf-8")) if INTERVENTION_PRIORITY_REPORT_FILE.exists() else {}
+    return pd.read_parquet(INTERVENTION_PRIORITY_FILE), report
 
 
 @st.cache_data(show_spinner=False)
@@ -869,6 +880,11 @@ except (FileNotFoundError, ValueError, OSError) as exc:
     sustainable_mode_recommendations, intervention_scenarios, universal_access_report = pd.DataFrame(), pd.DataFrame(), {}
     st.info(f"Extensiones analíticas adicionales aún no disponibles: {exc}")
 try:
+    intervention_priority, intervention_priority_report = load_access_intervention_priority()
+except (FileNotFoundError, ValueError, OSError) as exc:
+    intervention_priority, intervention_priority_report = pd.DataFrame(), {}
+    st.info(f"Priorización de intervenciones aún no disponible: {exc}")
+try:
     tsmai_sensitivity, route_infrastructure_profiles, tourist_offer_seasonality = load_advanced_evaluation_artifacts()
 except (FileNotFoundError, ValueError, OSError) as exc:
     tsmai_sensitivity, route_infrastructure_profiles, tourist_offer_seasonality = pd.DataFrame(), pd.DataFrame(), pd.DataFrame()
@@ -954,6 +970,7 @@ if not technical_mode:
     universal_access = road_safety_context = mobility_sentiment = pd.DataFrame()
     tsmai = tsmai_v2 = tsmai_sensitivity = route_infrastructure_profiles = pd.DataFrame()
     sustainable_mode_recommendations = intervention_scenarios = tourist_offer_seasonality = pd.DataFrame()
+    intervention_priority = pd.DataFrame()
     slope_profiles = current_sample_slope_profiles = massive_summary = pd.DataFrame()
     tsmai_extended = demand_accessibility_anomalies = pd.DataFrame()
 
@@ -1856,6 +1873,55 @@ with territorial_tab:
             scenario_display = intervention_scenarios[["municipality", "accommodations", "tourist_places", "baseline_coverage_800m_pct", "scenario_first_last_mile_coverage_800m_pct", "scenario_upper_bound_connection_coverage_800m_pct", "first_last_mile_candidates", "critical_gap_candidates"]].rename(columns={"municipality": "Municipio", "accommodations": "Alojamientos", "tourist_places": "Plazas turísticas", "baseline_coverage_800m_pct": "Cobertura base =800 m (%)", "scenario_first_last_mile_coverage_800m_pct": "Escenario última milla (%)", "scenario_upper_bound_connection_coverage_800m_pct": "Límite teórico de conexión (%)", "first_last_mile_candidates": "Candidatos última milla", "critical_gap_candidates": "Brechas críticas"})
             with st.expander("📊 Ver datos detallados", expanded=False):
                 st.dataframe(scenario_display, width="stretch", hide_index=True, column_config={"Plazas turísticas": st.column_config.NumberColumn(format="%.0f"), "Cobertura base =800 m (%)": st.column_config.NumberColumn(format="%.1f %%"), "Escenario última milla (%)": st.column_config.NumberColumn(format="%.1f %%"), "Límite teórico de conexión (%)": st.column_config.NumberColumn(format="%.1f %%")})
+
+    if not intervention_priority.empty:
+        with st.container(border=True):
+            st.subheader("🎯 Orden de prioridad de inversión (presupuesto limitado)")
+            st.caption("Heurística voraz (greedy), equivalente a la relajación fraccionaria de un problema de la mochila: ordena los municipios candidatos por valor ponderado (demanda turística) por cada alojamiento que se sacaría de la brecha. No decide ubicación de parada, coste económico real ni viabilidad de obra.")
+            total_candidates = int(intervention_priority["intervention_cost_accommodations"].sum())
+            n_municipalities = st.slider(
+                "¿Con cuántos municipios empezarías, si el presupuesto solo alcanza para unos pocos?",
+                min_value=1,
+                max_value=len(intervention_priority),
+                value=min(2, len(intervention_priority)),
+                help="Selecciona un número de municipios; el orden ya está fijado por la heurística voraz, de mayor a menor valor por alojamiento candidato.",
+            )
+            selected = intervention_priority.head(n_municipalities)
+            funded_columns = st.columns(3)
+            funded_columns[0].metric("Municipios financiados", f"{n_municipalities} de {len(intervention_priority)}")
+            funded_columns[1].metric(
+                "Alojamientos que salen de la brecha",
+                f"{int(selected['intervention_cost_accommodations'].sum())} de {total_candidates}",
+            )
+            funded_columns[2].metric(
+                "Valor ponderado cubierto",
+                f"{float(selected['cumulative_value_pct'].iloc[-1]):.1f} %",
+                help="Valor ponderado por demanda turística relativa, no un porcentaje de alojamientos.",
+            )
+            priority_chart = px.bar(
+                intervention_priority,
+                x="municipality",
+                y="intervention_cost_accommodations",
+                color=intervention_priority["priority_rank"].le(n_municipalities).map({True: "Dentro del presupuesto", False: "Fuera del presupuesto"}),
+                color_discrete_map={"Dentro del presupuesto": "#22A06B", "Fuera del presupuesto": "#D9D9D9"},
+                labels={"municipality": "", "intervention_cost_accommodations": "Alojamientos candidatos", "color": ""},
+                category_orders={"municipality": list(intervention_priority["municipality"])},
+            )
+            priority_chart.update_layout(showlegend=True, legend_title_text="")
+            st.plotly_chart(priority_chart, width="stretch")
+            priority_display = intervention_priority.rename(columns={"priority_rank": "Orden", "municipality": "Municipio", "accommodations": "Alojamientos", "tourist_places": "Plazas turísticas", "intervention_cost_accommodations": "Alojamientos candidatos", "value_density": "Valor por candidato", "cumulative_cost_pct": "Coste acumulado (%)", "cumulative_value_pct": "Valor acumulado (%)"})
+            with st.expander("📊 Ver datos detallados", expanded=False):
+                st.dataframe(
+                    priority_display[["Orden", "Municipio", "Alojamientos candidatos", "Plazas turísticas", "Valor por candidato", "Coste acumulado (%)", "Valor acumulado (%)"]],
+                    width="stretch",
+                    hide_index=True,
+                    column_config={
+                        "Plazas turísticas": st.column_config.NumberColumn(format="%.0f"),
+                        "Valor por candidato": st.column_config.NumberColumn(format="%.3f"),
+                        "Coste acumulado (%)": st.column_config.NumberColumn(format="%.1f %%"),
+                        "Valor acumulado (%)": st.column_config.NumberColumn(format="%.1f %%"),
+                    },
+                )
 
     if not tourist_offer_seasonality.empty:
         with st.container(border=True):

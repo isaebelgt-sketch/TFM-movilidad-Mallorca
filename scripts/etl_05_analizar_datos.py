@@ -1224,6 +1224,135 @@ def main_calculate_tsmai_extended():
     )
 
 
+
+
+import hashlib
+import json
+from datetime import datetime, timezone
+from pathlib import Path
+
+import pandas as pd
+
+
+ROOT = Path(__file__).resolve().parents[1]
+CURATED = ROOT / "data" / "curated"
+INTERVENTION_PRIORITY_INPUT = CURATED / "municipality_access_intervention_scenarios.parquet"
+INTERVENTION_PRIORITY_OUT = CURATED / "municipality_access_intervention_priority.parquet"
+INTERVENTION_PRIORITY_REPORT = ROOT / "docs" / "access_intervention_priority_report.json"
+INTERVENTION_PRIORITY_BUDGET_CHECKPOINTS_PCT = [10, 25, 50, 75, 100]
+
+
+def sha256(path):
+    digest = hashlib.sha256()
+    with path.open("rb") as stream:
+        for block in iter(lambda: stream.read(1024 * 1024), b""):
+            digest.update(block)
+    return digest.hexdigest()
+
+
+def atomic_parquet(frame, path):
+    path.parent.mkdir(parents=True, exist_ok=True)
+    temporary = path.with_suffix(path.suffix + ".part")
+    frame.to_parquet(temporary, index=False)
+    temporary.replace(path)
+
+
+def atomic_json(payload, path):
+    path.parent.mkdir(parents=True, exist_ok=True)
+    temporary = path.with_suffix(path.suffix + ".part")
+    temporary.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+    temporary.replace(path)
+
+
+def main_prioritize_access_interventions():
+    """Ordena los municipios candidatos a intervención de última milla por coste-beneficio explícito.
+
+    Parte de los escenarios ya calculados en main_simulate_access_interventions
+    (municipality_access_intervention_scenarios.parquet) y aplica una heurística voraz
+    (greedy) equivalente a la relajación fraccionaria de un problema de la mochila
+    (fractional knapsack): ordena los municipios de mayor a menor valor por unidad de
+    coste, donde el coste es el número de alojamientos candidatos a última milla en ese
+    municipio (proxy de esfuerzo de intervención, no un coste económico real) y el valor
+    pondera esos mismos candidatos por la demanda turística relativa del municipio, con
+    el mismo criterio que review_priority_score. No decide ubicaciones de parada, ni
+    presupuesto real, ni viabilidad de obra: es un orden de prioridad de inversión bajo
+    un supuesto de coste-beneficio explícito y documentado, no una recomendación de obra.
+    """
+    if not INTERVENTION_PRIORITY_INPUT.is_file():
+        raise FileNotFoundError("Ejecuta primero simulate_access_interventions.")
+    scenarios = pd.read_parquet(INTERVENTION_PRIORITY_INPUT)
+    required = {"municipality", "accommodations", "tourist_places", "first_last_mile_candidates"}
+    if missing := required.difference(scenarios.columns):
+        raise ValueError(f"Los escenarios de intervención no contienen: {sorted(missing)}")
+
+    candidates = scenarios[scenarios["first_last_mile_candidates"].gt(0)].copy()
+    if candidates.empty:
+        raise ValueError("No hay municipios con candidatos de última milla; nada que priorizar.")
+
+    max_tourist_places = max(float(candidates["tourist_places"].max()), 1.0)
+    candidates["intervention_cost_accommodations"] = candidates["first_last_mile_candidates"]
+    candidates["value_density"] = (1 + candidates["tourist_places"] / max_tourist_places).round(4)
+    candidates["intervention_value"] = (candidates["intervention_cost_accommodations"] * candidates["value_density"]).round(2)
+
+    ranked = candidates.sort_values(
+        ["value_density", "intervention_cost_accommodations"], ascending=[False, False]
+    ).reset_index(drop=True)
+    ranked["priority_rank"] = ranked.index + 1
+    ranked["cumulative_cost_accommodations"] = ranked["intervention_cost_accommodations"].cumsum()
+    ranked["cumulative_value"] = ranked["intervention_value"].cumsum()
+
+    total_cost = float(ranked["intervention_cost_accommodations"].sum())
+    total_value = float(ranked["intervention_value"].sum())
+    ranked["cumulative_cost_pct"] = (100 * ranked["cumulative_cost_accommodations"] / total_cost).round(2)
+    ranked["cumulative_value_pct"] = (100 * ranked["cumulative_value"] / total_value).round(2)
+
+    output_columns = [
+        "priority_rank", "municipality", "accommodations", "tourist_places",
+        "intervention_cost_accommodations", "value_density", "intervention_value",
+        "cumulative_cost_accommodations", "cumulative_cost_pct", "cumulative_value_pct",
+    ]
+    result = ranked[output_columns]
+    atomic_parquet(result, INTERVENTION_PRIORITY_OUT)
+
+    checkpoints = []
+    for target_pct in INTERVENTION_PRIORITY_BUDGET_CHECKPOINTS_PCT:
+        reached = ranked[ranked["cumulative_cost_pct"].le(target_pct)]
+        if reached.empty:
+            reached = ranked.iloc[:1]
+        checkpoints.append({
+            "budget_pct_of_total_candidates": target_pct,
+            "municipalities_funded": int(len(reached)),
+            "accommodations_resolved": int(reached["intervention_cost_accommodations"].sum()),
+            "cumulative_value_pct": round(float(reached["cumulative_value_pct"].iloc[-1]), 1),
+        })
+
+    report = {
+        "generated_at_utc": datetime.now(timezone.utc).isoformat(),
+        "status": "heuristic_recommendation",
+        "method": "Heurística voraz (greedy) equivalente a la relajación fraccionaria de un problema de la mochila (fractional knapsack): ordena municipios por valor/coste, no por coste total ni por número de alojamientos en bruto.",
+        "cost_definition": "Número de alojamientos candidatos a última milla en el municipio (entre 800 y 1.200 m de una parada); proxy de esfuerzo de intervención, no un coste económico real.",
+        "value_definition": "Candidatos ponderados por demanda turística relativa del municipio (mismo criterio que review_priority_score de simulate_access_interventions).",
+        "input": {
+            "path": str(INTERVENTION_PRIORITY_INPUT.relative_to(ROOT)) if INTERVENTION_PRIORITY_INPUT.is_relative_to(ROOT) else str(INTERVENTION_PRIORITY_INPUT),
+            "sha256": sha256(INTERVENTION_PRIORITY_INPUT),
+            "municipalities_considered": int(len(candidates)),
+        },
+        "totals": {
+            "total_candidate_accommodations": int(total_cost),
+            "municipalities_with_candidates": int(len(ranked)),
+        },
+        "budget_checkpoints": checkpoints,
+        "limitations": [
+            "No decide dónde colocar una parada ni su coste económico real: usa el número de alojamientos candidatos como proxy de esfuerzo.",
+            "No modela economías de escala entre municipios geográficamente próximos ni sinergias de una misma obra.",
+            "El peso por demanda turística es la misma elección analítica declarada que en review_priority_score; no es una calibración empírica.",
+            "Es una heurística voraz (greedy), óptima solo para la relajación fraccionaria del problema; no garantiza el óptimo exacto de un reparto entero de presupuesto.",
+        ],
+    }
+    atomic_json(report, INTERVENTION_PRIORITY_REPORT)
+    print(f"OK Priorización calculada para {len(ranked)} municipios ({int(total_cost)} alojamientos candidatos en total)")
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("task", help="Task to run")

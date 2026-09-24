@@ -1,0 +1,54 @@
+{
+  "generated_at_utc": "2026-09-23T23:14:26.993088+00:00",
+  "status": "heuristic_recommendation",
+  "method": "Heurística voraz (greedy) equivalente a la relajación fraccionaria de un problema de la mochila (fractional knapsack): ordena municipios por valor/coste, no por coste total ni por número de alojamientos en bruto.",
+  "cost_definition": "Número de alojamientos candidatos a última milla en el municipio (entre 800 y 1.200 m de una parada); proxy de esfuerzo de intervención, no un coste económico real.",
+  "value_definition": "Candidatos ponderados por demanda turística relativa del municipio (mismo criterio que review_priority_score de simulate_access_interventions).",
+  "input": {
+    "path": "data\\curated\\municipality_access_intervention_scenarios.parquet",
+    "sha256": "0f0df7d962e8af1008e81c2d184a0bb4c46dba8b622bfc0c46e29863831d1eaa",
+    "municipalities_considered": 15
+  },
+  "totals": {
+    "total_candidate_accommodations": 42,
+    "municipalities_with_candidates": 15
+  },
+  "budget_checkpoints": [
+    {
+      "budget_pct_of_total_candidates": 10,
+      "municipalities_funded": 1,
+      "accommodations_resolved": 1,
+      "cumulative_value_pct": 3.2
+    },
+    {
+      "budget_pct_of_total_candidates": 25,
+      "municipalities_funded": 1,
+      "accommodations_resolved": 1,
+      "cumulative_value_pct": 3.2
+    },
+    {
+      "budget_pct_of_total_candidates": 50,
+      "municipalities_funded": 2,
+      "accommodations_resolved": 20,
+      "cumulative_value_pct": 60.0
+    },
+    {
+      "budget_pct_of_total_candidates": 75,
+      "municipalities_funded": 8,
+      "accommodations_resolved": 30,
+      "cumulative_value_pct": 80.4
+    },
+    {
+      "budget_pct_of_total_candidates": 100,
+      "municipalities_funded": 15,
+      "accommodations_resolved": 42,
+      "cumulative_value_pct": 100.0
+    }
+  ],
+  "limitations": [
+    "No decide dónde colocar una parada ni su coste económico real: usa el número de alojamientos candidatos como proxy de esfuerzo.",
+    "No modela economías de escala entre municipios geográficamente próximos ni sinergias de una misma obra.",
+    "El peso por demanda turística es la misma elección analítica declarada que en review_priority_score; no es una calibración empírica.",
+    "Es una heurística voraz (greedy), óptima solo para la relajación fraccionaria del problema; no garantiza el óptimo exacto de un reparto entero de presupuesto."
+  ]
+}

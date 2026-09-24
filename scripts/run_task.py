@@ -56,6 +56,7 @@ TASKS: dict[str, tuple[str, str]] = {
     "generate_ai_route_narratives": ("scripts.etl_05_analizar_datos", "main_generate_ai_route_narratives"),
     "generate_destination_clusters": ("scripts.etl_05_analizar_datos", "main_generate_destination_clusters"),
     "simulate_access_interventions": ("scripts.etl_05_analizar_datos", "main_simulate_access_interventions"),
+    "prioritize_access_interventions": ("scripts.etl_05_analizar_datos", "main_prioritize_access_interventions"),
     "detect_demand_accessibility_anomalies": ("scripts.etl_05_analizar_datos", "main_detect_demand_accessibility_anomalies"),
     "calculate_tsmai_extended": ("scripts.etl_05_analizar_datos", "main_calculate_tsmai_extended"),
     "validate_bicycle_routes": ("scripts.etl_07_validar_calidad", "main_validate_bicycle_routes"),
